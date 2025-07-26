@@ -1,0 +1,110 @@
+import type { MetadataRoute } from "next"
+
+export default function robots(): MetadataRoute.Robots {
+  const baseUrl = "https://acquireandbuild.com"
+
+  return {
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: [
+          "/debug-datocms",
+          "/debug-homepage",
+          "/debug-newsletter",
+          "/admin",
+          "/api/",
+          "/datocms-setup",
+          "/deal-kit-setup",
+          "/subscribers",
+          "/lead-magnet-subscribers",
+          "/deal-kit-analytics",
+          "/_next/",
+          "/favicon.ico",
+        ],
+      },
+      {
+        userAgent: "GPTBot",
+        allow: "/",
+        disallow: [
+          "/debug-datocms",
+          "/debug-homepage",
+          "/debug-newsletter",
+          "/admin",
+          "/api/",
+          "/datocms-setup",
+          "/deal-kit-setup",
+          "/subscribers",
+          "/lead-magnet-subscribers",
+          "/deal-kit-analytics",
+        ],
+      },
+      {
+        userAgent: "ChatGPT-User",
+        allow: "/",
+        disallow: [
+          "/debug-datocms",
+          "/debug-homepage",
+          "/debug-newsletter",
+          "/admin",
+          "/api/",
+          "/datocms-setup",
+          "/deal-kit-setup",
+          "/subscribers",
+          "/lead-magnet-subscribers",
+          "/deal-kit-analytics",
+        ],
+      },
+      {
+        userAgent: "CCBot",
+        allow: "/",
+        disallow: [
+          "/debug-datocms",
+          "/debug-homepage",
+          "/debug-newsletter",
+          "/admin",
+          "/api/",
+          "/datocms-setup",
+          "/deal-kit-setup",
+          "/subscribers",
+          "/lead-magnet-subscribers",
+          "/deal-kit-analytics",
+        ],
+      },
+      {
+        userAgent: "anthropic-ai",
+        allow: "/",
+        disallow: [
+          "/debug-datocms",
+          "/debug-homepage",
+          "/debug-newsletter",
+          "/admin",
+          "/api/",
+          "/datocms-setup",
+          "/deal-kit-setup",
+          "/subscribers",
+          "/lead-magnet-subscribers",
+          "/deal-kit-analytics",
+        ],
+      },
+      {
+        userAgent: "Claude-Web",
+        allow: "/",
+        disallow: [
+          "/debug-datocms",
+          "/debug-homepage",
+          "/debug-newsletter",
+          "/admin",
+          "/api/",
+          "/datocms-setup",
+          "/deal-kit-setup",
+          "/subscribers",
+          "/lead-magnet-subscribers",
+          "/deal-kit-analytics",
+        ],
+      },
+    ],
+    sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl,
+  }
+}

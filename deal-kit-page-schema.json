@@ -1,0 +1,685 @@
+{
+  "models": [
+    {
+      "name": "Deal Kit Page",
+      "api_key": "deal_kit_page",
+      "singleton": true,
+      "sortable": false,
+      "modular_block": false,
+      "draft_mode_active": false,
+      "all_locales_required": true,
+      "collection_appearance": "table",
+      "has_singleton_item": true,
+      "fields": [
+        {
+          "label": "Hero Badge Text",
+          "field_type": "string",
+          "api_key": "hero_badge_text",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "Tools Built for Business Buyers",
+          "hint": "Text displayed in the blue badge at the top"
+        },
+        {
+          "label": "Hero Title Line 1",
+          "field_type": "string",
+          "api_key": "hero_title_line_1",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "Skip the guesswork.",
+          "hint": "First line of the main headline (black text)"
+        },
+        {
+          "label": "Hero Title Line 2",
+          "field_type": "string",
+          "api_key": "hero_title_line_2",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "Grab the Deal Kit.",
+          "hint": "Second line of the main headline (blue text)"
+        },
+        {
+          "label": "Hero Subtitle",
+          "field_type": "text",
+          "api_key": "hero_subtitle",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "textarea",
+            "parameters": {
+              "rows": 3
+            }
+          },
+          "default_value": "Get the same LOI, MNDA, and cold outreach scripts top acquirers use to find, analyze, and buy businesses — all for free.",
+          "hint": "Subtitle text below the main headline"
+        },
+        {
+          "label": "Email Placeholder Text",
+          "field_type": "string",
+          "api_key": "email_placeholder",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "Enter your email address",
+          "hint": "Placeholder text for email input field"
+        },
+        {
+          "label": "CTA Button Text",
+          "field_type": "string",
+          "api_key": "cta_button_text",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "Send Me the Deal Kit",
+          "hint": "Text on the main CTA button"
+        },
+        {
+          "label": "Form Disclaimer Text",
+          "field_type": "string",
+          "api_key": "form_disclaimer",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "100% free. No spam. Instant delivery to your inbox.",
+          "hint": "Small text below the form"
+        },
+        {
+          "label": "What's Inside Section Title",
+          "field_type": "string",
+          "api_key": "whats_inside_title",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "WHAT'S INSIDE THE DEAL KIT",
+          "hint": "Title for the tools section"
+        },
+        {
+          "label": "What's Inside Subtitle",
+          "field_type": "text",
+          "api_key": "whats_inside_subtitle",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "textarea",
+            "parameters": {
+              "rows": 2
+            }
+          },
+          "default_value": "These aren't templates. They're traction. Tools built by real buyers who've closed real deals.",
+          "hint": "Subtitle for the tools section"
+        },
+        {
+          "label": "Social Proof Title",
+          "field_type": "string",
+          "api_key": "social_proof_title",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "WHAT BUYERS ARE SAYING",
+          "hint": "Title for testimonials section"
+        },
+        {
+          "label": "Coming Soon Title",
+          "field_type": "string",
+          "api_key": "coming_soon_title",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "COMING SOON TO THE DEAL KIT",
+          "hint": "Title for coming soon section"
+        },
+        {
+          "label": "Coming Soon Subtitle",
+          "field_type": "text",
+          "api_key": "coming_soon_subtitle",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "textarea",
+            "parameters": {
+              "rows": 2
+            }
+          },
+          "default_value": "We're constantly adding new tools. Get the Deal Kit now and receive all future updates automatically.",
+          "hint": "Subtitle for coming soon section"
+        },
+        {
+          "label": "Final CTA Title",
+          "field_type": "string",
+          "api_key": "final_cta_title",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "READY TO GET YOUR DEAL KIT?",
+          "hint": "Title for final CTA section"
+        },
+        {
+          "label": "Final CTA Subtitle",
+          "field_type": "string",
+          "api_key": "final_cta_subtitle",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "Join 2,500+ business buyers who've downloaded the Deal Kit.",
+          "hint": "Subtitle for final CTA section"
+        },
+        {
+          "label": "Success Message",
+          "field_type": "text",
+          "api_key": "success_message",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "textarea",
+            "parameters": {
+              "rows": 3
+            }
+          },
+          "default_value": "🎉 Success! Check your email for The Deal Kit. It should arrive within 2 minutes. (Don't forget to check your spam folder!)",
+          "hint": "Message shown after successful form submission"
+        }
+      ]
+    },
+    {
+      "name": "Deal Kit Tool",
+      "api_key": "deal_kit_tool",
+      "singleton": false,
+      "sortable": true,
+      "modular_block": false,
+      "draft_mode_active": false,
+      "all_locales_required": true,
+      "collection_appearance": "table",
+      "has_singleton_item": false,
+      "fields": [
+        {
+          "label": "Tool Name",
+          "field_type": "string",
+          "api_key": "tool_name",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "Name of the tool (e.g., 'LOI Template')"
+        },
+        {
+          "label": "Tool Description",
+          "field_type": "text",
+          "api_key": "tool_description",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "textarea",
+            "parameters": {
+              "rows": 3
+            }
+          },
+          "hint": "Brief description of what this tool does"
+        },
+        {
+          "label": "Tool Icon",
+          "field_type": "string",
+          "api_key": "tool_icon",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "Lucide icon name (e.g., 'FileText', 'Shield', 'Phone')"
+        },
+        {
+          "label": "Tool File",
+          "field_type": "file",
+          "api_key": "tool_file",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "file",
+            "parameters": {}
+          },
+          "hint": "Upload the actual file for this tool (PDF, DOCX, etc.)"
+        },
+        {
+          "label": "Display Order",
+          "field_type": "integer",
+          "api_key": "display_order",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "integer",
+            "parameters": {}
+          },
+          "hint": "Order in which this tool appears (1, 2, 3, etc.)"
+        },
+        {
+          "label": "Is Featured",
+          "field_type": "boolean",
+          "api_key": "is_featured",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "boolean",
+            "parameters": {}
+          },
+          "default_value": true,
+          "hint": "Show this tool in the main tools grid"
+        }
+      ]
+    },
+    {
+      "name": "Deal Kit Testimonial",
+      "api_key": "deal_kit_testimonial",
+      "singleton": false,
+      "sortable": true,
+      "modular_block": false,
+      "draft_mode_active": false,
+      "all_locales_required": true,
+      "collection_appearance": "table",
+      "has_singleton_item": false,
+      "fields": [
+        {
+          "label": "Testimonial Text",
+          "field_type": "text",
+          "api_key": "testimonial_text",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "textarea",
+            "parameters": {
+              "rows": 4
+            }
+          },
+          "hint": "The testimonial quote"
+        },
+        {
+          "label": "Author Name",
+          "field_type": "string",
+          "api_key": "author_name",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "Name of the person giving the testimonial"
+        },
+        {
+          "label": "Author Title",
+          "field_type": "string",
+          "api_key": "author_title",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "Title or description of the author"
+        },
+        {
+          "label": "Star Rating",
+          "field_type": "integer",
+          "api_key": "star_rating",
+          "localized": false,
+          "validators": {
+            "integer_range": {
+              "min": 1,
+              "max": 5
+            }
+          },
+          "appearance": {
+            "editor": "integer",
+            "parameters": {}
+          },
+          "default_value": 5,
+          "hint": "Number of stars (1-5)"
+        },
+        {
+          "label": "Display Order",
+          "field_type": "integer",
+          "api_key": "display_order",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "integer",
+            "parameters": {}
+          },
+          "hint": "Order in which this testimonial appears"
+        }
+      ]
+    },
+    {
+      "name": "Coming Soon Tool",
+      "api_key": "coming_soon_tool",
+      "singleton": false,
+      "sortable": true,
+      "modular_block": false,
+      "draft_mode_active": false,
+      "all_locales_required": true,
+      "collection_appearance": "table",
+      "has_singleton_item": false,
+      "fields": [
+        {
+          "label": "Tool Name",
+          "field_type": "string",
+          "api_key": "tool_name",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "Name of the upcoming tool"
+        },
+        {
+          "label": "Display Order",
+          "field_type": "integer",
+          "api_key": "display_order",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "integer",
+            "parameters": {}
+          },
+          "hint": "Order in which this tool appears in the coming soon list"
+        },
+        {
+          "label": "Expected Release",
+          "field_type": "string",
+          "api_key": "expected_release",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "When this tool is expected to be released (optional)"
+        }
+      ]
+    },
+    {
+      "name": "Deal Kit Subscriber",
+      "api_key": "deal_kit_subscriber",
+      "singleton": false,
+      "sortable": false,
+      "modular_block": false,
+      "draft_mode_active": false,
+      "all_locales_required": true,
+      "collection_appearance": "table",
+      "has_singleton_item": false,
+      "fields": [
+        {
+          "label": "Email",
+          "field_type": "string",
+          "api_key": "email",
+          "localized": false,
+          "validators": {
+            "required": {},
+            "unique": {},
+            "format": {
+              "predefined_pattern": "email"
+            }
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "Subscriber email address"
+        },
+        {
+          "label": "First Name",
+          "field_type": "string",
+          "api_key": "first_name",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "Subscriber's first name (if provided)"
+        },
+        {
+          "label": "Buyer Type",
+          "field_type": "string",
+          "api_key": "buyer_type",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "Type of business they're targeting"
+        },
+        {
+          "label": "Submitted At",
+          "field_type": "date_time",
+          "api_key": "submitted_at",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "date_time_picker",
+            "parameters": {}
+          },
+          "hint": "When they signed up for the Deal Kit"
+        },
+        {
+          "label": "Status",
+          "field_type": "string",
+          "api_key": "status",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "active",
+          "hint": "Subscription status (active, unsubscribed, etc.)"
+        },
+        {
+          "label": "Source",
+          "field_type": "string",
+          "api_key": "source",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "deal_kit_landing",
+          "hint": "Where they signed up from"
+        },
+        {
+          "label": "IP Address",
+          "field_type": "string",
+          "api_key": "ip_address",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "IP address when they signed up (for analytics)"
+        },
+        {
+          "label": "User Agent",
+          "field_type": "text",
+          "api_key": "user_agent",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "textarea",
+            "parameters": {
+              "rows": 2
+            }
+          },
+          "hint": "Browser/device info (for analytics)"
+        },
+        {
+          "label": "UTM Source",
+          "field_type": "string",
+          "api_key": "utm_source",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "UTM source parameter"
+        },
+        {
+          "label": "UTM Medium",
+          "field_type": "string",
+          "api_key": "utm_medium",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "UTM medium parameter"
+        },
+        {
+          "label": "UTM Campaign",
+          "field_type": "string",
+          "api_key": "utm_campaign",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "UTM campaign parameter"
+        },
+        {
+          "label": "Notes",
+          "field_type": "text",
+          "api_key": "notes",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "textarea",
+            "parameters": {
+              "rows": 3
+            }
+          },
+          "hint": "Internal notes about this subscriber"
+        }
+      ]
+    }
+  ]
+}

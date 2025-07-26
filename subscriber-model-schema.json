@@ -1,0 +1,106 @@
+{
+  "name": "Subscriber",
+  "api_key": "subscriber",
+  "collection_appearance": "table",
+  "singleton": false,
+  "sortable": false,
+  "tree": false,
+  "modular_block": false,
+  "draft_mode_active": false,
+  "all_locales_required": true,
+  "default_sort": {
+    "field": "subscribed_at",
+    "direction": "desc"
+  },
+  "fields": [
+    {
+      "label": "Email",
+      "field_type": "string",
+      "api_key": "email",
+      "localized": false,
+      "validators": {
+        "required": {},
+        "format": {
+          "predefined_pattern": "email"
+        }
+      },
+      "appearance": {
+        "editor": "single_line",
+        "parameters": {}
+      }
+    },
+    {
+      "label": "Subscribed At",
+      "field_type": "date_time",
+      "api_key": "subscribed_at",
+      "localized": false,
+      "validators": {
+        "required": {}
+      }
+    },
+    {
+      "label": "Status",
+      "field_type": "string",
+      "api_key": "status",
+      "localized": false,
+      "validators": {
+        "enum": {
+          "values": ["active", "unsubscribed", "bounced"]
+        }
+      },
+      "appearance": {
+        "editor": "select",
+        "parameters": {
+          "options": [
+            {
+              "label": "Active",
+              "value": "active"
+            },
+            {
+              "label": "Unsubscribed",
+              "value": "unsubscribed"
+            },
+            {
+              "label": "Bounced",
+              "value": "bounced"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "Source",
+      "field_type": "string",
+      "api_key": "source",
+      "localized": false,
+      "validators": {
+        "enum": {
+          "values": ["homepage", "blog", "deal_kit", "contact"]
+        }
+      },
+      "appearance": {
+        "editor": "select",
+        "parameters": {
+          "options": [
+            {
+              "label": "Homepage",
+              "value": "homepage"
+            },
+            {
+              "label": "Blog",
+              "value": "blog"
+            },
+            {
+              "label": "Deal Kit",
+              "value": "deal_kit"
+            },
+            {
+              "label": "Contact",
+              "value": "contact"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

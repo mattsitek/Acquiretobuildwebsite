@@ -1,0 +1,80 @@
+{
+  "name": "Homepage",
+  "api_key": "homepage",
+  "singleton": true,
+  "collection_appearance": "table",
+  "fields": [
+    {
+      "label": "Hero Title",
+      "field_type": "string",
+      "api_key": "hero_title",
+      "validators": {
+        "required": {}
+      },
+      "appearance": {
+        "editor": "single_line"
+      }
+    },
+    {
+      "label": "Hero Subtitle",
+      "field_type": "text",
+      "api_key": "hero_subtitle",
+      "validators": {},
+      "appearance": {
+        "editor": "textarea",
+        "parameters": {
+          "rows": 3
+        }
+      }
+    },
+    {
+      "label": "Hero Image",
+      "field_type": "file",
+      "api_key": "hero_image",
+      "validators": {
+        "extension": {
+          "extensions": ["jpg", "jpeg", "png", "gif", "webp"]
+        }
+      }
+    },
+    {
+      "label": "Value Propositions",
+      "field_type": "json",
+      "api_key": "value_propositions",
+      "validators": {},
+      "appearance": {
+        "editor": "json"
+      }
+    },
+    {
+      "label": "Features",
+      "field_type": "json",
+      "api_key": "features",
+      "validators": {},
+      "appearance": {
+        "editor": "json"
+      }
+    },
+    {
+      "label": "Testimonials",
+      "field_type": "json",
+      "api_key": "testimonials",
+      "validators": {},
+      "appearance": {
+        "editor": "json"
+      }
+    },
+    {
+      "label": "CTA Title",
+      "field_type": "string",
+      "api_key": "cta_title",
+      "validators": {}
+    },
+    {
+      "label": "CTA Subtitle",
+      "field_type": "text",
+      "api_key": "cta_subtitle",
+      "validators": {}
+    }
+  ]
+}

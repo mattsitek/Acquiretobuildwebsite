@@ -1,0 +1,277 @@
+{
+  "models": [
+    {
+      "name": "Article",
+      "api_key": "article",
+      "singleton": false,
+      "sortable": false,
+      "modular_block": false,
+      "draft_mode_active": true,
+      "all_locales_required": true,
+      "collection_appearance": "table",
+      "has_singleton_item": false,
+      "fields": [
+        {
+          "label": "Title",
+          "field_type": "string",
+          "api_key": "title",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": ""
+        },
+        {
+          "label": "Slug",
+          "field_type": "slug",
+          "api_key": "slug",
+          "localized": false,
+          "validators": {
+            "required": {},
+            "slug_title_field": {
+              "title_field_id": "title"
+            }
+          }
+        },
+        {
+          "label": "Excerpt",
+          "field_type": "text",
+          "api_key": "excerpt",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "textarea",
+            "parameters": {
+              "rows": 4
+            }
+          }
+        },
+        {
+          "label": "Content",
+          "field_type": "structured_text",
+          "api_key": "content"
+        },
+        {
+          "label": "Featured Image",
+          "field_type": "file",
+          "api_key": "featured_image",
+          "localized": false,
+          "validators": {
+            "required": {},
+            "extension": {
+              "extensions": ["jpg", "jpeg", "png", "gif", "webp"]
+            }
+          },
+          "appearance": {
+            "editor": "file",
+            "parameters": {
+              "gallery_view": true
+            }
+          }
+        },
+        {
+          "label": "Published At",
+          "field_type": "date_time",
+          "api_key": "published_at",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "date_time_picker",
+            "parameters": {}
+          }
+        },
+        {
+          "label": "Category",
+          "field_type": "link",
+          "api_key": "category",
+          "localized": false,
+          "validators": {
+            "item_item_type": {
+              "item_types": ["category"]
+            }
+          },
+          "appearance": {
+            "editor": "link_select",
+            "parameters": {}
+          }
+        },
+        {
+          "label": "Author",
+          "field_type": "link",
+          "api_key": "author",
+          "localized": false,
+          "validators": {
+            "item_item_type": {
+              "item_types": ["author"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Category",
+      "api_key": "category",
+      "singleton": false,
+      "sortable": false,
+      "modular_block": false,
+      "draft_mode_active": false,
+      "all_locales_required": true,
+      "collection_appearance": "table",
+      "has_singleton_item": false,
+      "fields": [
+        {
+          "label": "Name",
+          "field_type": "string",
+          "api_key": "name",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          }
+        },
+        {
+          "label": "Slug",
+          "field_type": "slug",
+          "api_key": "slug",
+          "localized": false,
+          "validators": {
+            "required": {},
+            "slug_title_field": {
+              "title_field_id": "name"
+            }
+          }
+        },
+        {
+          "label": "Description",
+          "field_type": "text",
+          "api_key": "description",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "textarea",
+            "parameters": {
+              "rows": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lead Magnet",
+      "api_key": "lead_magnet",
+      "singleton": false,
+      "sortable": false,
+      "modular_block": false,
+      "draft_mode_active": false,
+      "all_locales_required": true,
+      "collection_appearance": "table",
+      "has_singleton_item": false,
+      "fields": [
+        {
+          "label": "Title",
+          "field_type": "string",
+          "api_key": "title",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          }
+        },
+        {
+          "label": "Description",
+          "field_type": "text",
+          "api_key": "description",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "textarea",
+            "parameters": {
+              "rows": 3
+            }
+          }
+        },
+        {
+          "label": "PDF File",
+          "field_type": "file",
+          "api_key": "pdf_file",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "file",
+            "parameters": {}
+          }
+        },
+        {
+          "label": "Is Active",
+          "field_type": "boolean",
+          "api_key": "is_active",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "boolean",
+            "parameters": {}
+          },
+          "default_value": true
+        }
+      ]
+    },
+    {
+      "name": "Author",
+      "api_key": "author",
+      "singleton": false,
+      "sortable": false,
+      "modular_block": false,
+      "draft_mode_active": false,
+      "all_locales_required": true,
+      "collection_appearance": "table",
+      "has_singleton_item": false,
+      "fields": [
+        {
+          "label": "Name",
+          "field_type": "string",
+          "api_key": "name",
+          "localized": false,
+          "validators": {
+            "required": {}
+          }
+        },
+        {
+          "label": "Bio",
+          "field_type": "text",
+          "api_key": "bio",
+          "localized": false,
+          "validators": {}
+        },
+        {
+          "label": "Avatar",
+          "field_type": "file",
+          "api_key": "avatar",
+          "localized": false,
+          "validators": {
+            "extension": {
+              "extensions": ["jpg", "jpeg", "png", "gif", "webp"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

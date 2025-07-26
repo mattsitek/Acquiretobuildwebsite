@@ -1,0 +1,106 @@
+{
+  "sample_data": {
+    "deal_kit_page": {
+      "hero_badge_text": "Tools Built for Business Buyers",
+      "hero_title_line_1": "Skip the guesswork.",
+      "hero_title_line_2": "Grab the Deal Kit.",
+      "hero_subtitle": "Get the same LOI, MNDA, and cold outreach scripts top acquirers use to find, analyze, and buy businesses — all for free.",
+      "email_placeholder": "Enter your email address",
+      "cta_button_text": "Send Me the Deal Kit",
+      "form_disclaimer": "100% free. No spam. Instant delivery to your inbox.",
+      "whats_inside_title": "WHAT'S INSIDE THE DEAL KIT",
+      "whats_inside_subtitle": "These aren't templates. They're traction. Tools built by real buyers who've closed real deals.",
+      "social_proof_title": "WHAT BUYERS ARE SAYING",
+      "coming_soon_title": "COMING SOON TO THE DEAL KIT",
+      "coming_soon_subtitle": "We're constantly adding new tools. Get the Deal Kit now and receive all future updates automatically.",
+      "final_cta_title": "READY TO GET YOUR DEAL KIT?",
+      "final_cta_subtitle": "Join 2,500+ business buyers who've downloaded the Deal Kit.",
+      "success_message": "🎉 Success! Check your email for The Deal Kit. It should arrive within 2 minutes. (Don't forget to check your spam folder!)"
+    },
+    "deal_kit_tools": [
+      {
+        "tool_name": "LOI Template",
+        "tool_description": "Professional Letter of Intent template used in $1M+ deals",
+        "tool_icon": "FileText",
+        "display_order": 1,
+        "is_featured": true
+      },
+      {
+        "tool_name": "MNDA Template",
+        "tool_description": "Mutual Non-Disclosure Agreement that protects both parties",
+        "tool_icon": "Shield",
+        "display_order": 2,
+        "is_featured": true
+      },
+      {
+        "tool_name": "Cold Call Scripts",
+        "tool_description": "Proven phone scripts that get business owners talking",
+        "tool_icon": "Phone",
+        "display_order": 3,
+        "is_featured": true
+      },
+      {
+        "tool_name": "Email Outreach Templates",
+        "tool_description": "High-response email templates for seller outreach",
+        "tool_icon": "Mail",
+        "display_order": 4,
+        "is_featured": true
+      },
+      {
+        "tool_name": "Due Diligence Starter Checklist",
+        "tool_description": "Essential items to verify before you buy",
+        "tool_icon": "ClipboardList",
+        "display_order": 5,
+        "is_featured": true
+      }
+    ],
+    "deal_kit_testimonials": [
+      {
+        "testimonial_text": "The LOI template alone saved me $5K in legal fees. These are the exact documents I used to close my first acquisition.",
+        "author_name": "Sarah M.",
+        "author_title": "Manufacturing Business Owner",
+        "star_rating": 5,
+        "display_order": 1
+      },
+      {
+        "testimonial_text": "The cold call scripts actually work. I got 3 seller meetings in my first week using these exact words.",
+        "author_name": "Mike R.",
+        "author_title": "Search Fund Entrepreneur",
+        "star_rating": 5,
+        "display_order": 2
+      }
+    ],
+    "coming_soon_tools": [
+      {
+        "tool_name": "Valuation Starter Calculator",
+        "display_order": 1,
+        "expected_release": "Q2 2024"
+      },
+      {
+        "tool_name": "Earnout Model Templates",
+        "display_order": 2,
+        "expected_release": "Q2 2024"
+      },
+      {
+        "tool_name": "Seller Psychology Guide",
+        "display_order": 3,
+        "expected_release": "Q3 2024"
+      },
+      {
+        "tool_name": "Broker Email Templates",
+        "display_order": 4,
+        "expected_release": "Q3 2024"
+      },
+      {
+        "tool_name": "SBA Loan Application Checklist",
+        "display_order": 5,
+        "expected_release": "Q4 2024"
+      },
+      {
+        "tool_name": "Asset Purchase Agreement Template",
+        "display_order": 6,
+        "expected_release": "Q4 2024"
+      }
+    ]
+  }
+}
