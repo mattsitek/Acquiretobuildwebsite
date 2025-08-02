@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { TrendingUp, TrendingDown, AlertTriangle, CheckCircle, Lock } from "lucide-react"
-import type { ScoreResults, FormData } from "../lib/calculations"
+import type { ScoreResults, FormData } from "./calculations"
 
 interface ResultsSummaryProps {
   scores: ScoreResults

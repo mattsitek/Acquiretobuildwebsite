@@ -3,7 +3,7 @@
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Slider } from "@/components/ui/slider"
-import type { FormData } from "../lib/calculations"
+import type { FormData } from "./calculations"
 
 interface OwnerInvolvementProps {
   formData: FormData
