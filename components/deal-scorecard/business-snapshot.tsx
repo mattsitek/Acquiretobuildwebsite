@@ -7,7 +7,7 @@ import { Slider } from "@/components/ui/slider"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { AlertTriangle } from "lucide-react"
-import type { FormData } from "../lib/calculations"
+import type { FormData } from "./calculations"
 
 interface BusinessSnapshotProps {
   formData: FormData

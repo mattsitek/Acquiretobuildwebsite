@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Lock } from "lucide-react"
-import type { FormData } from "../lib/calculations"
+import type { FormData } from "./calculations"
 
 interface DealTermsProps {
   formData: FormData

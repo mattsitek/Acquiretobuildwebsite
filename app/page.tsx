@@ -1,11 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { NewsletterForm } from "@/components/newsletter-form"
-import { LeadMagnetSection } from "@/components/lead-magnet-section"
+import { DealScorecardSection } from "@/components/deal-scorecard"
 import { Search, AlertTriangle, Users, Clock, Brain, MessageCircle, CheckCircle, Briefcase } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { getHomepageContent, getPrimaryLeadMagnet } from "@/lib/datocms"
+import { getHomepageContent } from "@/lib/datocms"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -57,11 +57,9 @@ export const metadata: Metadata = {
 export default async function HomePage() {
   // Get homepage content from DatoCMS with error handling
   let homepageData = null
-  let leadMagnet = null
 
   try {
     homepageData = await getHomepageContent()
-    leadMagnet = await getPrimaryLeadMagnet()
   } catch (error) {
     console.error("Error loading DatoCMS data:", error)
     // Continue with fallback content
@@ -70,7 +68,6 @@ export default async function HomePage() {
   // Debug log in development
   if (process.env.NODE_ENV === "development") {
     console.log("Homepage data from DatoCMS:", homepageData)
-    console.log("Lead magnet data from DatoCMS:", leadMagnet)
   }
 
   return (
@@ -217,7 +214,6 @@ export default async function HomePage() {
           <div className="container mx-auto px-4">
             <div className="text-sm text-blue-800">
               <p>DatoCMS Homepage Status: {homepageData ? "✅ Connected" : "❌ Using Fallback Content"}</p>
-              <p>Lead Magnet Status: {leadMagnet ? "✅ Available" : "❌ Using Fallback"}</p>
               <p>API Token Status: {process.env.DATOCMS_API_TOKEN ? "✅ Configured" : "❌ Missing"}</p>
               {homepageData && <p>Hero Image: {homepageData.heroImage?.url ? "✅ Available" : "❌ Missing"}</p>}
               {homepageData && (
@@ -306,8 +302,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* HIGH-CONVERTING LEAD MAGNET SECTION - Matches Original Design */}
-      <LeadMagnetSection leadMagnet={leadMagnet} />
+      {/* Deal Scorecard Section */}
+      <DealScorecardSection />
 
       {/* Value Proposition Section */}
       <section className="py-16 lg:py-24 bg-[#F9F9F9]" aria-labelledby="value-prop-heading">
