@@ -1,0 +1,51 @@
+name: Deploy Preview
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+on:
+  pull_request:
+    branches:
+      - main
+      - staging
+
+jobs:
+  Deploy-Preview:
+    # dependabot or github users already on Vercel should be added to the array
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts to Vercel
+        id: deploy
+        run: |
+          URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} | tail -n 1)
+          echo "Vercel URL: $URL"
+          echo "::set-output name=vercel_url::$URL"
+
+      - name: Output Vercel URL
+        run: echo "Preview URL ${{ steps.deploy.outputs.vercel_url }}"
+
+      - name: Post comment to Pull Request
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          PROJECT_NAME="MCCEI Frontend" # Or dynamically get from environment
+          BRANCH_NAME="${{ github.head_ref }}" # Get the branch name
+          TIMESTAMP=$(TZ="America/New_York" date +"%b %d, %Y %I:%M%p %Z")
+          PREFACE="🚀 The Preview Environment has successfully deployed! ✅"
+          COMMENT_BODY="${PREFACE}\n\n| Name  | Branch | Preview | Updated (ET) |\n| --- | --- | --- | --- |\n| **${PROJECT_NAME}** | ${BRANCH_NAME} | [Visit Preview](${{ steps.deploy.outputs.vercel_url }}) | ${TIMESTAMP} |"
+          PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+          curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               -H "Content-Type: application/json" \
+               -X POST \
+               -d "{\"body\":\"${COMMENT_BODY}\"}" \
+               "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
