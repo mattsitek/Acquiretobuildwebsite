@@ -28,6 +28,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/deal-scorecard`,
+      lastModified: currentDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/newsletter`,
       lastModified: currentDate,
       changeFrequency: "weekly" as const,
@@ -45,18 +51,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     },
-  ]
-
-  // Dynamic blog post pages
-  const blogPages = blogPosts.map((post: any) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: post.publishedAt ? new Date(post.publishedAt) : currentDate,
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }))
-
-  // Additional important pages
-  const additionalPages = [
     {
       url: `${baseUrl}/privacy`,
       lastModified: currentDate,
@@ -71,5 +65,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  return [...staticPages, ...blogPages, ...additionalPages]
+  // Dynamic blog post pages
+  const blogPages = blogPosts.map((post: any) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: post.publishedAt ? new Date(post.publishedAt) : currentDate,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }))
+
+  return [...staticPages, ...blogPages]
 }

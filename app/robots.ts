@@ -21,6 +21,8 @@ export default function robots(): MetadataRoute.Robots {
           "/deal-kit-analytics",
           "/_next/",
           "/favicon.ico",
+          "/manifest.webmanifest",
+          "/*.webmanifest",
         ],
       },
       {
@@ -37,6 +39,8 @@ export default function robots(): MetadataRoute.Robots {
           "/subscribers",
           "/lead-magnet-subscribers",
           "/deal-kit-analytics",
+          "/manifest.webmanifest",
+          "/*.webmanifest",
         ],
       },
       {
@@ -53,6 +57,8 @@ export default function robots(): MetadataRoute.Robots {
           "/subscribers",
           "/lead-magnet-subscribers",
           "/deal-kit-analytics",
+          "/manifest.webmanifest",
+          "/*.webmanifest",
         ],
       },
       {
@@ -69,6 +75,8 @@ export default function robots(): MetadataRoute.Robots {
           "/subscribers",
           "/lead-magnet-subscribers",
           "/deal-kit-analytics",
+          "/manifest.webmanifest",
+          "/*.webmanifest",
         ],
       },
       {
@@ -85,6 +93,8 @@ export default function robots(): MetadataRoute.Robots {
           "/subscribers",
           "/lead-magnet-subscribers",
           "/deal-kit-analytics",
+          "/manifest.webmanifest",
+          "/*.webmanifest",
         ],
       },
       {
@@ -101,6 +111,8 @@ export default function robots(): MetadataRoute.Robots {
           "/subscribers",
           "/lead-magnet-subscribers",
           "/deal-kit-analytics",
+          "/manifest.webmanifest",
+          "/*.webmanifest",
         ],
       },
     ],
