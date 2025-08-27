@@ -86,7 +86,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://acquireandbuild.com",
   },
-    generator: 'v0.dev'
+  generator: "v0.dev",
 }
 
 export default function RootLayout({
@@ -218,7 +218,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#1A73E8" />
         <meta name="msapplication-TileColor" content="#1A73E8" />
 
-        {/* Canonical URL */}
+        {/* Canonical URL - will be overridden by page-specific canonical */}
         <link rel="canonical" href="https://acquireandbuild.com" />
       </head>
       <body className={inter.className}>{children}</body>
