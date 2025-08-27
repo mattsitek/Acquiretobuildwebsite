@@ -34,6 +34,7 @@ export interface DealBox {
   sizeOfDeal: {
     revenueRange: string
     requiredSDE: string
+    dealSize: string // Add this line
   }
   financingFramework: {
     downPayment: string
@@ -268,15 +269,35 @@ export function calculateDealBox(data: AssessmentData): DealBox {
     }
   }
 
-  // Calculate down payment percentage
-  const downPaymentPercent = Math.round((capitalRange.min / (requiredSDELow * 3)) * 100) // Assuming 3x SDE valuation
+  // Get industry multiplier for deal valuation
+  const industryMultipliers = {
+    healthcare: 5.0,
+    "professional-services": 4.5,
+    "business-services": 3.5,
+    "tech-enabled": 6.0,
+    other: 3.0,
+  }
+
+  const multiplier = industryMultipliers[data.industryPreference as keyof typeof industryMultipliers] || 3.0
+
+  // Calculate deal size (business valuation = SDE × industry multiplier)
+  const minDealSize = requiredSDELow * multiplier
+  const maxDealSize = requiredSDEHigh * multiplier
+
+  // Calculate down payment percentages based on available capital vs deal size
+  const minDownPaymentPercent = Math.max(5, Math.min(20, Math.round((capitalRange.min / maxDealSize) * 100)))
+  const maxDownPaymentPercent = Math.min(20, Math.round((capitalRange.max / minDealSize) * 100))
+
+  // Ensure logical ordering (lower percentage first)
+  const lowerPercent = Math.min(minDownPaymentPercent, maxDownPaymentPercent)
+  const higherPercent = Math.max(minDownPaymentPercent, maxDownPaymentPercent)
 
   // Create elevator pitch
   const industry = industryMap[data.industryPreference as keyof typeof industryMap] || "service businesses"
   const geography = geographyMap[data.geography as keyof typeof geographyMap] || "locally"
   const businessModel = businessModelMap[data.businessModel as keyof typeof businessModelMap] || "proven business model"
 
-  const elevatorPitch = `I'm looking for a ${industry} business ${geography}—something with ${businessModel}. Ideally it's doing ${formatCurrency(revenueRangeLow)}–${formatCurrency(revenueRangeHigh)} in revenue and ${formatCurrency(requiredSDELow)}–${formatCurrency(requiredSDEHigh)} in SDE. I plan to use SBA financing with ${downPaymentPercent}–20% down, and I like deals where the seller provides transition support. My background is in ${personalEdge.background}, so ${personalEdge.advantage}. The goal for me is to build a stable, cash-flowing business that supports my family and creates long-term wealth.`
+  const elevatorPitch = `I'm looking for a ${industry} business ${geography}—something with ${businessModel}. Ideally it's doing ${formatCurrency(revenueRangeLow)}–${formatCurrency(revenueRangeHigh)} in revenue and ${formatCurrency(requiredSDELow)}–${formatCurrency(requiredSDEHigh)} in SDE. I plan to use SBA financing with ${lowerPercent}–${higherPercent}% down, and I like deals where the seller provides transition support. My background is in ${personalEdge.background}, so ${personalEdge.advantage}. The goal for me is to build a stable, cash-flowing business that supports my family and creates long-term wealth.`
 
   return {
     targetBusinessProfile: {
@@ -287,9 +308,10 @@ export function calculateDealBox(data: AssessmentData): DealBox {
     sizeOfDeal: {
       revenueRange: `${formatCurrency(revenueRangeLow)}–${formatCurrency(revenueRangeHigh)}`,
       requiredSDE: `${formatCurrency(requiredSDELow)}–${formatCurrency(requiredSDEHigh)}`,
+      dealSize: `${formatCurrency(minDealSize)}–${formatCurrency(maxDealSize)}`, // Add this new field
     },
     financingFramework: {
-      downPayment: `${formatCurrency(capitalRange.min)}–${formatCurrency(capitalRange.max)} (${downPaymentPercent}–20% down)`,
+      downPayment: `${formatCurrency(capitalRange.min)}–${formatCurrency(capitalRange.max)} (${lowerPercent}–${higherPercent}% down)`,
       structure: "SBA 7(a) financing with seller transition support preferred",
     },
     personalEdge: {

@@ -180,6 +180,10 @@ export function AssessmentResults({ results, assessmentData, onRestart }: Result
                     <span className="text-gray-600">Required SDE:</span>
                     <span className="font-medium">{results.dealBox.sizeOfDeal.requiredSDE}</span>
                   </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Deal Size:</span>
+                    <span className="font-medium">{results.dealBox.sizeOfDeal.dealSize}</span>
+                  </div>
                 </CardContent>
               </Card>
 
