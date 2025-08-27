@@ -1,363 +1,266 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import {
-  Download,
-  Mail,
-  RefreshCw,
-  TrendingUp,
-  DollarSign,
-  Target,
-  CheckCircle,
-  ArrowRight,
-  Star,
-  Building,
-  CreditCard,
-  MessageSquare,
-  Heart,
-} from "lucide-react"
-import type { AssessmentData } from "@/lib/assessment-logic"
+import { Copy, Mail, Building, DollarSign, CreditCard, User, Target } from "lucide-react"
+import { useState } from "react"
+import type { AssessmentData, DealBox } from "@/lib/assessment-logic"
 
 interface ResultsProps {
-  results: any
-  assessmentData: AssessmentData
-  onRestart: () => void
+  data: AssessmentData
+  dealBox: DealBox
+  readinessScore: number
 }
 
-export function AssessmentResults({ results, assessmentData, onRestart }: ResultsProps) {
-  const [email, setEmail] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+export function AssessmentResults({ data, dealBox, readinessScore }: ResultsProps) {
+  const [copied, setCopied] = useState(false)
 
-  const handleEmailSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-
-    setIsSubmitted(true)
-    setIsSubmitting(false)
+  const copyElevatorPitch = async () => {
+    await navigator.clipboard.writeText(dealBox.elevatorPitch)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
   }
 
   const getScoreColor = (score: number) => {
-    if (score >= 22) return "text-green-600"
-    if (score >= 17) return "text-blue-600"
-    if (score >= 12) return "text-yellow-600"
-    if (score >= 7) return "text-orange-600"
+    if (score >= 80) return "text-green-600"
+    if (score >= 60) return "text-yellow-600"
     return "text-red-600"
   }
 
-  const getScoreBadgeColor = (level: string) => {
-    switch (level) {
-      case "Ready to Buy":
-        return "bg-green-100 text-green-800"
-      case "Nearly Ready":
-        return "bg-blue-100 text-blue-800"
-      case "Developing Interest":
-        return "bg-yellow-100 text-yellow-800"
-      case "Early Exploration":
-        return "bg-orange-100 text-orange-800"
-      default:
-        return "bg-red-100 text-red-800"
-    }
+  const getScoreLabel = (score: number) => {
+    if (score >= 80) return "Highly Ready"
+    if (score >= 60) return "Moderately Ready"
+    return "Needs Development"
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Your KnowledgeBuyer Assessment Results</h1>
-          <p className="text-xl text-gray-600 mb-6">
-            Based on your responses, here's your personalized business acquisition roadmap
-          </p>
-        </div>
-
-        {/* Readiness Score */}
-        <Card className="mb-8 border-2 border-blue-200">
-          <CardHeader className="text-center">
-            <CardTitle className="flex items-center justify-center gap-3 text-2xl">
-              <Target className="w-8 h-8 text-blue-600" />
-              Your Readiness Score
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="text-center">
-            <div className={`text-6xl font-bold mb-4 ${getScoreColor(results.readinessScore.score)}`}>
-              {results.readinessScore.score}/26
-            </div>
-            <Badge className={`text-lg px-4 py-2 mb-4 ${getScoreBadgeColor(results.readinessScore.level)}`}>
-              {results.readinessScore.level}
-            </Badge>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">{results.readinessScore.description}</p>
-            <div className="mt-6">
-              <Progress value={(results.readinessScore.score / 26) * 100} className="h-3 max-w-md mx-auto" />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Skill Advantage */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Star className="w-5 h-5 text-yellow-500" />
-              Your Skill Advantage
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-center gap-2 mb-3">
-              <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">
-                {results.skillAdvantage.multiplier} Multiplier
+    <div className="space-y-8">
+      {/* Readiness Score */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Target className="w-5 h-5" />
+            Your Business Buying Readiness Score
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <span className="text-2xl font-bold">{readinessScore}/100</span>
+              <Badge variant="secondary" className={getScoreColor(readinessScore)}>
+                {getScoreLabel(readinessScore)}
               </Badge>
-              <span className="font-medium capitalize">{assessmentData.professionalBackground} Background</span>
             </div>
-            <p className="text-gray-600 mb-4">{results.skillAdvantage.advantage}</p>
-            <div className="text-sm text-gray-500">
-              <strong>Selected Skills:</strong> {assessmentData.transferableSkills?.join(", ") || "None selected"}
-            </div>
-          </CardContent>
-        </Card>
+            <Progress value={readinessScore} className="w-full" />
+            <p className="text-sm text-gray-600">
+              {readinessScore >= 80 && "You're well-prepared to start your business acquisition journey!"}
+              {readinessScore >= 60 &&
+                readinessScore < 80 &&
+                "You have a solid foundation but could benefit from additional preparation."}
+              {readinessScore < 60 && "Consider developing your skills and experience before pursuing an acquisition."}
+            </p>
+          </div>
+        </CardContent>
+      </Card>
 
-        {/* Deal Box - New Structure */}
-        <Card className="mb-8 bg-gradient-to-r from-green-50 to-blue-50 border-green-200">
-          <CardHeader className="text-center">
-            <CardTitle className="flex items-center justify-center gap-3 text-2xl">
-              <Building className="w-8 h-8 text-green-600" />
-              Your Deal Box
+      {/* Deal Box */}
+      <div className="space-y-6">
+        <h2 className="text-2xl font-bold">Your Personalized Deal Box</h2>
+
+        {/* Target Business Profile */}
+        <Card className="border-green-200 bg-green-50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-green-800">
+              <Building className="w-5 h-5" />
+              Target Business Profile
             </CardTitle>
-            <p className="text-gray-600">Your personalized business acquisition profile</p>
           </CardHeader>
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
-              {/* Target Business Profile */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-lg">
-                    <Target className="w-5 h-5 text-blue-600" />
-                    Target Business Profile
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Industry:</span>
-                    <span className="font-medium capitalize">{results.dealBox.targetBusinessProfile.industry}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Geography:</span>
-                    <span className="font-medium capitalize">{results.dealBox.targetBusinessProfile.geography}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Model:</span>
-                    <span className="font-medium capitalize">
-                      {results.dealBox.targetBusinessProfile.businessModel}
-                    </span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Size of Deal */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-lg">
-                    <DollarSign className="w-5 h-5 text-green-600" />
-                    Size of the Deal
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Revenue Range:</span>
-                    <span className="font-medium">{results.dealBox.sizeOfDeal.revenueRange}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Required SDE:</span>
-                    <span className="font-medium">{results.dealBox.sizeOfDeal.requiredSDE}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Deal Size:</span>
-                    <span className="font-medium">{results.dealBox.sizeOfDeal.dealSize}</span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Financing Framework */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-lg">
-                    <CreditCard className="w-5 h-5 text-purple-600" />
-                    Financing Framework
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Down Payment:</span>
-                    <span className="font-medium">{results.dealBox.financingFramework.downPayment}</span>
-                  </div>
-                  <div className="text-sm text-gray-600">{results.dealBox.financingFramework.structure}</div>
-                </CardContent>
-              </Card>
-
-              {/* Personal Edge */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-lg">
-                    <Star className="w-5 h-5 text-yellow-600" />
-                    Personal Edge
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Background:</span>
-                    <span className="font-medium capitalize">{results.dealBox.personalEdge.background}</span>
-                  </div>
-                  <div className="text-sm text-gray-600">{results.dealBox.personalEdge.advantage}</div>
-                </CardContent>
-              </Card>
+          <CardContent className="space-y-2">
+            <div className="flex justify-between">
+              <span className="text-gray-600">Industry:</span>
+              <span className="font-medium">{dealBox.targetBusinessProfile.industry}</span>
             </div>
-
-            {/* Lifestyle & Outcome */}
-            <Card className="mb-6">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <Heart className="w-5 h-5 text-red-600" />
-                  Lifestyle & Outcome
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600">{results.dealBox.lifestyleOutcome.goals}</p>
-              </CardContent>
-            </Card>
-
-            {/* Elevator Pitch */}
-            <Card className="bg-blue-50 border-blue-200">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <MessageSquare className="w-5 h-5 text-blue-600" />
-                  Your Elevator Pitch
-                </CardTitle>
-                <p className="text-sm text-gray-600">Use this script when talking to brokers, sellers, or lenders</p>
-              </CardHeader>
-              <CardContent>
-                <div className="bg-white p-4 rounded-lg border-l-4 border-blue-500">
-                  <p className="text-gray-800 italic leading-relaxed">"{results.dealBox.elevatorPitch}"</p>
-                </div>
-                <div className="mt-4 text-center">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => navigator.clipboard.writeText(results.dealBox.elevatorPitch)}
-                  >
-                    Copy to Clipboard
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Geography:</span>
+              <span className="font-medium">{dealBox.targetBusinessProfile.geography}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Business Model:</span>
+              <span className="font-medium">{dealBox.targetBusinessProfile.businessModel}</span>
+            </div>
           </CardContent>
         </Card>
 
-        {/* Recommendations */}
-        <Card className="mb-8">
+        {/* Size of the Deal */}
+        <Card className="border-blue-200 bg-blue-50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-blue-800">
+              <DollarSign className="w-5 h-5" />
+              Size of the Deal
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <div className="flex justify-between">
+              <span className="text-gray-600">Revenue Range:</span>
+              <span className="font-medium">{dealBox.sizeOfDeal.revenueRange}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Required SDE:</span>
+              <span className="font-medium">{dealBox.sizeOfDeal.requiredSDE}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Deal Size:</span>
+              <span className="font-medium">{dealBox.sizeOfDeal.dealSize}</span>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Financing Framework */}
+        <Card className="border-purple-200 bg-purple-50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-purple-800">
+              <CreditCard className="w-5 h-5" />
+              Financing Framework
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <div className="flex justify-between">
+              <span className="text-gray-600">Down Payment:</span>
+              <span className="font-medium">
+                {dealBox.financingFramework.downPayment} ({dealBox.financingFramework.downPaymentPercentage})
+              </span>
+            </div>
+            <div className="text-sm text-gray-600 mt-2">{dealBox.financingFramework.structure}</div>
+          </CardContent>
+        </Card>
+
+        {/* Personal Edge */}
+        <Card className="border-orange-200 bg-orange-50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-orange-800">
+              <User className="w-5 h-5" />
+              Personal Edge
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <div className="flex justify-between">
+              <span className="text-gray-600">Background:</span>
+              <span className="font-medium">{dealBox.personalEdge.background}</span>
+            </div>
+            <div className="text-sm text-gray-600 mt-2">{dealBox.personalEdge.advantage}</div>
+          </CardContent>
+        </Card>
+
+        {/* Lifestyle & Outcome */}
+        <Card className="border-indigo-200 bg-indigo-50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-indigo-800">
+              <Target className="w-5 h-5" />
+              Lifestyle & Outcome
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <div className="text-sm text-gray-600">
+              <strong>Goals:</strong> {dealBox.lifestyleOutcome.goals}
+            </div>
+            <div className="text-sm text-gray-600">
+              <strong>Motivation:</strong> {dealBox.lifestyleOutcome.motivation}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Elevator Pitch */}
+        <Card className="border-gray-200">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-blue-600" />
-              Your Next Steps
+              <Mail className="w-5 h-5" />
+              Your Elevator Pitch
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3">
-              {results.recommendations.map((rec: string, index: number) => (
-                <div key={index} className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span>{rec}</span>
-                </div>
-              ))}
+            <div className="bg-gray-50 p-4 rounded-lg mb-4">
+              <p className="text-sm leading-relaxed">{dealBox.elevatorPitch}</p>
             </div>
+            <Button onClick={copyElevatorPitch} variant="outline" size="sm">
+              <Copy className="w-4 h-4 mr-2" />
+              {copied ? "Copied!" : "Copy Pitch"}
+            </Button>
           </CardContent>
         </Card>
-
-        {/* Email Capture */}
-        <Card className="mb-8 bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl">Get Your Detailed Business Buyer Roadmap</CardTitle>
-            <p className="text-gray-600">
-              Download a personalized PDF report with detailed analysis, deal examples, and action steps
-            </p>
-          </CardHeader>
-          <CardContent>
-            {!isSubmitted ? (
-              <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto">
-                <div className="flex gap-2">
-                  <div className="flex-1">
-                    <Label htmlFor="email" className="sr-only">
-                      Email
-                    </Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="Enter your email address"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="h-12"
-                    />
-                  </div>
-                  <Button type="submit" disabled={isSubmitting} className="h-12 px-6 bg-blue-600 hover:bg-blue-700">
-                    {isSubmitting ? (
-                      <RefreshCw className="w-4 h-4 animate-spin" />
-                    ) : (
-                      <>
-                        <Download className="w-4 h-4 mr-2" />
-                        Get Report
-                      </>
-                    )}
-                  </Button>
-                </div>
-                <p className="text-xs text-gray-500 mt-2 text-center">
-                  We'll also send you weekly tips on business acquisition
-                </p>
-              </form>
-            ) : (
-              <div className="text-center">
-                <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Report Sent!</h3>
-                <p className="text-gray-600 mb-4">Check your email for your personalized Business Buyer Roadmap</p>
-                <Button className="bg-green-600 hover:bg-green-700">
-                  <Mail className="w-4 h-4 mr-2" />
-                  Join Our Newsletter
-                </Button>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button onClick={onRestart} variant="outline" className="flex items-center gap-2 bg-transparent">
-            <RefreshCw className="w-4 h-4" />
-            Retake Assessment
-          </Button>
-
-          <Button className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2">
-            <ArrowRight className="w-4 h-4" />
-            Explore Deal Opportunities
-          </Button>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center mt-12 pt-8 border-t border-gray-200">
-          <p className="text-gray-500 text-sm">
-            Ready to take the next step? Join thousands of professionals who've successfully transitioned to business
-            ownership.
-          </p>
-        </div>
       </div>
+
+      {/* Next Steps */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Recommended Next Steps</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            {readinessScore >= 80 && (
+              <>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                  <div>
+                    <p className="font-medium">Start Your Search</p>
+                    <p className="text-sm text-gray-600">
+                      Begin reaching out to business brokers with your elevator pitch
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                  <div>
+                    <p className="font-medium">Secure Financing Pre-approval</p>
+                    <p className="text-sm text-gray-600">Get pre-qualified for SBA loans to strengthen your offers</p>
+                  </div>
+                </div>
+              </>
+            )}
+            {readinessScore >= 60 && readinessScore < 80 && (
+              <>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
+                  <div>
+                    <p className="font-medium">Build Your Network</p>
+                    <p className="text-sm text-gray-600">Connect with business brokers and other buyers in your area</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
+                  <div>
+                    <p className="font-medium">Enhance Your Skills</p>
+                    <p className="text-sm text-gray-600">
+                      Consider additional training in areas like financial analysis or operations
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
+            {readinessScore < 60 && (
+              <>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
+                  <div>
+                    <p className="font-medium">Gain More Experience</p>
+                    <p className="text-sm text-gray-600">
+                      Consider starting with a smaller side business or consulting work
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
+                  <div>
+                    <p className="font-medium">Build Your Capital</p>
+                    <p className="text-sm text-gray-600">Focus on saving more for a larger down payment</p>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }

@@ -3,7 +3,7 @@
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Card } from "@/components/ui/card"
-import { TrendingUp, Shield, Clock, DollarSign, Users } from "lucide-react"
+import { TrendingUp, Shield, Clock, DollarSign, Users, Heart } from "lucide-react"
 import type { AssessmentData } from "@/lib/assessment-logic"
 
 interface Section1Props {
@@ -67,19 +67,35 @@ export function AssessmentSection1({ data, onUpdate }: Section1Props) {
             </div>
           </Card>
 
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="lifestyle" id="lifestyle" />
-            <Label htmlFor="lifestyle" className="cursor-pointer">
-              Lifestyle change (work-life balance, location independence)
-            </Label>
-          </div>
+          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+            <div className="flex items-center space-x-3">
+              <RadioGroupItem value="lifestyle" id="lifestyle" />
+              <div className="flex items-center space-x-2">
+                <Clock className="w-5 h-5 text-orange-600" />
+                <Label htmlFor="lifestyle" className="cursor-pointer">
+                  <div>
+                    <div className="font-medium">Lifestyle Change</div>
+                    <div className="text-sm text-gray-600">Work-life balance, location independence</div>
+                  </div>
+                </Label>
+              </div>
+            </div>
+          </Card>
 
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="legacy" id="legacy" />
-            <Label htmlFor="legacy" className="cursor-pointer">
-              Build a legacy for my family
-            </Label>
-          </div>
+          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+            <div className="flex items-center space-x-3">
+              <RadioGroupItem value="legacy" id="legacy" />
+              <div className="flex items-center space-x-2">
+                <Heart className="w-5 h-5 text-pink-600" />
+                <Label htmlFor="legacy" className="cursor-pointer">
+                  <div>
+                    <div className="font-medium">Build a Legacy</div>
+                    <div className="text-sm text-gray-600">Create something meaningful for my family</div>
+                  </div>
+                </Label>
+              </div>
+            </div>
+          </Card>
         </RadioGroup>
       </div>
 
@@ -136,12 +152,20 @@ export function AssessmentSection1({ data, onUpdate }: Section1Props) {
             </div>
           </Card>
 
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="passive" id="passive" />
-            <Label htmlFor="passive" className="cursor-pointer">
-              Passive investment (minimal time commitment)
-            </Label>
-          </div>
+          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+            <div className="flex items-center space-x-3">
+              <RadioGroupItem value="passive" id="passive" />
+              <div className="flex items-center space-x-2">
+                <DollarSign className="w-5 h-5 text-yellow-600" />
+                <Label htmlFor="passive" className="cursor-pointer">
+                  <div>
+                    <div className="font-medium">Passive Investment</div>
+                    <div className="text-sm text-gray-600">Minimal time commitment, others manage operations</div>
+                  </div>
+                </Label>
+              </div>
+            </div>
+          </Card>
         </RadioGroup>
       </div>
 

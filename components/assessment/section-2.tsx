@@ -154,12 +154,20 @@ export function AssessmentSection2({ data, onUpdate }: Section2Props) {
             </div>
           </Card>
 
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="other" id="other" />
-            <Label htmlFor="other" className="cursor-pointer">
-              Other professional background
-            </Label>
-          </div>
+          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+            <div className="flex items-center space-x-3">
+              <RadioGroupItem value="other" id="other" />
+              <div className="flex items-center space-x-2">
+                <Users className="w-5 h-5 text-gray-600" />
+                <Label htmlFor="other" className="cursor-pointer">
+                  <div>
+                    <div className="font-medium">Other Background</div>
+                    <div className="text-sm text-gray-600">Different professional experience</div>
+                  </div>
+                </Label>
+              </div>
+            </div>
+          </Card>
         </RadioGroup>
       </div>
 
@@ -250,26 +258,41 @@ export function AssessmentSection2({ data, onUpdate }: Section2Props) {
             </div>
           </Card>
 
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="startup" id="startup" />
-            <Label htmlFor="startup" className="cursor-pointer">
-              Startup experience (founded or early employee)
-            </Label>
-          </div>
+          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="startup" id="startup" />
+              <Label htmlFor="startup" className="cursor-pointer">
+                <div>
+                  <div className="font-medium">Startup Experience</div>
+                  <div className="text-sm text-gray-600">Founded or early employee at a startup</div>
+                </div>
+              </Label>
+            </div>
+          </Card>
 
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="side-business" id="side-business" />
-            <Label htmlFor="side-business" className="cursor-pointer">
-              Side business or consulting experience
-            </Label>
-          </div>
+          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="side-business" id="side-business" />
+              <Label htmlFor="side-business" className="cursor-pointer">
+                <div>
+                  <div className="font-medium">Side Business</div>
+                  <div className="text-sm text-gray-600">Consulting or side business experience</div>
+                </div>
+              </Label>
+            </div>
+          </Card>
 
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="none" id="none" />
-            <Label htmlFor="none" className="cursor-pointer">
-              No direct business ownership experience
-            </Label>
-          </div>
+          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="none" id="none" />
+              <Label htmlFor="none" className="cursor-pointer">
+                <div>
+                  <div className="font-medium">No Prior Experience</div>
+                  <div className="text-sm text-gray-600">First-time business buyer</div>
+                </div>
+              </Label>
+            </div>
+          </Card>
         </RadioGroup>
       </div>
     </div>
