@@ -1,12 +1,11 @@
 "use client"
 
-import { Label } from "@/components/ui/label"
+import { Card, CardContent } from "@/components/ui/card"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
+import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { TrendingUp, Users, Cog, Code, Scale, Heart } from "lucide-react"
+import { DollarSign, TrendingUp, Settings, Monitor, Scale, Heart, Users, Building, Briefcase, Star } from "lucide-react"
 import type { AssessmentData } from "@/lib/assessment-logic"
 
 interface Section2Props {
@@ -27,189 +26,150 @@ export function AssessmentSection2({ data, onUpdate }: Section2Props) {
   return (
     <div className="space-y-8">
       {/* Question 1: Professional Background */}
-      <div>
-        <h3 className="text-lg font-semibold mb-4">What's your primary professional background?</h3>
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold">What's your professional background?</h3>
         <RadioGroup
           value={data.professionalBackground}
           onValueChange={(value) => onUpdate({ professionalBackground: value })}
           className="space-y-3"
         >
-          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
-            <div className="flex items-center justify-between">
+          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
+            <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="finance" id="finance" />
-                <div className="flex items-center space-x-2">
-                  <TrendingUp className="w-5 h-5 text-green-600" />
-                  <Label htmlFor="finance" className="cursor-pointer">
-                    <div>
-                      <div className="font-medium">Finance & Accounting</div>
-                      <div className="text-sm text-gray-600">CFO, Controller, Analyst, Banking</div>
-                    </div>
-                  </Label>
-                </div>
-              </div>
-              <Badge variant="secondary" className="bg-green-100 text-green-800">
-                2.0x Advantage
-              </Badge>
-            </div>
-          </Card>
-
-          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="sales" id="sales" />
-                <div className="flex items-center space-x-2">
-                  <Users className="w-5 h-5 text-blue-600" />
-                  <Label htmlFor="sales" className="cursor-pointer">
-                    <div>
-                      <div className="font-medium">Sales & Business Development</div>
-                      <div className="text-sm text-gray-600">Sales Manager, BD, Account Management</div>
-                    </div>
-                  </Label>
-                </div>
-              </div>
-              <Badge variant="secondary" className="bg-blue-100 text-blue-800">
-                1.9x Advantage
-              </Badge>
-            </div>
-          </Card>
-
-          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="operations" id="operations" />
-                <div className="flex items-center space-x-2">
-                  <Cog className="w-5 h-5 text-purple-600" />
-                  <Label htmlFor="operations" className="cursor-pointer">
-                    <div>
-                      <div className="font-medium">Operations & Project Management</div>
-                      <div className="text-sm text-gray-600">COO, Operations Manager, Project Manager</div>
-                    </div>
-                  </Label>
-                </div>
-              </div>
-              <Badge variant="secondary" className="bg-purple-100 text-purple-800">
-                1.8x Advantage
-              </Badge>
-            </div>
-          </Card>
-
-          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="technology" id="technology" />
-                <div className="flex items-center space-x-2">
-                  <Code className="w-5 h-5 text-indigo-600" />
-                  <Label htmlFor="technology" className="cursor-pointer">
-                    <div>
-                      <div className="font-medium">Technology & Engineering</div>
-                      <div className="text-sm text-gray-600">CTO, Software Engineer, IT Manager</div>
-                    </div>
-                  </Label>
-                </div>
-              </div>
-              <Badge variant="secondary" className="bg-indigo-100 text-indigo-800">
-                1.7x Advantage
-              </Badge>
-            </div>
-          </Card>
-
-          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="legal" id="legal" />
-                <div className="flex items-center space-x-2">
-                  <Scale className="w-5 h-5 text-gray-600" />
-                  <Label htmlFor="legal" className="cursor-pointer">
-                    <div>
-                      <div className="font-medium">Legal & Compliance</div>
-                      <div className="text-sm text-gray-600">Attorney, Compliance Officer, Risk Manager</div>
-                    </div>
-                  </Label>
-                </div>
-              </div>
-              <Badge variant="secondary" className="bg-gray-100 text-gray-800">
-                1.6x Advantage
-              </Badge>
-            </div>
-          </Card>
-
-          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="healthcare" id="healthcare" />
-                <div className="flex items-center space-x-2">
-                  <Heart className="w-5 h-5 text-red-600" />
-                  <Label htmlFor="healthcare" className="cursor-pointer">
-                    <div>
-                      <div className="font-medium">Healthcare</div>
-                      <div className="text-sm text-gray-600">Doctor, Nurse, Healthcare Administrator</div>
-                    </div>
-                  </Label>
-                </div>
-              </div>
-              <Badge variant="secondary" className="bg-red-100 text-red-800">
-                1.6x Advantage
-              </Badge>
-            </div>
-          </Card>
-
-          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
-            <div className="flex items-center space-x-3">
-              <RadioGroupItem value="other" id="other" />
-              <div className="flex items-center space-x-2">
-                <Users className="w-5 h-5 text-gray-600" />
-                <Label htmlFor="other" className="cursor-pointer">
-                  <div>
-                    <div className="font-medium">Other Background</div>
-                    <div className="text-sm text-gray-600">Different professional experience</div>
-                  </div>
+                <DollarSign className="w-5 h-5 text-green-600" />
+                <Label htmlFor="finance" className="cursor-pointer flex-1">
+                  <div className="font-medium">Finance & Accounting</div>
+                  <div className="text-sm text-gray-600">Financial analysis, accounting, investment banking</div>
                 </Label>
               </div>
-            </div>
+            </CardContent>
+          </Card>
+
+          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="sales" id="sales" />
+                <TrendingUp className="w-5 h-5 text-blue-600" />
+                <Label htmlFor="sales" className="cursor-pointer flex-1">
+                  <div className="font-medium">Sales & Business Development</div>
+                  <div className="text-sm text-gray-600">Sales, marketing, customer relationships</div>
+                </Label>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="operations" id="operations" />
+                <Settings className="w-5 h-5 text-purple-600" />
+                <Label htmlFor="operations" className="cursor-pointer flex-1">
+                  <div className="font-medium">Operations & Management</div>
+                  <div className="text-sm text-gray-600">Operations, project management, process improvement</div>
+                </Label>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="technology" id="technology" />
+                <Monitor className="w-5 h-5 text-indigo-600" />
+                <Label htmlFor="technology" className="cursor-pointer flex-1">
+                  <div className="font-medium">Technology & Engineering</div>
+                  <div className="text-sm text-gray-600">Software, IT, engineering, technical roles</div>
+                </Label>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="legal" id="legal" />
+                <Scale className="w-5 h-5 text-red-600" />
+                <Label htmlFor="legal" className="cursor-pointer flex-1">
+                  <div className="font-medium">Legal & Compliance</div>
+                  <div className="text-sm text-gray-600">Law, compliance, risk management</div>
+                </Label>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="healthcare" id="healthcare" />
+                <Heart className="w-5 h-5 text-pink-600" />
+                <Label htmlFor="healthcare" className="cursor-pointer flex-1">
+                  <div className="font-medium">Healthcare</div>
+                  <div className="text-sm text-gray-600">Medical, dental, veterinary, healthcare administration</div>
+                </Label>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="other" id="other" />
+                <Users className="w-5 h-5 text-gray-600" />
+                <Label htmlFor="other" className="cursor-pointer flex-1">
+                  <div className="font-medium">Other Professional Background</div>
+                  <div className="text-sm text-gray-600">Education, consulting, government, non-profit</div>
+                </Label>
+              </div>
+            </CardContent>
           </Card>
         </RadioGroup>
       </div>
 
       {/* Question 2: Transferable Skills */}
-      <div>
-        <h3 className="text-lg font-semibold mb-4">Which transferable skills do you have? (Select all that apply)</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold">Which skills do you have that would transfer to business ownership?</h3>
+        <p className="text-sm text-gray-600">Select all that apply</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {[
-            "Sales & Marketing",
-            "Financial Analysis",
-            "Operations Management",
-            "Team Leadership",
-            "Strategic Planning",
-            "Customer Service",
-            "Technology Implementation",
-            "Process Improvement",
+            "Financial analysis",
+            "Team leadership",
+            "Customer service",
+            "Marketing",
+            "Strategic planning",
+            "Process improvement",
             "Negotiation",
-            "Project Management",
-            "Data Analysis",
-            "Regulatory Compliance",
+            "Project management",
+            "Sales",
+            "Technology systems",
+            "Regulatory compliance",
+            "Training & development",
           ].map((skill) => (
-            <div key={skill} className="flex items-center space-x-2">
-              <Checkbox
-                id={skill}
-                checked={data.transferableSkills?.includes(skill) || false}
-                onCheckedChange={(checked) => handleSkillsChange(skill, checked as boolean)}
-              />
-              <Label htmlFor={skill} className="text-sm cursor-pointer">
-                {skill}
-              </Label>
-            </div>
+            <Card key={skill} className="cursor-pointer hover:bg-gray-50 transition-colors">
+              <CardContent className="p-3">
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id={skill}
+                    checked={data.transferableSkills?.includes(skill) || false}
+                    onCheckedChange={(checked) => handleSkillsChange(skill, checked as boolean)}
+                  />
+                  <Label htmlFor={skill} className="cursor-pointer text-sm">
+                    {skill}
+                  </Label>
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
 
       {/* Question 3: Business Application */}
-      <div>
-        <h3 className="text-lg font-semibold mb-4">
-          How would you apply your professional skills to improve a business? (Optional)
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold">
+          How would you apply your professional skills to improve a business you acquire?
         </h3>
         <Textarea
-          placeholder="Example: I would use my finance background to optimize cash flow, implement better financial controls, and identify cost-saving opportunities..."
+          placeholder="Describe how your background would help you add value to a business..."
           value={data.businessApplication}
           onChange={(e) => onUpdate({ businessApplication: e.target.value })}
           className="min-h-[100px]"
@@ -217,81 +177,78 @@ export function AssessmentSection2({ data, onUpdate }: Section2Props) {
       </div>
 
       {/* Question 4: Business Experience */}
-      <div>
-        <h3 className="text-lg font-semibold mb-4">What's your business ownership experience?</h3>
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold">What's your experience with business ownership or entrepreneurship?</h3>
         <RadioGroup
           value={data.businessExperience}
           onValueChange={(value) => onUpdate({ businessExperience: value })}
           className="space-y-3"
         >
-          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="owner" id="owner" />
-              <Label htmlFor="owner" className="cursor-pointer flex-1">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <div className="font-medium">Current/Former Business Owner</div>
-                    <div className="text-sm text-gray-600">I've owned and operated a business</div>
-                  </div>
-                  <Badge variant="secondary" className="bg-green-100 text-green-800">
-                    High Experience
-                  </Badge>
-                </div>
-              </Label>
-            </div>
+          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="owner" id="owner" />
+                <Building className="w-5 h-5 text-green-600" />
+                <Label htmlFor="owner" className="cursor-pointer flex-1">
+                  <div className="font-medium">Current/Former Business Owner</div>
+                  <div className="text-sm text-gray-600">I've owned and operated a business before</div>
+                </Label>
+              </div>
+            </CardContent>
           </Card>
 
-          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="acquisition" id="acquisition" />
-              <Label htmlFor="acquisition" className="cursor-pointer flex-1">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <div className="font-medium">Prior Acquisition Experience</div>
-                    <div className="text-sm text-gray-600">I've been involved in buying/selling businesses</div>
+          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="acquisition" id="acquisition" />
+                <Briefcase className="w-5 h-5 text-blue-600" />
+                <Label htmlFor="acquisition" className="cursor-pointer flex-1">
+                  <div className="font-medium">M&A Experience</div>
+                  <div className="text-sm text-gray-600">
+                    I've been involved in business acquisitions professionally
                   </div>
-                  <Badge variant="secondary" className="bg-blue-100 text-blue-800">
-                    High Experience
-                  </Badge>
-                </div>
-              </Label>
-            </div>
+                </Label>
+              </div>
+            </CardContent>
           </Card>
 
-          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="startup" id="startup" />
-              <Label htmlFor="startup" className="cursor-pointer">
-                <div>
+          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="startup" id="startup" />
+                <Star className="w-5 h-5 text-purple-600" />
+                <Label htmlFor="startup" className="cursor-pointer flex-1">
                   <div className="font-medium">Startup Experience</div>
-                  <div className="text-sm text-gray-600">Founded or early employee at a startup</div>
-                </div>
-              </Label>
-            </div>
+                  <div className="text-sm text-gray-600">I've worked at or founded startups</div>
+                </Label>
+              </div>
+            </CardContent>
           </Card>
 
-          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="side-business" id="side-business" />
-              <Label htmlFor="side-business" className="cursor-pointer">
-                <div>
+          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="side-business" id="side-business" />
+                <TrendingUp className="w-5 h-5 text-orange-600" />
+                <Label htmlFor="side-business" className="cursor-pointer flex-1">
                   <div className="font-medium">Side Business</div>
-                  <div className="text-sm text-gray-600">Consulting or side business experience</div>
-                </div>
-              </Label>
-            </div>
+                  <div className="text-sm text-gray-600">I've run side businesses or freelanced</div>
+                </Label>
+              </div>
+            </CardContent>
           </Card>
 
-          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="none" id="none" />
-              <Label htmlFor="none" className="cursor-pointer">
-                <div>
-                  <div className="font-medium">No Prior Experience</div>
-                  <div className="text-sm text-gray-600">First-time business buyer</div>
-                </div>
-              </Label>
-            </div>
+          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-3">
+                <RadioGroupItem value="none" id="none" />
+                <Users className="w-5 h-5 text-gray-600" />
+                <Label htmlFor="none" className="cursor-pointer flex-1">
+                  <div className="font-medium">No Direct Experience</div>
+                  <div className="text-sm text-gray-600">This would be my first business ownership experience</div>
+                </Label>
+              </div>
+            </CardContent>
           </Card>
         </RadioGroup>
       </div>
