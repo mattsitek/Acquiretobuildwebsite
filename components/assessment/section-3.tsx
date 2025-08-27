@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { DollarSign, TrendingUp, Shield, Zap } from "lucide-react"
+import { DollarSign, TrendingUp, Shield, Zap, MapPin, RefreshCw } from "lucide-react"
 import type { AssessmentData } from "@/lib/assessment-logic"
 
 interface Section3Props {
@@ -13,13 +13,6 @@ interface Section3Props {
 }
 
 export function AssessmentSection3({ data, onUpdate }: Section3Props) {
-  const industryMultipliers = {
-    healthcare: { multiplier: "5.0x", icon: Shield, color: "text-red-600" },
-    "professional-services": { multiplier: "4.5x", icon: TrendingUp, color: "text-blue-600" },
-    "business-services": { multiplier: "3.5x", icon: DollarSign, color: "text-green-600" },
-    "tech-enabled": { multiplier: "6.0x", icon: Zap, color: "text-purple-600" },
-  }
-
   return (
     <div className="space-y-8">
       {/* Question 1: Target Income */}
@@ -127,7 +120,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
                 </div>
               </div>
               <Badge variant="secondary" className="bg-red-100 text-red-800">
-                5.0x Multiple
+                High Value
               </Badge>
             </div>
           </Card>
@@ -147,7 +140,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
                 </div>
               </div>
               <Badge variant="secondary" className="bg-blue-100 text-blue-800">
-                4.5x Multiple
+                Stable
               </Badge>
             </div>
           </Card>
@@ -167,7 +160,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
                 </div>
               </div>
               <Badge variant="secondary" className="bg-green-100 text-green-800">
-                3.5x Multiple
+                Growing
               </Badge>
             </div>
           </Card>
@@ -187,7 +180,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
                 </div>
               </div>
               <Badge variant="secondary" className="bg-purple-100 text-purple-800">
-                6.0x Multiple
+                High Growth
               </Badge>
             </div>
           </Card>
@@ -201,7 +194,152 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
         </RadioGroup>
       </div>
 
-      {/* Question 4: Credit Score */}
+      {/* Question 4: Geography */}
+      <div>
+        <h3 className="text-lg font-semibold mb-4">What's your preferred location for business acquisition?</h3>
+        <RadioGroup
+          value={data.geography}
+          onValueChange={(value) => onUpdate({ geography: value })}
+          className="space-y-3"
+        >
+          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+            <div className="flex items-center space-x-3">
+              <RadioGroupItem value="25-miles" id="25-miles" />
+              <div className="flex items-center space-x-2">
+                <MapPin className="w-5 h-5 text-blue-600" />
+                <Label htmlFor="25-miles" className="cursor-pointer">
+                  <div>
+                    <div className="font-medium">Within 25 miles</div>
+                    <div className="text-sm text-gray-600">Easy daily management and oversight</div>
+                  </div>
+                </Label>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+            <div className="flex items-center space-x-3">
+              <RadioGroupItem value="50-miles" id="50-miles" />
+              <div className="flex items-center space-x-2">
+                <MapPin className="w-5 h-5 text-green-600" />
+                <Label htmlFor="50-miles" className="cursor-pointer">
+                  <div>
+                    <div className="font-medium">Within 50 miles</div>
+                    <div className="text-sm text-gray-600">Manageable with occasional visits</div>
+                  </div>
+                </Label>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+            <div className="flex items-center space-x-3">
+              <RadioGroupItem value="100-miles" id="100-miles" />
+              <div className="flex items-center space-x-2">
+                <MapPin className="w-5 h-5 text-yellow-600" />
+                <Label htmlFor="100-miles" className="cursor-pointer">
+                  <div>
+                    <div className="font-medium">Within 100 miles</div>
+                    <div className="text-sm text-gray-600">Regional focus with strong management team</div>
+                  </div>
+                </Label>
+              </div>
+            </div>
+          </Card>
+
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="statewide" id="statewide" />
+            <Label htmlFor="statewide" className="cursor-pointer">
+              Statewide (anywhere in my state)
+            </Label>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="regional" id="regional" />
+            <Label htmlFor="regional" className="cursor-pointer">
+              Regional (multi-state area)
+            </Label>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="relocate" id="relocate" />
+            <Label htmlFor="relocate" className="cursor-pointer">
+              Open to relocation for the right opportunity
+            </Label>
+          </div>
+        </RadioGroup>
+      </div>
+
+      {/* Question 5: Business Model */}
+      <div>
+        <h3 className="text-lg font-semibold mb-4">What type of business model appeals to you most?</h3>
+        <RadioGroup
+          value={data.businessModel}
+          onValueChange={(value) => onUpdate({ businessModel: value })}
+          className="space-y-3"
+        >
+          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+            <div className="flex items-center space-x-3">
+              <RadioGroupItem value="recurring" id="recurring" />
+              <div className="flex items-center space-x-2">
+                <RefreshCw className="w-5 h-5 text-green-600" />
+                <Label htmlFor="recurring" className="cursor-pointer">
+                  <div>
+                    <div className="font-medium">Recurring Revenue</div>
+                    <div className="text-sm text-gray-600">Subscriptions, contracts, predictable income</div>
+                  </div>
+                </Label>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+            <div className="flex items-center space-x-3">
+              <RadioGroupItem value="project" id="project" />
+              <div className="flex items-center space-x-2">
+                <TrendingUp className="w-5 h-5 text-blue-600" />
+                <Label htmlFor="project" className="cursor-pointer">
+                  <div>
+                    <div className="font-medium">Project-Based Services</div>
+                    <div className="text-sm text-gray-600">Repeat clients, relationship-driven</div>
+                  </div>
+                </Label>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-4 hover:bg-gray-50 cursor-pointer">
+            <div className="flex items-center space-x-3">
+              <RadioGroupItem value="mixed" id="mixed" />
+              <div className="flex items-center space-x-2">
+                <DollarSign className="w-5 h-5 text-purple-600" />
+                <Label htmlFor="mixed" className="cursor-pointer">
+                  <div>
+                    <div className="font-medium">Mixed Revenue Model</div>
+                    <div className="text-sm text-gray-600">Combination of recurring and project revenue</div>
+                  </div>
+                </Label>
+              </div>
+            </div>
+          </Card>
+
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="product" id="product" />
+            <Label htmlFor="product" className="cursor-pointer">
+              Product sales with service components
+            </Label>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="no-preference" id="no-preference" />
+            <Label htmlFor="no-preference" className="cursor-pointer">
+              No preference - show me proven business models
+            </Label>
+          </div>
+        </RadioGroup>
+      </div>
+
+      {/* Question 6: Credit Score */}
       <div>
         <h3 className="text-lg font-semibold mb-4">
           What's your approximate credit score? (Important for SBA loan eligibility)

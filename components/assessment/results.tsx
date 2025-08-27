@@ -19,8 +19,10 @@ import {
   CheckCircle,
   ArrowRight,
   Star,
-  Shield,
-  Zap,
+  Building,
+  CreditCard,
+  MessageSquare,
+  Heart,
 } from "lucide-react"
 import type { AssessmentData } from "@/lib/assessment-logic"
 
@@ -102,85 +104,157 @@ export function AssessmentResults({ results, assessmentData, onRestart }: Result
           </CardContent>
         </Card>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-8">
-          {/* Skill Advantage */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Star className="w-5 h-5 text-yellow-500" />
-                Your Skill Advantage
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center gap-2 mb-3">
-                <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">
-                  {results.skillAdvantage.multiplier} Multiplier
-                </Badge>
-                <span className="font-medium capitalize">{assessmentData.professionalBackground} Background</span>
-              </div>
-              <p className="text-gray-600 mb-4">{results.skillAdvantage.advantage}</p>
-              <div className="text-sm text-gray-500">
-                <strong>Selected Skills:</strong> {assessmentData.transferableSkills?.join(", ") || "None selected"}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Deal Box */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <DollarSign className="w-5 h-5 text-green-600" />
-                Your Deal Box
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Business Size:</span>
-                  <span className="font-medium">{results.dealBox.businessSize}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Target Cash Flow:</span>
-                  <span className="font-medium">{results.dealBox.targetCashFlow}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Down Payment:</span>
-                  <span className="font-medium">{results.dealBox.downPayment}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">SBA Loan:</span>
-                  <span className="font-medium">{results.dealBox.sbaLoan}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Monthly Payment:</span>
-                  <span className="font-medium">{results.dealBox.monthlyPayment}</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Target Industries */}
+        {/* Skill Advantage */}
         <Card className="mb-8">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Zap className="w-5 h-5 text-purple-600" />
-              Recommended Industries
+              <Star className="w-5 h-5 text-yellow-500" />
+              Your Skill Advantage
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid md:grid-cols-3 gap-4">
-              {results.dealBox.targetIndustries.map((industry: string, index: number) => (
-                <div key={index} className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
-                  <Shield className="w-4 h-4 text-blue-600" />
-                  <span className="font-medium">{industry}</span>
-                </div>
-              ))}
+            <div className="flex items-center gap-2 mb-3">
+              <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">
+                {results.skillAdvantage.multiplier} Multiplier
+              </Badge>
+              <span className="font-medium capitalize">{assessmentData.professionalBackground} Background</span>
             </div>
-            <p className="text-sm text-gray-600 mt-4">
-              Based on your {assessmentData.professionalBackground} background and {assessmentData.industryPreference}{" "}
-              preference
-            </p>
+            <p className="text-gray-600 mb-4">{results.skillAdvantage.advantage}</p>
+            <div className="text-sm text-gray-500">
+              <strong>Selected Skills:</strong> {assessmentData.transferableSkills?.join(", ") || "None selected"}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Deal Box - New Structure */}
+        <Card className="mb-8 bg-gradient-to-r from-green-50 to-blue-50 border-green-200">
+          <CardHeader className="text-center">
+            <CardTitle className="flex items-center justify-center gap-3 text-2xl">
+              <Building className="w-8 h-8 text-green-600" />
+              Your Deal Box
+            </CardTitle>
+            <p className="text-gray-600">Your personalized business acquisition profile</p>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-2 gap-6 mb-6">
+              {/* Target Business Profile */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <Target className="w-5 h-5 text-blue-600" />
+                    Target Business Profile
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Industry:</span>
+                    <span className="font-medium capitalize">{results.dealBox.targetBusinessProfile.industry}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Geography:</span>
+                    <span className="font-medium capitalize">{results.dealBox.targetBusinessProfile.geography}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Model:</span>
+                    <span className="font-medium capitalize">
+                      {results.dealBox.targetBusinessProfile.businessModel}
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Size of Deal */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <DollarSign className="w-5 h-5 text-green-600" />
+                    Size of the Deal
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Revenue Range:</span>
+                    <span className="font-medium">{results.dealBox.sizeOfDeal.revenueRange}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Required SDE:</span>
+                    <span className="font-medium">{results.dealBox.sizeOfDeal.requiredSDE}</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Financing Framework */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <CreditCard className="w-5 h-5 text-purple-600" />
+                    Financing Framework
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Down Payment:</span>
+                    <span className="font-medium">{results.dealBox.financingFramework.downPayment}</span>
+                  </div>
+                  <div className="text-sm text-gray-600">{results.dealBox.financingFramework.structure}</div>
+                </CardContent>
+              </Card>
+
+              {/* Personal Edge */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <Star className="w-5 h-5 text-yellow-600" />
+                    Personal Edge
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Background:</span>
+                    <span className="font-medium capitalize">{results.dealBox.personalEdge.background}</span>
+                  </div>
+                  <div className="text-sm text-gray-600">{results.dealBox.personalEdge.advantage}</div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Lifestyle & Outcome */}
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <Heart className="w-5 h-5 text-red-600" />
+                  Lifestyle & Outcome
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">{results.dealBox.lifestyleOutcome.goals}</p>
+              </CardContent>
+            </Card>
+
+            {/* Elevator Pitch */}
+            <Card className="bg-blue-50 border-blue-200">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <MessageSquare className="w-5 h-5 text-blue-600" />
+                  Your Elevator Pitch
+                </CardTitle>
+                <p className="text-sm text-gray-600">Use this script when talking to brokers, sellers, or lenders</p>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-white p-4 rounded-lg border-l-4 border-blue-500">
+                  <p className="text-gray-800 italic leading-relaxed">"{results.dealBox.elevatorPitch}"</p>
+                </div>
+                <div className="mt-4 text-center">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => navigator.clipboard.writeText(results.dealBox.elevatorPitch)}
+                  >
+                    Copy to Clipboard
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           </CardContent>
         </Card>
 

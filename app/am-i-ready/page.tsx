@@ -29,6 +29,8 @@ export default function AmIReadyPage() {
     targetIncome: "",
     capitalAvailable: "",
     industryPreference: "",
+    geography: "",
+    businessModel: "",
     creditScore: "",
   })
   const [results, setResults] = useState<any>(null)
@@ -37,7 +39,7 @@ export default function AmIReadyPage() {
   const sections = [
     { title: "Business Buying Readiness", questions: 3 },
     { title: "Professional Skills Assessment", questions: 4 },
-    { title: "Deal Parameters", questions: 4 },
+    { title: "Deal Parameters", questions: 6 },
   ]
 
   const totalQuestions = sections.reduce((sum, section) => sum + section.questions, 0)
@@ -147,6 +149,8 @@ export default function AmIReadyPage() {
               targetIncome: "",
               capitalAvailable: "",
               industryPreference: "",
+              geography: "",
+              businessModel: "",
               creditScore: "",
             })
             setResults(null)
@@ -240,7 +244,7 @@ export default function AmIReadyPage() {
             <p className="text-sm text-gray-500 italic">
               {currentSection === 0 && "You're closer than you think to owning your own business"}
               {currentSection === 1 && "Your professional skills are your secret weapon"}
-              {currentSection === 2 && "Let's find your perfect deal size"}
+              {currentSection === 2 && "Let's build your perfect deal box"}
             </p>
           </div>
         </div>

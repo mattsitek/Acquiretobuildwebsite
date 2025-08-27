@@ -14,6 +14,8 @@ export interface AssessmentData {
   targetIncome: string
   capitalAvailable: string
   industryPreference: string
+  geography: string
+  businessModel: string
   creditScore: string
 }
 
@@ -24,12 +26,27 @@ export interface ReadinessScore {
 }
 
 export interface DealBox {
-  businessSize: string
-  targetCashFlow: string
-  downPayment: string
-  sbaLoan: string
-  monthlyPayment: string
-  targetIndustries: string[]
+  targetBusinessProfile: {
+    industry: string
+    geography: string
+    businessModel: string
+  }
+  sizeOfDeal: {
+    revenueRange: string
+    requiredSDE: string
+  }
+  financingFramework: {
+    downPayment: string
+    structure: string
+  }
+  personalEdge: {
+    background: string
+    advantage: string
+  }
+  lifestyleOutcome: {
+    goals: string
+  }
+  elevatorPitch: string
 }
 
 export function calculateReadinessScore(data: AssessmentData): ReadinessScore {
@@ -150,71 +167,138 @@ export function calculateDealBox(data: AssessmentData): DealBox {
 
   const incomeRange = incomeRanges[data.targetIncome as keyof typeof incomeRanges] || { min: 150000, max: 250000 }
 
-  // Calculate business size (Target Income × 2-4 = SDE target)
-  const minBusinessSize = incomeRange.min * 2
-  const maxBusinessSize = incomeRange.max * 4
+  // Calculate required SDE (target income + estimated debt service)
+  // Estimate debt service based on typical SBA loan structure
+  const estimatedDebtServiceLow = incomeRange.min * 0.3 // Conservative estimate
+  const estimatedDebtServiceHigh = incomeRange.max * 0.6 // Higher leverage scenario
 
-  // Get industry multiplier
-  const industryMultipliers = {
-    healthcare: 5.0,
-    "professional-services": 4.5,
-    "business-services": 3.5,
-    "tech-enabled": 6.0,
-    other: 3.0,
+  const requiredSDELow = incomeRange.min + estimatedDebtServiceLow
+  const requiredSDEHigh = incomeRange.max + estimatedDebtServiceHigh
+
+  // Calculate revenue range (SDE typically 15-25% of revenue for service businesses)
+  const revenueMultiplier = 4 // Conservative 25% SDE margin
+  const revenueRangeLow = requiredSDELow * revenueMultiplier
+  const revenueRangeHigh = requiredSDEHigh * revenueMultiplier
+
+  // Get capital available for down payment
+  const capitalRanges = {
+    "50k-100k": { min: 50000, max: 100000 },
+    "100k-250k": { min: 100000, max: 250000 },
+    "250k-500k": { min: 250000, max: 500000 },
+    "500k-1m": { min: 500000, max: 1000000 },
+    "1m+": { min: 1000000, max: 2000000 },
   }
 
-  const multiplier = industryMultipliers[data.industryPreference as keyof typeof industryMultipliers] || 3.0
-
-  // Apply industry multiplier to get business valuation
-  const minValuation = minBusinessSize * multiplier
-  const maxValuation = maxBusinessSize * multiplier
-
-  // Calculate down payment (10% of business size)
-  const minDownPayment = minValuation * 0.1
-  const maxDownPayment = maxValuation * 0.1
-
-  // Calculate SBA loan (75% of business size)
-  const minSBALoan = minValuation * 0.75
-  const maxSBALoan = maxValuation * 0.75
-
-  // Calculate monthly debt service (10.5% SBA rate, 10 years)
-  const monthlyRate = 0.105 / 12
-  const numPayments = 10 * 12
-  const minMonthlyPayment =
-    (minSBALoan * monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1)
-  const maxMonthlyPayment =
-    (maxSBALoan * monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1)
-
-  // Get target industries based on preference and background
-  const industryRecommendations = {
-    healthcare: ["Medical Practices", "Dental Clinics", "Veterinary Services"],
-    "professional-services": ["CPA Firms", "Consulting Practices", "Advisory Services"],
-    "business-services": ["Marketing Agencies", "HR Services", "Facilities Management"],
-    "tech-enabled": ["SaaS Companies", "Digital Agencies", "E-commerce Businesses"],
-    other: ["Service Businesses", "Local Franchises", "Distribution Companies"],
+  const capitalRange = capitalRanges[data.capitalAvailable as keyof typeof capitalRanges] || {
+    min: 100000,
+    max: 250000,
   }
 
-  const targetIndustries =
-    industryRecommendations[data.industryPreference as keyof typeof industryRecommendations] ||
-    industryRecommendations.other
+  // Industry mapping
+  const industryMap = {
+    healthcare: "healthcare services",
+    "professional-services": "professional services",
+    "business-services": "business services",
+    "tech-enabled": "tech-enabled services",
+    other: "service businesses",
+  }
+
+  // Geography mapping
+  const geographyMap = {
+    "25-miles": "within 25 miles of your location",
+    "50-miles": "within 50 miles of your location",
+    "100-miles": "within 100 miles of your location",
+    statewide: "statewide",
+    regional: "regional (multi-state)",
+    relocate: "open to relocation",
+  }
+
+  // Business model mapping
+  const businessModelMap = {
+    recurring: "recurring revenue and stable operations",
+    project: "project-based with repeat clients",
+    mixed: "mixed revenue model with growth potential",
+    product: "product sales with service components",
+    "no-preference": "proven business model",
+  }
+
+  // Personal edge based on background
+  const personalEdgeMap = {
+    finance: {
+      background: "finance",
+      advantage: "I know how to optimize cash flow, conduct thorough due diligence, and manage financial operations",
+    },
+    sales: {
+      background: "sales and business development",
+      advantage: "I know how to grow revenue, build customer relationships, and scale sales operations",
+    },
+    operations: {
+      background: "operations and process management",
+      advantage: "I know how to systematize operations, improve efficiency, and scale teams",
+    },
+    technology: {
+      background: "technology and digital transformation",
+      advantage: "I know how to leverage technology, automate processes, and modernize operations",
+    },
+    legal: {
+      background: "legal and compliance",
+      advantage: "I know how to navigate regulations, manage risk, and structure deals effectively",
+    },
+    healthcare: {
+      background: "healthcare operations",
+      advantage: "I understand healthcare regulations, patient care standards, and operational requirements",
+    },
+    other: {
+      background: "business management",
+      advantage: "I know how to lead teams, optimize operations, and drive business growth",
+    },
+  }
+
+  const personalEdge =
+    personalEdgeMap[data.professionalBackground as keyof typeof personalEdgeMap] || personalEdgeMap.other
 
   // Format currency
   const formatCurrency = (amount: number) => {
     if (amount >= 1000000) {
       return `$${(amount / 1000000).toFixed(1)}M`
     } else if (amount >= 1000) {
-      return `$${(amount / 1000).toFixed(0)}K`
+      return `$${Math.round(amount / 1000)}K`
     } else {
-      return `$${amount.toFixed(0)}`
+      return `$${Math.round(amount)}`
     }
   }
 
+  // Calculate down payment percentage
+  const downPaymentPercent = Math.round((capitalRange.min / (requiredSDELow * 3)) * 100) // Assuming 3x SDE valuation
+
+  // Create elevator pitch
+  const industry = industryMap[data.industryPreference as keyof typeof industryMap] || "service businesses"
+  const geography = geographyMap[data.geography as keyof typeof geographyMap] || "locally"
+  const businessModel = businessModelMap[data.businessModel as keyof typeof businessModelMap] || "proven business model"
+
+  const elevatorPitch = `I'm looking for a ${industry} business ${geography}—something with ${businessModel}. Ideally it's doing ${formatCurrency(revenueRangeLow)}–${formatCurrency(revenueRangeHigh)} in revenue and ${formatCurrency(requiredSDELow)}–${formatCurrency(requiredSDEHigh)} in SDE. I plan to use SBA financing with ${downPaymentPercent}–20% down, and I like deals where the seller provides transition support. My background is in ${personalEdge.background}, so ${personalEdge.advantage}. The goal for me is to build a stable, cash-flowing business that supports my family and creates long-term wealth.`
+
   return {
-    businessSize: `${formatCurrency(minValuation)} - ${formatCurrency(maxValuation)}`,
-    targetCashFlow: `${formatCurrency(incomeRange.min)} - ${formatCurrency(incomeRange.max)}`,
-    downPayment: `${formatCurrency(minDownPayment)} - ${formatCurrency(maxDownPayment)}`,
-    sbaLoan: `${formatCurrency(minSBALoan)} - ${formatCurrency(maxSBALoan)}`,
-    monthlyPayment: `${formatCurrency(minMonthlyPayment)} - ${formatCurrency(maxMonthlyPayment)}`,
-    targetIndustries,
+    targetBusinessProfile: {
+      industry: industry,
+      geography: geography,
+      businessModel: businessModel,
+    },
+    sizeOfDeal: {
+      revenueRange: `${formatCurrency(revenueRangeLow)}–${formatCurrency(revenueRangeHigh)}`,
+      requiredSDE: `${formatCurrency(requiredSDELow)}–${formatCurrency(requiredSDEHigh)}`,
+    },
+    financingFramework: {
+      downPayment: `${formatCurrency(capitalRange.min)}–${formatCurrency(capitalRange.max)} (${downPaymentPercent}–20% down)`,
+      structure: "SBA 7(a) financing with seller transition support preferred",
+    },
+    personalEdge: {
+      background: personalEdge.background,
+      advantage: personalEdge.advantage,
+    },
+    lifestyleOutcome: {
+      goals: "Build a stable, cash-flowing business that supports my family and creates long-term wealth",
+    },
+    elevatorPitch,
   }
 }
