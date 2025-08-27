@@ -120,6 +120,9 @@ export async function POST(request: NextRequest) {
       },
     }
 
+    // 🔍 ENHANCED LOGGING: Log the payload being sent to DatoCMS
+    console.log("📤 Sending payload to DatoCMS:", JSON.stringify(recordData, null, 2))
+
     // Save to DatoCMS
     const response = await fetch("https://site-api.datocms.com/items", {
       method: "POST",
@@ -134,12 +137,34 @@ export async function POST(request: NextRequest) {
 
     const result = await response.json()
 
+    // 🔍 ENHANCED LOGGING: Log the complete response from DatoCMS
+    console.log("📥 DatoCMS Response Status:", response.status)
+    console.log("📥 DatoCMS Response Headers:", Object.fromEntries(response.headers.entries()))
+    console.log("📥 DatoCMS Response Body:", JSON.stringify(result, null, 2))
+
     if (!response.ok) {
-      console.error("❌ DatoCMS API error:", {
-        status: response.status,
-        statusText: response.statusText,
-        error: result,
-      })
+      // 🔍 ENHANCED ERROR LOGGING: Detailed error information
+      console.error("❌ DatoCMS API DETAILED ERROR ANALYSIS:")
+      console.error("   Status Code:", response.status)
+      console.error("   Status Text:", response.statusText)
+      console.error("   Response Headers:", Object.fromEntries(response.headers.entries()))
+      console.error("   Error Body:", JSON.stringify(result, null, 2))
+
+      // 🔍 Log specific error details if available
+      if (result.errors) {
+        console.error("   Specific Errors:")
+        result.errors.forEach((error: any, index: number) => {
+          console.error(`     Error ${index + 1}:`, {
+            title: error.title,
+            detail: error.detail,
+            source: error.source,
+            code: error.code,
+          })
+        })
+      }
+
+      // 🔍 Log the original lead data for comparison
+      console.error("   Original Lead Data:", JSON.stringify(leadData, null, 2))
 
       // Still try Zapier as fallback
       if (process.env.NEXT_PUBLIC_ZAPIER_WEBHOOK_URL) {
@@ -151,6 +176,7 @@ export async function POST(request: NextRequest) {
               ...leadData,
               timestamp: new Date().toISOString(),
               note: "DatoCMS failed - sent to Zapier as backup",
+              datocms_error: result,
             }),
           })
           console.log("✅ Sent to Zapier as fallback")
@@ -196,7 +222,13 @@ export async function POST(request: NextRequest) {
       message: "Lead successfully captured and stored",
     })
   } catch (error) {
-    console.error("❌ Error saving lead:", error)
+    // 🔍 ENHANCED ERROR LOGGING: Catch block errors
+    console.error("❌ UNEXPECTED ERROR in /api/leads:")
+    console.error("   Error Type:", error?.constructor?.name)
+    console.error("   Error Message:", error instanceof Error ? error.message : "Unknown error")
+    console.error("   Error Stack:", error instanceof Error ? error.stack : "No stack trace")
+    console.error("   Full Error Object:", error)
+
     return NextResponse.json(
       {
         error: "Failed to save lead",
