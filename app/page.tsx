@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { getHomepageContent } from "@/lib/datocms"
 import type { Metadata } from "next"
+import DealScorecard from './deal-scorecard/page'
 
 export const metadata: Metadata = {
   title: "Acquire & Build - Buy a Business, Build Your Freedom",
@@ -301,22 +302,14 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* DEAL SCORECARD SECTION - Replaces Lead Magnet with Responsive Heights */}
-      <section className="py-16 lg:py-24 bg-white" aria-labelledby="scorecard-heading">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <iframe
-              src="https://scorecardacquiretobuild.com"
-              width="100%"
-              height="1200"
-              frameBorder="0"
-              className="rounded-lg shadow-xl h-[800px] md:h-[1000px] lg:h-[1200px] xl:h-[1400px]"
-              title="Deal Readiness Scorecard - Assess Your Business Acquisition Readiness"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </section>
+      {/* DEAL SCORECARD SECTION - Now Embedded Component */}
+  <section className="py-16 lg:py-24 bg-white" aria-labelledby="scorecard-heading">
+    <div className="container mx-auto px-4">
+      <div className="max-w-6xl mx-auto">
+        <DealScorecard />
+      </div>
+    </div>
+  </section>
 
       {/* Value Proposition Section */}
       <section className="py-16 lg:py-24 bg-[#F9F9F9]" aria-labelledby="value-prop-heading">
