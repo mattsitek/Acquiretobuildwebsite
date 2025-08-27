@@ -3,7 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
-import { TrendingUp, Shield, Users, Heart, Clock, DollarSign } from "lucide-react"
+import { TrendingUp, Shield, Users, Heart, Clock } from "lucide-react"
 import type { AssessmentData } from "@/lib/assessment-logic"
 
 interface Section1Props {
@@ -81,7 +81,7 @@ export function AssessmentSection1({ data, onUpdate }: Section1Props) {
                 <Heart className="w-5 h-5 text-red-600" />
                 <Label htmlFor="legacy" className="cursor-pointer flex-1">
                   <div className="font-medium">Build a Legacy</div>
-                  <div className="text-sm text-gray-600">Build a legacy for my family</div>
+                  <div className="text-sm text-gray-600">Create something lasting for my family</div>
                 </Label>
               </div>
             </CardContent>
@@ -140,7 +140,7 @@ export function AssessmentSection1({ data, onUpdate }: Section1Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="passive" id="passive" />
-                <DollarSign className="w-5 h-5 text-purple-600" />
+                <TrendingUp className="w-5 h-5 text-purple-600" />
                 <Label htmlFor="passive" className="cursor-pointer flex-1">
                   <div className="font-medium">Passive Investment</div>
                   <div className="text-sm text-gray-600">Minimal time commitment</div>
@@ -162,9 +162,9 @@ export function AssessmentSection1({ data, onUpdate }: Section1Props) {
           <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
-                <RadioGroupItem value="high" id="high" />
+                <RadioGroupItem value="high" id="high-risk" />
                 <TrendingUp className="w-5 h-5 text-red-600" />
-                <Label htmlFor="high" className="cursor-pointer flex-1">
+                <Label htmlFor="high-risk" className="cursor-pointer flex-1">
                   <div className="font-medium">High Risk, High Reward</div>
                   <div className="text-sm text-gray-600">
                     Willing to take significant risks for potential high returns
@@ -177,9 +177,9 @@ export function AssessmentSection1({ data, onUpdate }: Section1Props) {
           <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
-                <RadioGroupItem value="medium" id="medium" />
-                <Shield className="w-5 h-5 text-blue-600" />
-                <Label htmlFor="medium" className="cursor-pointer flex-1">
+                <RadioGroupItem value="medium" id="medium-risk" />
+                <Shield className="w-5 h-5 text-yellow-600" />
+                <Label htmlFor="medium-risk" className="cursor-pointer flex-1">
                   <div className="font-medium">Moderate Risk</div>
                   <div className="text-sm text-gray-600">Balanced approach with calculated risks</div>
                 </Label>
@@ -190,9 +190,9 @@ export function AssessmentSection1({ data, onUpdate }: Section1Props) {
           <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
-                <RadioGroupItem value="low" id="low" />
-                <Heart className="w-5 h-5 text-green-600" />
-                <Label htmlFor="low" className="cursor-pointer flex-1">
+                <RadioGroupItem value="low" id="low-risk" />
+                <Shield className="w-5 h-5 text-green-600" />
+                <Label htmlFor="low-risk" className="cursor-pointer flex-1">
                   <div className="font-medium">Conservative</div>
                   <div className="text-sm text-gray-600">Prefer stable, predictable businesses with lower risk</div>
                 </Label>

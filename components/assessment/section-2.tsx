@@ -2,10 +2,10 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Textarea } from "@/components/ui/textarea"
-import { DollarSign, TrendingUp, Settings, Monitor, Scale, Heart, Users, Building, Briefcase, Star } from "lucide-react"
+import { DollarSign, TrendingUp, Users, Code, Scale, Heart, Building } from "lucide-react"
 import type { AssessmentData } from "@/lib/assessment-logic"
 
 interface Section2Props {
@@ -63,10 +63,10 @@ export function AssessmentSection2({ data, onUpdate }: Section2Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="operations" id="operations" />
-                <Settings className="w-5 h-5 text-purple-600" />
+                <Users className="w-5 h-5 text-purple-600" />
                 <Label htmlFor="operations" className="cursor-pointer flex-1">
                   <div className="font-medium">Operations & Management</div>
-                  <div className="text-sm text-gray-600">Operations, project management, process improvement</div>
+                  <div className="text-sm text-gray-600">Operations, project management, team leadership</div>
                 </Label>
               </div>
             </CardContent>
@@ -76,10 +76,10 @@ export function AssessmentSection2({ data, onUpdate }: Section2Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="technology" id="technology" />
-                <Monitor className="w-5 h-5 text-indigo-600" />
+                <Code className="w-5 h-5 text-indigo-600" />
                 <Label htmlFor="technology" className="cursor-pointer flex-1">
                   <div className="font-medium">Technology & Engineering</div>
-                  <div className="text-sm text-gray-600">Software, IT, engineering, technical roles</div>
+                  <div className="text-sm text-gray-600">Software, engineering, technical systems</div>
                 </Label>
               </div>
             </CardContent>
@@ -89,7 +89,7 @@ export function AssessmentSection2({ data, onUpdate }: Section2Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="legal" id="legal" />
-                <Scale className="w-5 h-5 text-red-600" />
+                <Scale className="w-5 h-5 text-gray-600" />
                 <Label htmlFor="legal" className="cursor-pointer flex-1">
                   <div className="font-medium">Legal & Compliance</div>
                   <div className="text-sm text-gray-600">Law, compliance, risk management</div>
@@ -102,10 +102,10 @@ export function AssessmentSection2({ data, onUpdate }: Section2Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="healthcare" id="healthcare" />
-                <Heart className="w-5 h-5 text-pink-600" />
+                <Heart className="w-5 h-5 text-red-600" />
                 <Label htmlFor="healthcare" className="cursor-pointer flex-1">
                   <div className="font-medium">Healthcare</div>
-                  <div className="text-sm text-gray-600">Medical, dental, veterinary, healthcare administration</div>
+                  <div className="text-sm text-gray-600">Medical, healthcare administration, life sciences</div>
                 </Label>
               </div>
             </CardContent>
@@ -115,10 +115,10 @@ export function AssessmentSection2({ data, onUpdate }: Section2Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="other" id="other" />
-                <Users className="w-5 h-5 text-gray-600" />
+                <Building className="w-5 h-5 text-orange-600" />
                 <Label htmlFor="other" className="cursor-pointer flex-1">
                   <div className="font-medium">Other Professional Background</div>
-                  <div className="text-sm text-gray-600">Education, consulting, government, non-profit</div>
+                  <div className="text-sm text-gray-600">Education, government, non-profit, or other field</div>
                 </Label>
               </div>
             </CardContent>
@@ -134,16 +134,16 @@ export function AssessmentSection2({ data, onUpdate }: Section2Props) {
           {[
             "Financial analysis",
             "Team leadership",
-            "Customer service",
-            "Marketing",
             "Strategic planning",
-            "Process improvement",
-            "Negotiation",
-            "Project management",
-            "Sales",
+            "Customer service",
+            "Marketing & sales",
+            "Operations management",
             "Technology systems",
-            "Regulatory compliance",
-            "Training & development",
+            "Negotiation",
+            "Problem solving",
+            "Project management",
+            "Data analysis",
+            "Process improvement",
           ].map((skill) => (
             <Card key={skill} className="cursor-pointer hover:bg-gray-50 transition-colors">
               <CardContent className="p-3">
@@ -165,11 +165,9 @@ export function AssessmentSection2({ data, onUpdate }: Section2Props) {
 
       {/* Question 3: Business Application */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">
-          How would you apply your professional skills to improve a business you acquire?
-        </h3>
+        <h3 className="text-lg font-semibold">How would you apply your skills to improve a business?</h3>
         <Textarea
-          placeholder="Describe how your background would help you add value to a business..."
+          placeholder="Describe how your professional experience would help you run and grow a business..."
           value={data.businessApplication}
           onChange={(e) => onUpdate({ businessApplication: e.target.value })}
           className="min-h-[100px]"
@@ -201,12 +199,10 @@ export function AssessmentSection2({ data, onUpdate }: Section2Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="acquisition" id="acquisition" />
-                <Briefcase className="w-5 h-5 text-blue-600" />
+                <TrendingUp className="w-5 h-5 text-blue-600" />
                 <Label htmlFor="acquisition" className="cursor-pointer flex-1">
                   <div className="font-medium">M&A Experience</div>
-                  <div className="text-sm text-gray-600">
-                    I've been involved in business acquisitions professionally
-                  </div>
+                  <div className="text-sm text-gray-600">I've been involved in business acquisitions or mergers</div>
                 </Label>
               </div>
             </CardContent>
@@ -216,7 +212,7 @@ export function AssessmentSection2({ data, onUpdate }: Section2Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="startup" id="startup" />
-                <Star className="w-5 h-5 text-purple-600" />
+                <Code className="w-5 h-5 text-purple-600" />
                 <Label htmlFor="startup" className="cursor-pointer flex-1">
                   <div className="font-medium">Startup Experience</div>
                   <div className="text-sm text-gray-600">I've worked at or founded startups</div>
@@ -229,10 +225,10 @@ export function AssessmentSection2({ data, onUpdate }: Section2Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="side-business" id="side-business" />
-                <TrendingUp className="w-5 h-5 text-orange-600" />
+                <Users className="w-5 h-5 text-orange-600" />
                 <Label htmlFor="side-business" className="cursor-pointer flex-1">
                   <div className="font-medium">Side Business</div>
-                  <div className="text-sm text-gray-600">I've run side businesses or freelanced</div>
+                  <div className="text-sm text-gray-600">I've run a side business or freelance work</div>
                 </Label>
               </div>
             </CardContent>
@@ -242,7 +238,7 @@ export function AssessmentSection2({ data, onUpdate }: Section2Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="none" id="none" />
-                <Users className="w-5 h-5 text-gray-600" />
+                <Heart className="w-5 h-5 text-gray-600" />
                 <Label htmlFor="none" className="cursor-pointer flex-1">
                   <div className="font-medium">No Direct Experience</div>
                   <div className="text-sm text-gray-600">This would be my first business ownership experience</div>

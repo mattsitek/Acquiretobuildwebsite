@@ -3,20 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
-import {
-  DollarSign,
-  MapPin,
-  Building,
-  TrendingUp,
-  CreditCard,
-  Users,
-  Home,
-  Globe,
-  Repeat,
-  Briefcase,
-  Package,
-  Star,
-} from "lucide-react"
+import { DollarSign, MapPin, Building, TrendingUp, Users, Star } from "lucide-react"
 import type { AssessmentData } from "@/lib/assessment-logic"
 
 interface Section3Props {
@@ -41,7 +28,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
                 <RadioGroupItem value="75k-150k" id="75k-150k" />
                 <DollarSign className="w-5 h-5 text-green-600" />
                 <Label htmlFor="75k-150k" className="cursor-pointer flex-1">
-                  <div className="font-medium">$75K - $150K</div>
+                  <div className="font-medium">$75,000 - $150,000</div>
                   <div className="text-sm text-gray-600">Comfortable lifestyle income</div>
                 </Label>
               </div>
@@ -54,7 +41,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
                 <RadioGroupItem value="150k-250k" id="150k-250k" />
                 <DollarSign className="w-5 h-5 text-blue-600" />
                 <Label htmlFor="150k-250k" className="cursor-pointer flex-1">
-                  <div className="font-medium">$150K - $250K</div>
+                  <div className="font-medium">$150,000 - $250,000</div>
                   <div className="text-sm text-gray-600">Upper middle class income</div>
                 </Label>
               </div>
@@ -67,7 +54,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
                 <RadioGroupItem value="250k-400k" id="250k-400k" />
                 <DollarSign className="w-5 h-5 text-purple-600" />
                 <Label htmlFor="250k-400k" className="cursor-pointer flex-1">
-                  <div className="font-medium">$250K - $400K</div>
+                  <div className="font-medium">$250,000 - $400,000</div>
                   <div className="text-sm text-gray-600">High income lifestyle</div>
                 </Label>
               </div>
@@ -80,7 +67,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
                 <RadioGroupItem value="400k-500k" id="400k-500k" />
                 <DollarSign className="w-5 h-5 text-orange-600" />
                 <Label htmlFor="400k-500k" className="cursor-pointer flex-1">
-                  <div className="font-medium">$400K - $500K</div>
+                  <div className="font-medium">$400,000 - $500,000</div>
                   <div className="text-sm text-gray-600">Affluent income level</div>
                 </Label>
               </div>
@@ -93,7 +80,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
                 <RadioGroupItem value="500k+" id="500k+" />
                 <DollarSign className="w-5 h-5 text-red-600" />
                 <Label htmlFor="500k+" className="cursor-pointer flex-1">
-                  <div className="font-medium">$500K+</div>
+                  <div className="font-medium">$500,000+</div>
                   <div className="text-sm text-gray-600">High net worth income</div>
                 </Label>
               </div>
@@ -114,10 +101,10 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="50k-100k" id="50k-100k" />
-                <CreditCard className="w-5 h-5 text-green-600" />
+                <DollarSign className="w-5 h-5 text-yellow-600" />
                 <Label htmlFor="50k-100k" className="cursor-pointer flex-1">
-                  <div className="font-medium">$50K - $100K</div>
-                  <div className="text-sm text-gray-600">Entry-level acquisition capital</div>
+                  <div className="font-medium">$50,000 - $100,000</div>
+                  <div className="text-sm text-gray-600">Entry level investment</div>
                 </Label>
               </div>
             </CardContent>
@@ -127,9 +114,9 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="100k-250k" id="100k-250k" />
-                <CreditCard className="w-5 h-5 text-blue-600" />
+                <DollarSign className="w-5 h-5 text-green-600" />
                 <Label htmlFor="100k-250k" className="cursor-pointer flex-1">
-                  <div className="font-medium">$100K - $250K</div>
+                  <div className="font-medium">$100,000 - $250,000</div>
                   <div className="text-sm text-gray-600">Solid down payment range</div>
                 </Label>
               </div>
@@ -140,10 +127,10 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="250k-500k" id="250k-500k" />
-                <CreditCard className="w-5 h-5 text-purple-600" />
+                <DollarSign className="w-5 h-5 text-blue-600" />
                 <Label htmlFor="250k-500k" className="cursor-pointer flex-1">
-                  <div className="font-medium">$250K - $500K</div>
-                  <div className="text-sm text-gray-600">Strong acquisition capital</div>
+                  <div className="font-medium">$250,000 - $500,000</div>
+                  <div className="text-sm text-gray-600">Strong financial position</div>
                 </Label>
               </div>
             </CardContent>
@@ -153,10 +140,10 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="500k-1m" id="500k-1m" />
-                <CreditCard className="w-5 h-5 text-orange-600" />
+                <DollarSign className="w-5 h-5 text-purple-600" />
                 <Label htmlFor="500k-1m" className="cursor-pointer flex-1">
-                  <div className="font-medium">$500K - $1M</div>
-                  <div className="text-sm text-gray-600">Substantial investment capacity</div>
+                  <div className="font-medium">$500,000 - $1,000,000</div>
+                  <div className="text-sm text-gray-600">High net worth investor</div>
                 </Label>
               </div>
             </CardContent>
@@ -166,10 +153,10 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="1m+" id="1m+" />
-                <CreditCard className="w-5 h-5 text-red-600" />
+                <DollarSign className="w-5 h-5 text-red-600" />
                 <Label htmlFor="1m+" className="cursor-pointer flex-1">
-                  <div className="font-medium">$1M+</div>
-                  <div className="text-sm text-gray-600">High-value acquisition ready</div>
+                  <div className="font-medium">$1,000,000+</div>
+                  <div className="text-sm text-gray-600">Significant capital available</div>
                 </Label>
               </div>
             </CardContent>
@@ -192,7 +179,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
                 <Building className="w-5 h-5 text-red-600" />
                 <Label htmlFor="healthcare" className="cursor-pointer flex-1">
                   <div className="font-medium">Healthcare Services</div>
-                  <div className="text-sm text-gray-600">Medical, dental, veterinary practices</div>
+                  <div className="text-sm text-gray-600">Medical practices, dental, veterinary</div>
                 </Label>
               </div>
             </CardContent>
@@ -202,10 +189,10 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="professional-services" id="professional-services" />
-                <Briefcase className="w-5 h-5 text-blue-600" />
+                <Users className="w-5 h-5 text-blue-600" />
                 <Label htmlFor="professional-services" className="cursor-pointer flex-1">
                   <div className="font-medium">Professional Services</div>
-                  <div className="text-sm text-gray-600">Consulting, accounting, legal, advisory</div>
+                  <div className="text-sm text-gray-600">Consulting, accounting, legal services</div>
                 </Label>
               </div>
             </CardContent>
@@ -215,10 +202,10 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="business-services" id="business-services" />
-                <Users className="w-5 h-5 text-green-600" />
+                <TrendingUp className="w-5 h-5 text-green-600" />
                 <Label htmlFor="business-services" className="cursor-pointer flex-1">
                   <div className="font-medium">Business Services</div>
-                  <div className="text-sm text-gray-600">Marketing, HR, facilities, B2B services</div>
+                  <div className="text-sm text-gray-600">Marketing, HR, facilities management</div>
                 </Label>
               </div>
             </CardContent>
@@ -228,7 +215,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="tech-enabled" id="tech-enabled" />
-                <TrendingUp className="w-5 h-5 text-purple-600" />
+                <Star className="w-5 h-5 text-purple-600" />
                 <Label htmlFor="tech-enabled" className="cursor-pointer flex-1">
                   <div className="font-medium">Tech-Enabled Services</div>
                   <div className="text-sm text-gray-600">SaaS, digital agencies, e-commerce</div>
@@ -240,11 +227,11 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
           <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
-                <RadioGroupItem value="other" id="other" />
-                <Star className="w-5 h-5 text-gray-600" />
-                <Label htmlFor="other" className="cursor-pointer flex-1">
-                  <div className="font-medium">Industry Agnostic</div>
-                  <div className="text-sm text-gray-600">Open to any profitable business</div>
+                <RadioGroupItem value="other" id="other-industry" />
+                <Building className="w-5 h-5 text-orange-600" />
+                <Label htmlFor="other-industry" className="cursor-pointer flex-1">
+                  <div className="font-medium">Other/Industry Agnostic</div>
+                  <div className="text-sm text-gray-600">Open to various industries</div>
                 </Label>
               </div>
             </CardContent>
@@ -264,7 +251,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="25-miles" id="25-miles" />
-                <Home className="w-5 h-5 text-green-600" />
+                <MapPin className="w-5 h-5 text-green-600" />
                 <Label htmlFor="25-miles" className="cursor-pointer flex-1">
                   <div className="font-medium">Within 25 miles</div>
                   <div className="text-sm text-gray-600">Local area only</div>
@@ -280,7 +267,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
                 <MapPin className="w-5 h-5 text-blue-600" />
                 <Label htmlFor="50-miles" className="cursor-pointer flex-1">
                   <div className="font-medium">Within 50 miles</div>
-                  <div className="text-sm text-gray-600">Regional commute acceptable</div>
+                  <div className="text-sm text-gray-600">Regional area</div>
                 </Label>
               </div>
             </CardContent>
@@ -316,10 +303,10 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="regional" id="regional" />
-                <Globe className="w-5 h-5 text-indigo-600" />
+                <MapPin className="w-5 h-5 text-red-600" />
                 <Label htmlFor="regional" className="cursor-pointer flex-1">
                   <div className="font-medium">Regional (Multi-state)</div>
-                  <div className="text-sm text-gray-600">Multi-state region</div>
+                  <div className="text-sm text-gray-600">Multiple states in my region</div>
                 </Label>
               </div>
             </CardContent>
@@ -329,7 +316,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="relocate" id="relocate" />
-                <Globe className="w-5 h-5 text-red-600" />
+                <MapPin className="w-5 h-5 text-gray-600" />
                 <Label htmlFor="relocate" className="cursor-pointer flex-1">
                   <div className="font-medium">Open to Relocation</div>
                   <div className="text-sm text-gray-600">Willing to move for the right opportunity</div>
@@ -352,10 +339,10 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="recurring" id="recurring" />
-                <Repeat className="w-5 h-5 text-green-600" />
+                <TrendingUp className="w-5 h-5 text-green-600" />
                 <Label htmlFor="recurring" className="cursor-pointer flex-1">
                   <div className="font-medium">Recurring Revenue</div>
-                  <div className="text-sm text-gray-600">Subscriptions, contracts, predictable income</div>
+                  <div className="text-sm text-gray-600">Subscriptions, contracts, repeat customers</div>
                 </Label>
               </div>
             </CardContent>
@@ -365,7 +352,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="project" id="project" />
-                <Briefcase className="w-5 h-5 text-blue-600" />
+                <Building className="w-5 h-5 text-blue-600" />
                 <Label htmlFor="project" className="cursor-pointer flex-1">
                   <div className="font-medium">Project-Based</div>
                   <div className="text-sm text-gray-600">Custom projects with repeat clients</div>
@@ -378,7 +365,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="mixed" id="mixed" />
-                <TrendingUp className="w-5 h-5 text-purple-600" />
+                <Star className="w-5 h-5 text-purple-600" />
                 <Label htmlFor="mixed" className="cursor-pointer flex-1">
                   <div className="font-medium">Mixed Revenue Model</div>
                   <div className="text-sm text-gray-600">Combination of recurring and project revenue</div>
@@ -391,7 +378,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="product" id="product" />
-                <Package className="w-5 h-5 text-orange-600" />
+                <DollarSign className="w-5 h-5 text-orange-600" />
                 <Label htmlFor="product" className="cursor-pointer flex-1">
                   <div className="font-medium">Product Sales</div>
                   <div className="text-sm text-gray-600">Physical or digital products with services</div>
@@ -404,7 +391,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="no-preference" id="no-preference" />
-                <Star className="w-5 h-5 text-gray-600" />
+                <Users className="w-5 h-5 text-gray-600" />
                 <Label htmlFor="no-preference" className="cursor-pointer flex-1">
                   <div className="font-medium">No Preference</div>
                   <div className="text-sm text-gray-600">Open to any proven business model</div>
@@ -430,7 +417,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
                 <Star className="w-5 h-5 text-green-600" />
                 <Label htmlFor="excellent" className="cursor-pointer flex-1">
                   <div className="font-medium">Excellent (750+)</div>
-                  <div className="text-sm text-gray-600">Best SBA loan rates available</div>
+                  <div className="text-sm text-gray-600">Best financing terms available</div>
                 </Label>
               </div>
             </CardContent>
@@ -443,7 +430,7 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
                 <TrendingUp className="w-5 h-5 text-blue-600" />
                 <Label htmlFor="good" className="cursor-pointer flex-1">
                   <div className="font-medium">Good (680-749)</div>
-                  <div className="text-sm text-gray-600">Competitive SBA loan rates</div>
+                  <div className="text-sm text-gray-600">Favorable financing options</div>
                 </Label>
               </div>
             </CardContent>
@@ -453,10 +440,10 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="fair" id="fair" />
-                <CreditCard className="w-5 h-5 text-orange-600" />
+                <DollarSign className="w-5 h-5 text-yellow-600" />
                 <Label htmlFor="fair" className="cursor-pointer flex-1">
                   <div className="font-medium">Fair (620-679)</div>
-                  <div className="text-sm text-gray-600">SBA loans possible with higher rates</div>
+                  <div className="text-sm text-gray-600">Standard financing available</div>
                 </Label>
               </div>
             </CardContent>
@@ -466,10 +453,10 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
                 <RadioGroupItem value="poor" id="poor" />
-                <CreditCard className="w-5 h-5 text-red-600" />
+                <Building className="w-5 h-5 text-red-600" />
                 <Label htmlFor="poor" className="cursor-pointer flex-1">
-                  <div className="font-medium">Below 620</div>
-                  <div className="text-sm text-gray-600">May need alternative financing or co-signer</div>
+                  <div className="font-medium">Needs Improvement (Below 620)</div>
+                  <div className="text-sm text-gray-600">May need alternative financing</div>
                 </Label>
               </div>
             </CardContent>
