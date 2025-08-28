@@ -6,7 +6,10 @@ import Image from "next/image"
 import Link from "next/link"
 import { getHomepageContent } from "@/lib/datocms"
 import type { Metadata } from "next"
-import DealScorecard from './deal-scorecard/page'
+import DealScorecard from "./deal-scorecard/page"
+import Navigation from "@/components/navigation"
+import LeadMagnetSection from "@/components/lead-magnet-section"
+import { Suspense } from "react"
 
 export const metadata: Metadata = {
   title: "Acquire & Build - Buy a Business, Build Your Freedom",
@@ -71,245 +74,63 @@ export default async function HomePage() {
   }
 
   return (
-    <main role="main">
-      {/* Enhanced Structured Data for Homepage */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            "@id": "https://acquireandbuild.com/#webpage",
-            url: "https://acquireandbuild.com",
-            name: "Acquire & Build - Buy a Business, Build Your Freedom",
-            description:
-              "Learn how to buy a business and build your freedom. Newsletter and community for business acquisition.",
-            isPartOf: {
-              "@id": "https://acquireandbuild.com/#website",
-            },
-            about: {
-              "@id": "https://acquireandbuild.com/#organization",
-            },
-            mainEntity: {
-              "@type": "Service",
-              "@id": "https://acquireandbuild.com/#service",
-              name: "Business Acquisition Education",
-              description: "Newsletter and community teaching people how to buy existing businesses",
-              provider: {
-                "@id": "https://acquireandbuild.com/#organization",
-              },
-              areaServed: {
-                "@type": "Country",
-                name: "United States",
-              },
-              audience: {
-                "@type": "Audience",
-                audienceType: "Business Professionals, Entrepreneurs, Aspiring Business Owners",
-              },
-            },
-            breadcrumb: {
-              "@type": "BreadcrumbList",
-              itemListElement: [
-                {
-                  "@type": "ListItem",
-                  position: 1,
-                  name: "Home",
-                  item: "https://acquireandbuild.com",
-                },
-              ],
-            },
-            speakable: {
-              "@type": "SpeakableSpecification",
-              cssSelector: ["h1", "h2", ".hero-subtitle"],
-            },
-          }),
-        }}
-      />
+    <div className="min-h-screen bg-white">
+      <Navigation />
 
-      {/* FAQ Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: [
-              {
-                "@type": "Question",
-                name: "How do I buy a business with little money down?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "You can buy a business with as little as 10% down using SBA loans, seller financing, and creative capital structures. Our newsletter teaches proven strategies for acquiring businesses without massive upfront capital.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "What is business acquisition financing?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Business acquisition financing includes SBA loans, seller notes, bank financing, and creative capital structures that allow you to purchase existing businesses. We cover all these strategies in our free newsletter.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "How do I value a business before buying?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Business valuation involves analyzing financial statements, cash flow, market comparables, and growth potential. Our Deal Kit includes templates and checklists for proper due diligence and valuation.",
-                },
-              },
-            ],
-          }),
-        }}
-      />
+      {/* Hero Section */}
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        <div className="text-center">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            BUY A BUSINESS. <span className="text-blue-600">BUILD YOUR FREEDOM.</span>
+          </h1>
 
-      {/* Navigation */}
-      <nav
-        className="bg-white border-b border-gray-200 sticky top-0 z-50"
-        role="navigation"
-        aria-label="Main navigation"
-      >
+          <p className="text-xl sm:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Join Acquire and Build — the free newsletter + community for people ready to stop climbing the ladder and
+            start owning the whole damn thing.
+          </p>
+
+          {/* Newsletter Signup */}
+          <div className="max-w-md mx-auto mb-16">
+            <Suspense fallback={<div>Loading...</div>}>
+              <NewsletterForm />
+            </Suspense>
+          </div>
+
+          <p className="text-sm text-gray-500 mb-12">
+            Join 1,000+ professionals getting weekly insights. No spam, unsubscribe anytime.
+          </p>
+
+          <p className="text-lg text-gray-700 mb-16 max-w-2xl mx-auto">
+            Scripts, deals, lessons & real-world tactics — straight to your inbox.
+          </p>
+
+          {/* Hero Image */}
+          <div className="flex justify-center mb-16">
+            <Image
+              src="/icon-512.png"
+              alt="Acquire & Build - Business Acquisition"
+              width={300}
+              height={300}
+              className="w-64 h-64 sm:w-80 sm:h-80"
+              priority
+            />
+          </div>
+        </div>
+
+        {/* Lead Magnet Section */}
+        <Suspense fallback={<div>Loading...</div>}>
+          <LeadMagnetSection />
+        </Suspense>
+      </main>
+
+      {/* DEAL SCORECARD SECTION - Now Embedded Component */}
+      <section className="py-16 lg:py-24 bg-white" aria-labelledby="scorecard-heading">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="text-2xl font-black text-black" aria-label="Acquire & Build Home">
-              Acquire & Build
-            </Link>
-            <div className="flex space-x-8">
-              <Link
-                href="/blog"
-                className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors"
-                aria-label="Blog"
-              >
-                Blog
-              </Link>
-              <Link
-                href="/deal-kit"
-                className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors"
-                aria-label="Deal Kit"
-              >
-                Deal Kit
-              </Link>
-              <Link
-                href="/newsletter"
-                className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors"
-                aria-label="Newsletter"
-              >
-                Newsletter
-              </Link>
-              <Link
-                href="/contact"
-                className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors"
-                aria-label="Contact"
-              >
-                Contact
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Debug Info in Development */}
-      {process.env.NODE_ENV === "development" && (
-        <div className="bg-blue-50 p-4">
-          <div className="container mx-auto px-4">
-            <div className="text-sm text-blue-800">
-              <p>DatoCMS Homepage Status: {homepageData ? "✅ Connected" : "❌ Using Fallback Content"}</p>
-              <p>API Token Status: {process.env.DATOCMS_API_TOKEN ? "✅ Configured" : "❌ Missing"}</p>
-              {homepageData && <p>Hero Image: {homepageData.heroImage?.url ? "✅ Available" : "❌ Missing"}</p>}
-              {homepageData && (
-                <p>Right Place Fields: {homepageData.rightPlaceTitle ? "✅ Available" : "❌ Not Added Yet"}</p>
-              )}
-              <Link href="/debug-homepage" className="underline text-blue-600">
-                → View Homepage Debug Page
-              </Link>
-              <Link href="/datocms-setup" className="underline text-blue-600 ml-4">
-                → DatoCMS Setup Guide
-              </Link>
-              <Link href="/debug-newsletter" className="underline text-blue-600 ml-4">
-                → Newsletter Debug Page
-              </Link>
-              {!process.env.DATOCMS_API_TOKEN && (
-                <div className="mt-2 p-2 bg-red-100 rounded text-red-800">
-                  <p className="font-semibold">⚠️ DatoCMS API Token Missing</p>
-                  <p className="text-xs">Add DATOCMS_API_TOKEN to your environment variables</p>
-                </div>
-              )}
-              {!homepageData?.rightPlaceTitle && process.env.DATOCMS_API_TOKEN && (
-                <div className="mt-2 p-2 bg-yellow-100 rounded text-yellow-800">
-                  <p className="font-semibold">Next Step: Add Right Place fields to DatoCMS</p>
-                  <p className="text-xs">The section will use fallback content until you add the fields</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Hero Section - Matches Original Design */}
-      <section className="relative overflow-hidden bg-white" aria-labelledby="hero-heading">
-        <div className="container mx-auto px-4 py-16 lg:py-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <h1 id="hero-heading" className="text-4xl lg:text-6xl font-black text-black leading-tight">
-                  {homepageData?.heroTitle ? (
-                    <span
-                      dangerouslySetInnerHTML={{
-                        __html: homepageData.heroTitle.replace(
-                          "BUILD YOUR FREEDOM.",
-                          '<span class="text-[#1A73E8]">BUILD YOUR FREEDOM.</span>',
-                        ),
-                      }}
-                    />
-                  ) : (
-                    <>
-                      BUY A BUSINESS.
-                      <br />
-                      <span className="text-[#1A73E8]">BUILD YOUR FREEDOM.</span>
-                    </>
-                  )}
-                </h1>
-                <p className="text-xl lg:text-2xl text-gray-700 leading-relaxed hero-subtitle">
-                  {homepageData?.heroSubtitle ||
-                    "Join Acquire and Build — the free newsletter + community for people ready to stop climbing the ladder and start owning the whole damn thing."}
-                </p>
-              </div>
-
-              <NewsletterForm variant="hero" buttonText={homepageData?.heroButtonText || "GET FREE WEEKLY INSIGHTS"} />
-
-              <p className="text-sm text-gray-600">
-                Scripts, deals, lessons & real-world tactics — straight to your inbox.
-              </p>
-            </div>
-
-            <div className="relative">
-              <Image
-                src={homepageData?.heroImage?.url || "/placeholder.svg?height=600&width=500"}
-                alt={
-                  homepageData?.heroImageAltText ||
-                  homepageData?.heroImage?.alt ||
-                  "Confident small business owner in industrial setting representing business acquisition success"
-                }
-                width={500}
-                height={600}
-                className="rounded-lg shadow-2xl"
-                priority
-                loading="eager"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 500px"
-              />
-            </div>
+          <div className="max-w-6xl mx-auto">
+            <DealScorecard />
           </div>
         </div>
       </section>
-
-      {/* DEAL SCORECARD SECTION - Now Embedded Component */}
-  <section className="py-16 lg:py-24 bg-white" aria-labelledby="scorecard-heading">
-    <div className="container mx-auto px-4">
-      <div className="max-w-6xl mx-auto">
-        <DealScorecard />
-      </div>
-    </div>
-  </section>
 
       {/* Value Proposition Section */}
       <section className="py-16 lg:py-24 bg-[#F9F9F9]" aria-labelledby="value-prop-heading">
@@ -568,26 +389,25 @@ export default async function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-white py-12" role="contentinfo">
-        <div className="container mx-auto px-4">
-          <div className="text-center space-y-4">
-            <h3 className="text-2xl font-bold">Acquire & Build</h3>
-            <p className="text-gray-400">The newsletter and community for business acquisition.</p>
-            <nav className="flex justify-center space-x-6 text-sm" aria-label="Footer navigation">
-              <Link href="/privacy" className="hover:text-[#1A73E8] transition-colors">
+      <footer className="bg-gray-50 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <div className="flex items-center justify-center space-x-2 mb-4">
+              <Image src="/icon-192.png" alt="Acquire & Build" width={24} height={24} className="w-6 h-6" />
+              <span className="font-bold text-lg text-gray-900">Acquire & Build</span>
+            </div>
+            <p className="text-gray-600 mb-6">The newsletter and community for business acquisition</p>
+            <div className="flex justify-center space-x-6 text-sm">
+              <a href="/privacy" className="text-gray-500 hover:text-gray-700">
                 Privacy Policy
-              </Link>
-              <Link href="/terms" className="hover:text-[#1A73E8] transition-colors">
+              </a>
+              <a href="/terms" className="text-gray-500 hover:text-gray-700">
                 Terms of Service
-              </Link>
-              <Link href="/contact" className="hover:text-[#1A73E8] transition-colors">
-                Contact
-              </Link>
-            </nav>
-            <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Acquire & Build. All rights reserved.</p>
+              </a>
+            </div>
           </div>
         </div>
       </footer>
-    </main>
+    </div>
   )
 }
