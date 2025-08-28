@@ -42,6 +42,13 @@ export default function Navigation() {
               aria-label="Am I Ready Assessment"
             >
               Am I Ready?
+               </Link>
+            <Link
+              href="/deal-scorecard"
+              className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors"
+              aria-label="Deal Score"
+            >
+              Deal Score     
             </Link>
             <Link
               href="/deal-kit"
@@ -80,6 +87,14 @@ export default function Navigation() {
               aria-label="Am I Ready Assessment"
             >
               Am I Ready?
+            </Link>
+             <Link
+              href="/deal-scorecard"
+              className="block px-4 py-2 text-gray-700 hover:text-[#1A73E8] hover:bg-gray-50 font-medium transition-colors rounded-md"
+              onClick={closeMenu}
+              aria-label="Deal Score"
+            >
+              Deal Score
             </Link>
             <Link
               href="/deal-kit"
