@@ -197,11 +197,14 @@ export function calculateDealBox(data: AssessmentData): DealBox {
 
   // Industry mapping
   const industryMap = {
-    healthcare: "healthcare services",
-    "professional-services": "professional services",
-    "business-services": "business services",
+    "home-services": "home services",
+    "commercial-services": "commercial services",
+    "healthcare-services": "healthcare services",
+    "professional-business": "professional & business services",
+    "specialty-manufacturing": "specialty manufacturing & distribution",
+    "logistics-field": "logistics & field services",
     "tech-enabled": "tech-enabled services",
-    other: "service businesses",
+    "not-sure": "service businesses",
   }
 
   // Geography mapping
@@ -273,14 +276,17 @@ export function calculateDealBox(data: AssessmentData): DealBox {
 
   // Get industry multiplier for deal valuation
   const industryMultipliers = {
-    healthcare: 5.0,
-    "professional-services": 4.5,
-    "business-services": 3.5,
-    "tech-enabled": 6.0,
-    other: 3.0,
+    "home-services": 3.0,
+    "commercial-services": 3.5,
+    "healthcare-services": 4.5,
+    "professional-business": 4.0,
+    "specialty-manufacturing": 4.5,
+    "logistics-field": 4.0,
+    "tech-enabled": 5.25,
+    "not-sure": 3.5,
   }
 
-  const multiplier = industryMultipliers[data.industryPreference as keyof typeof industryMultipliers] || 3.0
+  const multiplier = industryMultipliers[data.industryPreference as keyof typeof industryMultipliers] || 3.5
 
   // Calculate deal size (business valuation = SDE × industry multiplier)
   const minDealSize = requiredSDELow * multiplier

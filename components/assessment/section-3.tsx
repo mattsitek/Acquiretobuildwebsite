@@ -5,6 +5,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { DollarSign, MapPin, Building, TrendingUp, Users, Star } from "lucide-react"
 import type { AssessmentData } from "@/lib/assessment-logic"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 interface Section3Props {
   data: AssessmentData
@@ -167,76 +168,48 @@ export function AssessmentSection3({ data, onUpdate }: Section3Props) {
       {/* Question 3: Industry Preference */}
       <div className="space-y-4">
         <h3 className="text-lg font-semibold">What industry interests you most?</h3>
-        <RadioGroup
-          value={data.industryPreference}
-          onValueChange={(value) => onUpdate({ industryPreference: value })}
-          className="space-y-3"
-        >
-          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
-            <CardContent className="p-4">
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="healthcare" id="healthcare" />
-                <Building className="w-5 h-5 text-red-600" />
-                <Label htmlFor="healthcare" className="cursor-pointer flex-1">
-                  <div className="font-medium">Healthcare Services</div>
-                  <div className="text-sm text-gray-600">Medical practices, dental, veterinary</div>
-                </Label>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
-            <CardContent className="p-4">
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="professional-services" id="professional-services" />
-                <Users className="w-5 h-5 text-blue-600" />
-                <Label htmlFor="professional-services" className="cursor-pointer flex-1">
-                  <div className="font-medium">Professional Services</div>
-                  <div className="text-sm text-gray-600">Consulting, accounting, legal services</div>
-                </Label>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
-            <CardContent className="p-4">
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="business-services" id="business-services" />
-                <TrendingUp className="w-5 h-5 text-green-600" />
-                <Label htmlFor="business-services" className="cursor-pointer flex-1">
-                  <div className="font-medium">Business Services</div>
-                  <div className="text-sm text-gray-600">Marketing, HR, facilities management</div>
-                </Label>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
-            <CardContent className="p-4">
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="tech-enabled" id="tech-enabled" />
-                <Star className="w-5 h-5 text-purple-600" />
-                <Label htmlFor="tech-enabled" className="cursor-pointer flex-1">
-                  <div className="font-medium">Tech-Enabled Services</div>
-                  <div className="text-sm text-gray-600">SaaS, digital agencies, e-commerce</div>
-                </Label>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
-            <CardContent className="p-4">
-              <div className="flex items-center space-x-3">
-                <RadioGroupItem value="other" id="other-industry" />
-                <Building className="w-5 h-5 text-orange-600" />
-                <Label htmlFor="other-industry" className="cursor-pointer flex-1">
-                  <div className="font-medium">Other/Industry Agnostic</div>
-                  <div className="text-sm text-gray-600">Open to various industries</div>
-                </Label>
-              </div>
-            </CardContent>
-          </Card>
-        </RadioGroup>
+        <Card className="p-4">
+          <div className="flex items-center space-x-3">
+            <Building className="w-5 h-5 text-blue-600" />
+            <div className="flex-1">
+              <Label htmlFor="industry-select" className="text-sm font-medium">
+                Select your preferred industry
+              </Label>
+              <Select
+                value={data.industryPreference}
+                onValueChange={(value) => onUpdate({ industryPreference: value })}
+              >
+                <SelectTrigger className="w-full mt-2">
+                  <SelectValue placeholder="Choose an industry..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="home-services">
+                    Home Services (plumbing, HVAC, electrical, roofing, landscaping)
+                  </SelectItem>
+                  <SelectItem value="commercial-services">
+                    Commercial Services (janitorial, facilities maintenance, fire protection)
+                  </SelectItem>
+                  <SelectItem value="healthcare-services">
+                    Healthcare Services (non-clinical PT clinics, dental, home health, med spa)
+                  </SelectItem>
+                  <SelectItem value="professional-business">
+                    Professional & Business Services (accounting firms, staffing, training providers)
+                  </SelectItem>
+                  <SelectItem value="specialty-manufacturing">
+                    Specialty Manufacturing & Distribution (niche machining, industrial supply)
+                  </SelectItem>
+                  <SelectItem value="logistics-field">
+                    Logistics & Field Services (last-mile delivery, fleet maintenance)
+                  </SelectItem>
+                  <SelectItem value="tech-enabled">
+                    Technology-Enabled Services (MSPs, IT services, digital agencies w/ retainers)
+                  </SelectItem>
+                  <SelectItem value="not-sure">I'm Not Sure Yet</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </Card>
       </div>
 
       {/* Question 4: Geography */}
