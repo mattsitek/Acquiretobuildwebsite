@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
@@ -41,6 +41,11 @@ export default function AmIReadyPage() {
     { title: "Professional Skills Assessment", questions: 4 },
     { title: "Deal Parameters", questions: 6 },
   ]
+
+  // Auto-scroll to top when section changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }, [currentSection])
 
   const totalQuestions = sections.reduce((sum, section) => sum + section.questions, 0)
   const answeredQuestions = Object.values(assessmentData).filter((value) =>
