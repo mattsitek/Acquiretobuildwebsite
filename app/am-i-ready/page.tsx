@@ -100,7 +100,7 @@ export default function AmIReadyPage() {
         "Start building your acquisition pipeline",
         "Connect with business brokers in your target markets",
         "Secure pre-approval for SBA financing",
-        "Join our Deal Flow Newsletter for exclusive opportunities",
+        "Join Our Acquire & Build Community for tools & tactics",
       ],
       "Nearly Ready": [
         "Strengthen your financial foundation",
@@ -169,7 +169,7 @@ export default function AmIReadyPage() {
           <div className="text-center mb-8">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Are You Ready to Buy a Business?</h1>
             <p className="text-xl text-gray-600 mb-6 max-w-2xl mx-auto">
-              Take our 3-minute KnowledgeBuyer Assessment to discover your readiness level, skill advantages, and
+              Take our 3-minute Personal Assessment to discover your readiness level, skill advantages, and
               personalized deal parameters.
             </p>
             <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
@@ -183,7 +183,7 @@ export default function AmIReadyPage() {
               </div>
               <div className="flex items-center gap-1">
                 <CheckCircle className="w-4 h-4 text-green-500" />
-                <span>Free PDF report</span>
+                <span>Free report</span>
               </div>
             </div>
           </div>
