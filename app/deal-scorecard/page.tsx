@@ -13,7 +13,11 @@ import { calculateScores, type FormData, type ScoreResults } from "@/app/lib/cal
 import { trackUTMParams } from "@/app/lib/analytics"
 import Navigation from "@/components/navigation"
 
-export default function DealScorecard() {
+interface DealScorecardProps {
+  showNavigation?: boolean
+}
+
+export default function DealScorecard({ showNavigation = true }: DealScorecardProps) {
   const [currentStep, setCurrentStep] = useState(1)
   const [showEmailGate, setShowEmailGate] = useState(false)
   const [emailCaptured, setEmailCaptured] = useState(false)
@@ -211,10 +215,9 @@ export default function DealScorecard() {
 
   return (
     <div className="min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8">
-     
-      {/* Navigation - NEW: Replace the old inline nav */}
-      <Navigation />
-      
+ 
+    {showNavigation && <Navigation />}
+       
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
