@@ -1,9 +1,10 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { useState } from "react"
 import { Menu, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -12,91 +13,62 @@ export default function Navigation() {
     setIsMenuOpen(!isMenuOpen)
   }
 
-  const closeMenu = () => {
-    setIsMenuOpen(false)
-  }
+  const navigationItems = [
+    { name: "Am I Ready?", href: "/am-i-ready" },
+    { name: "Deal Kit", href: "/deal-kit" },
+    { name: "Newsletter", href: "/newsletter" },
+  ]
 
   return (
-    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50" role="navigation" aria-label="Main navigation">
-      <div className="container mx-auto px-4">
+    <nav className="bg-white shadow-sm border-b">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo - Responsive */}
-          <Link href="/" className="flex items-center space-x-2" aria-label="Acquire & Build Home">
-            {/* Mobile: Icon + A&B */}
-            <div className="md:hidden flex items-center space-x-2">
-              <Image src="/icon-192.png" alt="Acquire & Build" width={32} height={32} className="rounded" />
-              <span className="text-xl font-black text-black">A&B</span>
-            </div>
-
-            {/* Desktop: Full Text */}
-            <div className="hidden md:block">
-              <span className="text-2xl font-black text-black">Acquire & Build</span>
-            </div>
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-2">
+            <Image src="/apple-touch-icon.png" alt="Acquire & Build" width={32} height={32} className="rounded-md" />
+            {/* Mobile: Show "A&B", Desktop: Show full name */}
+            <span className="font-bold text-xl text-gray-900">
+              <span className="md:hidden">A&B</span>
+              <span className="hidden md:inline">Acquire & Build</span>
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
-            <Link
-              href="/am-i-ready"
-              className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors"
-              aria-label="Am I Ready Assessment"
-            >
-              Am I Ready?
-            </Link>
-            <Link
-              href="/deal-kit"
-              className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors"
-              aria-label="Deal Kit"
-            >
-              Deal Kit
-            </Link>
-            <Link
-              href="/newsletter"
-              className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors"
-              aria-label="Newsletter"
-            >
-              Newsletter
-            </Link>
+          <div className="hidden md:flex items-center space-x-8">
+            {navigationItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+              >
+                {item.name}
+              </Link>
+            ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMenu}
-            className="md:hidden p-2 rounded-md text-gray-700 hover:text-[#1A73E8] hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#1A73E8] focus:ring-offset-2"
-            aria-label="Toggle navigation menu"
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <Button variant="ghost" size="sm" onClick={toggleMenu} className="p-2" aria-label="Toggle menu">
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4 space-y-4">
-            <Link
-              href="/am-i-ready"
-              className="block px-4 py-2 text-gray-700 hover:text-[#1A73E8] hover:bg-gray-50 font-medium transition-colors rounded-md"
-              onClick={closeMenu}
-              aria-label="Am I Ready Assessment"
-            >
-              Am I Ready?
-            </Link>
-            <Link
-              href="/deal-kit"
-              className="block px-4 py-2 text-gray-700 hover:text-[#1A73E8] hover:bg-gray-50 font-medium transition-colors rounded-md"
-              onClick={closeMenu}
-              aria-label="Deal Kit"
-            >
-              Deal Kit
-            </Link>
-            <Link
-              href="/newsletter"
-              className="block px-4 py-2 text-gray-700 hover:text-[#1A73E8] hover:bg-gray-50 font-medium transition-colors rounded-md"
-              onClick={closeMenu}
-              aria-label="Newsletter"
-            >
-              Newsletter
-            </Link>
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
+              {navigationItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="block px-3 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors duration-200"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
           </div>
         )}
       </div>
