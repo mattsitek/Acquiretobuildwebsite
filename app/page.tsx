@@ -266,7 +266,7 @@ export default async function HomePage() {
   <section className="py-16 lg:py-24 bg-white" aria-labelledby="scorecard-heading">
     <div className="container mx-auto px-4">
       <div className="max-w-6xl mx-auto">
-        <DealScorecard />
+        <DealScorecard showNavigation={false} />
       </div>
     </div>
   </section>
