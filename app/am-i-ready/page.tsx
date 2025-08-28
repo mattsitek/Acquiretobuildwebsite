@@ -47,6 +47,13 @@ export default function AmIReadyPage() {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }, [currentSection])
 
+  // Auto-scroll to top when results page loads
+  useEffect(() => {
+    if (isCompleted && results) {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+  }, [isCompleted])
+
   const totalQuestions = sections.reduce((sum, section) => sum + section.questions, 0)
   const answeredQuestions = Object.values(assessmentData).filter((value) =>
     Array.isArray(value) ? value.length > 0 : value !== "",
