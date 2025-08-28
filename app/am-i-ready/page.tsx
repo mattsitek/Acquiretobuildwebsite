@@ -77,6 +77,33 @@ export default function AmIReadyPage() {
     setAssessmentData((prev) => ({ ...prev, ...updates }))
   }
 
+  const isValidSection = (sectionIndex: number): boolean => {
+    switch (sectionIndex) {
+      case 0: // Section 1 - All 3 required
+        return !!(assessmentData.motivation && assessmentData.timeCommitment && assessmentData.riskTolerance)
+
+      case 1: // Section 2 - 3 required (businessApplication is optional)
+        return !!(
+          assessmentData.professionalBackground &&
+          assessmentData.transferableSkills.length > 0 &&
+          assessmentData.businessExperience
+        )
+
+      case 2: // Section 3 - All 6 required
+        return !!(
+          assessmentData.targetIncome &&
+          assessmentData.capitalAvailable &&
+          assessmentData.industryPreference &&
+          assessmentData.geography &&
+          assessmentData.businessModel &&
+          assessmentData.creditScore
+        )
+
+      default:
+        return false
+    }
+  }
+
   const getSkillAdvantage = (background: string) => {
     const advantages = {
       finance: { multiplier: "2.0x", advantage: "Due diligence, cash flow management, and financial analysis" },
@@ -169,8 +196,8 @@ export default function AmIReadyPage() {
           <div className="text-center mb-8">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Are You Ready to Buy a Business?</h1>
             <p className="text-xl text-gray-600 mb-6 max-w-2xl mx-auto">
-              Take our 3-minute Personal Assessment to discover your readiness level, skill advantages, and
-              personalized deal parameters.
+              Take our 3-minute Personal Assessment to discover your readiness level, skill advantages, and personalized
+              deal parameters.
             </p>
             <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
               <div className="flex items-center gap-1">
@@ -233,7 +260,11 @@ export default function AmIReadyPage() {
               ))}
             </div>
 
-            <Button onClick={handleNext} className="bg-blue-600 hover:bg-blue-700">
+            <Button
+              onClick={handleNext}
+              className="bg-blue-600 hover:bg-blue-700"
+              disabled={!isValidSection(currentSection)}
+            >
               {currentSection === sections.length - 1 ? "Get My Results" : "Next"}
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
