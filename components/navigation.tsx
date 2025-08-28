@@ -20,17 +20,15 @@ export default function Navigation() {
   ]
 
   return (
-    <nav className="bg-white shadow-sm border-b">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+      <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+          {/* Logo - Responsive */}
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/apple-touch-icon.png" alt="Acquire & Build" width={32} height={32} className="rounded-md" />
-            {/* Mobile: Show "A&B", Desktop: Show full name */}
-            <span className="font-bold text-xl text-gray-900">
-              <span className="md:hidden">A&B</span>
-              <span className="hidden md:inline">Acquire & Build</span>
-            </span>
+            <Image src="/placeholder-logo.png" alt="Acquire & Build" width={32} height={32} className="w-8 h-8" />
+            {/* Show "A&B" on mobile, full text on desktop */}
+            <span className="font-bold text-xl text-gray-900 sm:hidden">A&B</span>
+            <span className="font-bold text-xl text-gray-900 hidden sm:block">Acquire & Build</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -39,30 +37,28 @@ export default function Navigation() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
               >
                 {item.name}
               </Link>
             ))}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button variant="ghost" size="sm" onClick={toggleMenu} className="p-2" aria-label="Toggle menu">
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-          </div>
+          {/* Mobile Menu Button */}
+          <Button variant="ghost" size="sm" className="md:hidden" onClick={toggleMenu} aria-label="Toggle menu">
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </Button>
         </div>
 
         {/* Mobile Navigation Menu */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
+          <div className="md:hidden border-t border-gray-200 py-4">
+            <div className="flex flex-col space-y-4">
               {navigationItems.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block px-3 py-3 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors duration-200"
+                  className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2 px-4 rounded-md hover:bg-gray-50"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
