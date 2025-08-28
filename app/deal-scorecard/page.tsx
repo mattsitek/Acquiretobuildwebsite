@@ -214,14 +214,14 @@ export default function DealScorecard({ showNavigation = true }: DealScorecardPr
   const progressPercentage = ((currentStep - 1) / 2) * 100
 
   return (
-    <div className="min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8">
- 
-    {showNavigation && <Navigation />}
-       
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-background">
+      {showNavigation && <Navigation />}
+    <div className="py-8 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-6xl mx-auto">
+      
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-black text-black mb-4">Deal Scorecard</h1>
+          <h1 className="text-4xl sm:text-5xl font-bold text-black mb-4">Deal Scorecard</h1>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
             Get an instant business valuation and risk assessment to make smarter acquisition decisions
           </p>
