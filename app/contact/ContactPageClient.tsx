@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Mail, MessageCircle, Loader2, CheckCircle, AlertCircle } from "lucide-react"
 import Link from "next/link"
 import { submitContactForm } from "@/app/actions/contact"
+import Navigation from "@/components/navigation"
 
 export default function ContactPageClient() {
   const [isLoading, setIsLoading] = useState(false)
@@ -42,30 +43,8 @@ export default function ContactPageClient() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="text-2xl font-black text-black">
-              Acquire & Build
-            </Link>
-            <div className="flex space-x-8">
-              <Link href="/blog" className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors">
-                Blog
-              </Link>
-              <Link href="/deal-kit" className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors">
-                Deal Kit
-              </Link>
-              <Link href="/newsletter" className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors">
-                Newsletter
-              </Link>
-              <Link href="/contact" className="text-[#1A73E8] font-medium">
-                Contact
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      {/* Navigation - NEW: Replace the old inline nav */}
+      <Navigation />
 
       {/* Contact Section */}
       <section className="py-16 lg:py-24">
