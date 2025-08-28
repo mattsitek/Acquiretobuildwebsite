@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Calendar, Clock } from "lucide-react"
 import type { Metadata } from "next"
+import Navigation from "@/components/navigation"
 
 // Function to get blog posts with images
 async function getBlogPostsWithImages() {
@@ -126,34 +127,8 @@ export default async function BlogPage() {
         }}
       />
 
-      {/* Navigation */}
-      <nav
-        className="bg-white border-b border-gray-200 sticky top-0 z-50"
-        role="navigation"
-        aria-label="Main navigation"
-      >
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="text-2xl font-black text-black" aria-label="Acquire & Build Home">
-              Acquire & Build
-            </Link>
-            <div className="flex space-x-8">
-              <Link href="/blog" className="text-[#1A73E8] font-medium" aria-current="page">
-                Blog
-              </Link>
-              <Link href="/deal-kit" className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors">
-                Deal Kit
-              </Link>
-              <Link href="/newsletter" className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors">
-                Newsletter
-              </Link>
-              <Link href="/contact" className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors">
-                Contact
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      {/* Navigation - NEW: Replace the old inline nav */}
+      <Navigation />
 
       {/* Blog Header */}
       <section className="py-16 bg-gray-50">
