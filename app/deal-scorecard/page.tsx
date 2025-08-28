@@ -11,6 +11,7 @@ import { ResultsSummary } from "@/components/results-summary"
 import { EmailGate } from "@/components/email-gate"
 import { calculateScores, type FormData, type ScoreResults } from "@/app/lib/calculations"
 import { trackUTMParams } from "@/app/lib/analytics"
+import Navigation from "@/components/navigation"
 
 export default function DealScorecard() {
   const [currentStep, setCurrentStep] = useState(1)
@@ -210,6 +211,10 @@ export default function DealScorecard() {
 
   return (
     <div className="min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8">
+     
+      {/* Navigation - NEW: Replace the old inline nav */}
+      <Navigation />
+      
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
