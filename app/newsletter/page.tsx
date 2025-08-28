@@ -1,7 +1,8 @@
 "use client"
 
-import { useEffect, useRef } from "react"
-import Link from "next/link"
+import { Suspense, useEffect, useRef } from "react"
+import Navigation from "@/components/navigation"
+import NewsletterForm from "@/components/newsletter-form"
 
 export default function NewsletterPage() {
   const iframeRef = useRef<HTMLIFrameElement>(null)
@@ -37,6 +38,26 @@ export default function NewsletterPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <Navigation />
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        <div className="text-center">
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">Join the Newsletter</h1>
+
+          <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+            Get weekly insights on business acquisition, deal breakdowns, and tactical advice straight to your inbox.
+          </p>
+
+          <div className="max-w-md mx-auto mb-8">
+            <Suspense fallback={<div>Loading...</div>}>
+              <NewsletterForm />
+            </Suspense>
+          </div>
+
+          <p className="text-sm text-gray-500">Join 1,000+ professionals. No spam, unsubscribe anytime.</p>
+        </div>
+      </div>
+
       {/* Enhanced Structured Data for Newsletter */}
       <script
         type="application/ld+json"
@@ -76,50 +97,6 @@ export default function NewsletterPage() {
           }),
         }}
       />
-
-      {/* Navigation */}
-      <nav
-        className="bg-white border-b border-gray-200 sticky top-0 z-50"
-        role="navigation"
-        aria-label="Main navigation"
-      >
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="text-2xl font-black text-black" aria-label="Acquire & Build Home">
-              Acquire & Build
-            </Link>
-            <div className="flex space-x-8">
-              <Link href="/blog" className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors">
-                Blog
-              </Link>
-              <Link href="/deal-kit" className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors">
-                Deal Kit
-              </Link>
-              <Link href="/newsletter" className="text-[#1A73E8] font-medium" aria-current="page">
-                Newsletter
-              </Link>
-              <Link href="/contact" className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors">
-                Contact
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Newsletter Embed */}
-      <div className="w-full" style={{ height: "calc(100vh - 64px)" }}>
-        <iframe
-          ref={iframeRef}
-          src="https://acquireandbuild.beehiiv.com/"
-          width="100%"
-          height="100%"
-          frameBorder="0"
-          title="Acquire & Build Newsletter Subscription"
-          className="w-full h-full"
-          loading="lazy"
-          aria-label="Newsletter subscription form"
-        />
-      </div>
     </div>
   )
 }

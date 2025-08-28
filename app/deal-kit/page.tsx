@@ -1,4 +1,6 @@
 import type { Metadata } from "next"
+import { Suspense } from "react"
+import Navigation from "@/components/navigation"
 import DealKitPageClient from "./DealKitPageClient"
 
 export const metadata: Metadata = {
@@ -46,8 +48,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function DealKitPage() {
-  // Use fallback data since we're doing manual delivery (no API dependencies)
+export default function DealKitPage() {
   const pageContent = {
     heroBadgeText: "FREE BUSINESS ACQUISITION TOOLKIT",
     heroTitleLine1: "The Deal Kit",
@@ -165,108 +166,16 @@ export default async function DealKitPage() {
   ]
 
   return (
-    <>
-      {/* Enhanced Structured Data for Deal Kit */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Product",
-            "@id": "https://acquireandbuild.com/deal-kit#product",
-            name: "The Deal Kit - Business Acquisition Tools",
-            description:
-              "Professional templates, scripts, and tools to find, evaluate, and close your first acquisition",
-            brand: {
-              "@type": "Brand",
-              name: "Acquire & Build",
-            },
-            offers: {
-              "@type": "Offer",
-              price: "0",
-              priceCurrency: "USD",
-              availability: "https://schema.org/InStock",
-              url: "https://acquireandbuild.com/deal-kit",
-            },
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: "5.0",
-              reviewCount: "2500",
-              bestRating: "5",
-              worstRating: "1",
-            },
-            category: "Business Tools",
-            audience: {
-              "@type": "Audience",
-              audienceType: "Business Professionals, Entrepreneurs, Business Buyers",
-            },
-          }),
-        }}
-      />
-
-      {/* Service Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "@id": "https://acquireandbuild.com/deal-kit#service",
-            name: "Business Acquisition Toolkit",
-            description:
-              "Free professional business acquisition tools including LOI templates, NDAs, cold outreach scripts, and due diligence checklists",
-            provider: {
-              "@id": "https://acquireandbuild.com/#organization",
-            },
-            serviceType: "Business Education",
-            areaServed: {
-              "@type": "Country",
-              name: "United States",
-            },
-            hasOfferCatalog: {
-              "@type": "OfferCatalog",
-              name: "Deal Kit Tools",
-              itemListElement: [
-                {
-                  "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Product",
-                    name: "Letter of Intent (LOI) Template",
-                  },
-                },
-                {
-                  "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Product",
-                    name: "Mutual NDA Template",
-                  },
-                },
-                {
-                  "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Product",
-                    name: "Cold Outreach Scripts",
-                  },
-                },
-                {
-                  "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Product",
-                    name: "Due Diligence Checklist",
-                  },
-                },
-              ],
-            },
-          }),
-        }}
-      />
-
-      <DealKitPageClient
-        pageContent={pageContent}
-        tools={tools}
-        testimonials={testimonials}
-        comingSoonTools={comingSoonTools}
-      />
-    </>
+    <div className="min-h-screen bg-gray-50">
+      <Navigation />
+      <Suspense fallback={<div>Loading...</div>}>
+        <DealKitPageClient
+          pageContent={pageContent}
+          tools={tools}
+          testimonials={testimonials}
+          comingSoonTools={comingSoonTools}
+        />
+      </Suspense>
+    </div>
   )
 }

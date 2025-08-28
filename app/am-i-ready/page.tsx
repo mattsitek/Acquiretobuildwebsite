@@ -1,50 +1,49 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
-import { ArrowRight, CheckCircle, TrendingUp, DollarSign, Target } from "lucide-react"
-import { AssessmentSection1 } from "@/components/assessment/section-1"
-import { AssessmentSection2 } from "@/components/assessment/section-2"
-import { AssessmentSection3 } from "@/components/assessment/section-3"
-import { AssessmentResults } from "@/components/assessment/results"
-import { calculateReadinessScore, calculateDealBox, type AssessmentData } from "@/lib/assessment-logic"
+import { CheckCircle } from "lucide-react"
+import Navigation from "@/components/navigation"
+import Section1 from "@/components/assessment/section-1"
+import Section2 from "@/components/assessment/section-2"
+import Section3 from "@/components/assessment/section-3"
+import AssessmentResults from "@/components/assessment/results"
+import { calculateReadinessScore, calculateDealBox } from "@/lib/assessment-logic"
+
+export interface AssessmentData {
+  // Section 1: Readiness Assessment
+  motivation?: string
+  timeCommitment?: string
+  riskTolerance?: string
+
+  // Section 2: Professional Background
+  professionalBackground?: string
+  transferableSkills?: string[]
+  businessApplication?: string
+  businessExperience?: string
+
+  // Section 3: Deal Parameters
+  targetIncome?: string
+  capitalAvailable?: string
+  industryPreference?: string
+  geography?: string
+  businessModel?: string
+  creditScore?: string
+}
 
 export default function AmIReadyPage() {
   const [currentSection, setCurrentSection] = useState(0)
-  const [assessmentData, setAssessmentData] = useState<AssessmentData>({
-    // Section 1: Business Buying Readiness
-    motivation: "",
-    timeCommitment: "",
-    riskTolerance: "",
-
-    // Section 2: Professional Skills
-    professionalBackground: "",
-    transferableSkills: [],
-    businessApplication: "",
-    businessExperience: "",
-
-    // Section 3: Deal Box Parameters
-    targetIncome: "",
-    capitalAvailable: "",
-    industryPreference: "",
-    geography: "",
-    businessModel: "",
-    creditScore: "",
-  })
-  const [results, setResults] = useState<any>(null)
+  const [assessmentData, setAssessmentData] = useState<AssessmentData>({})
   const [isCompleted, setIsCompleted] = useState(false)
-
-  const sections = [
-    { title: "Business Buying Readiness", questions: 3 },
-    { title: "Professional Skills Assessment", questions: 4 },
-    { title: "Deal Parameters", questions: 6 },
-  ]
+  const [results, setResults] = useState<any>(null)
 
   // Auto-scroll to top when section changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
+    if (currentSection >= 0) {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }
   }, [currentSection])
 
   // Auto-scroll to top when results page loads
@@ -54,26 +53,71 @@ export default function AmIReadyPage() {
     }
   }, [isCompleted])
 
-  const totalQuestions = sections.reduce((sum, section) => sum + section.questions, 0)
-  const answeredQuestions = Object.values(assessmentData).filter((value) =>
-    Array.isArray(value) ? value.length > 0 : value !== "",
-  ).length
+  const updateAssessmentData = (updates: Partial<AssessmentData>) => {
+    setAssessmentData((prev) => ({ ...prev, ...updates }))
+  }
 
-  const progress = (answeredQuestions / totalQuestions) * 100
+  const calculateProgress = () => {
+    const totalQuestions = 12 // 3 + 4 + 6 - 1 (business application is optional)
+    let answered = 0
+
+    // Section 1 (3 required)
+    if (assessmentData.motivation) answered++
+    if (assessmentData.timeCommitment) answered++
+    if (assessmentData.riskTolerance) answered++
+
+    // Section 2 (3 required, 1 optional)
+    if (assessmentData.professionalBackground) answered++
+    if (assessmentData.transferableSkills && assessmentData.transferableSkills.length > 0) answered++
+    if (assessmentData.businessExperience) answered++
+
+    // Section 3 (6 required)
+    if (assessmentData.targetIncome) answered++
+    if (assessmentData.capitalAvailable) answered++
+    if (assessmentData.industryPreference) answered++
+    if (assessmentData.geography) answered++
+    if (assessmentData.businessModel) answered++
+    if (assessmentData.creditScore) answered++
+
+    return Math.round((answered / totalQuestions) * 100)
+  }
+
+  const isValidSection = (section: number): boolean => {
+    switch (section) {
+      case 0: // Section 1
+        return !!(assessmentData.motivation && assessmentData.timeCommitment && assessmentData.riskTolerance)
+      case 1: // Section 2
+        return !!(
+          assessmentData.professionalBackground &&
+          assessmentData.transferableSkills &&
+          assessmentData.transferableSkills.length > 0 &&
+          assessmentData.businessExperience
+        )
+      case 2: // Section 3
+        return !!(
+          assessmentData.targetIncome &&
+          assessmentData.capitalAvailable &&
+          assessmentData.industryPreference &&
+          assessmentData.geography &&
+          assessmentData.businessModel &&
+          assessmentData.creditScore
+        )
+      default:
+        return false
+    }
+  }
 
   const handleNext = () => {
-    if (currentSection < sections.length - 1) {
+    if (currentSection < 2) {
       setCurrentSection(currentSection + 1)
     } else {
       // Calculate results
-      const readinessScore = calculateReadinessScore(assessmentData)
-      const dealBox = calculateDealBox(assessmentData)
+      const readinessResults = calculateReadinessScore(assessmentData)
+      const dealBoxResults = calculateDealBox(assessmentData)
 
       setResults({
-        readinessScore,
-        dealBox,
-        skillAdvantage: getSkillAdvantage(assessmentData.professionalBackground),
-        recommendations: getRecommendations(readinessScore.level),
+        readiness: readinessResults,
+        dealBox: dealBoxResults,
       })
       setIsCompleted(true)
     }
@@ -85,211 +129,82 @@ export default function AmIReadyPage() {
     }
   }
 
-  const updateAssessmentData = (updates: Partial<AssessmentData>) => {
-    setAssessmentData((prev) => ({ ...prev, ...updates }))
+  const handleRestart = () => {
+    setCurrentSection(0)
+    setAssessmentData({})
+    setIsCompleted(false)
+    setResults(null)
   }
 
-  const isValidSection = (sectionIndex: number): boolean => {
-    switch (sectionIndex) {
-      case 0: // Section 1 - All 3 required
-        return !!(assessmentData.motivation && assessmentData.timeCommitment && assessmentData.riskTolerance)
-
-      case 1: // Section 2 - 3 required (businessApplication is optional)
-        return !!(
-          assessmentData.professionalBackground &&
-          assessmentData.transferableSkills.length > 0 &&
-          assessmentData.businessExperience
-        )
-
-      case 2: // Section 3 - All 6 required
-        return !!(
-          assessmentData.targetIncome &&
-          assessmentData.capitalAvailable &&
-          assessmentData.industryPreference &&
-          assessmentData.geography &&
-          assessmentData.businessModel &&
-          assessmentData.creditScore
-        )
-
-      default:
-        return false
-    }
-  }
-
-  const getSkillAdvantage = (background: string) => {
-    const advantages = {
-      finance: { multiplier: "2.0x", advantage: "Due diligence, cash flow management, and financial analysis" },
-      sales: { multiplier: "1.9x", advantage: "Customer acquisition, relationship building, and revenue growth" },
-      operations: { multiplier: "1.8x", advantage: "Process optimization, efficiency improvements, and scaling" },
-      technology: { multiplier: "1.7x", advantage: "Digital transformation, automation, and tech integration" },
-      legal: { multiplier: "1.6x", advantage: "Contract negotiation, compliance, and risk management" },
-      healthcare: { multiplier: "1.6x", advantage: "Regulatory knowledge, patient care, and healthcare operations" },
-    }
-    return (
-      advantages[background as keyof typeof advantages] || {
-        multiplier: "1.5x",
-        advantage: "General business management and leadership",
-      }
-    )
-  }
-
-  const getRecommendations = (level: string) => {
-    const recommendations = {
-      "Ready to Buy": [
-        "Start building your acquisition pipeline",
-        "Connect with business brokers in your target markets",
-        "Secure pre-approval for SBA financing",
-        "Join Our Acquire & Build Community for tools & tactics",
-      ],
-      "Nearly Ready": [
-        "Strengthen your financial foundation",
-        "Gain more industry-specific knowledge",
-        "Build relationships with lenders and advisors",
-        "Consider partnering with an experienced buyer",
-      ],
-      "Developing Interest": [
-        "Take a business acquisition course",
-        "Start networking in your target industry",
-        "Build up your capital reserves",
-        "Read case studies of successful acquisitions",
-      ],
-      "Early Exploration": [
-        "Learn the fundamentals of business acquisition",
-        "Assess your risk tolerance and financial capacity",
-        "Explore different business models and industries",
-        "Consider starting with smaller investments",
-      ],
-      "Not Ready Yet": [
-        "Focus on building your professional skills",
-        "Increase your savings and capital",
-        "Gain more business experience",
-        "Start with business education and networking",
-      ],
-    }
-    return recommendations[level] || recommendations["Early Exploration"]
-  }
+  const progress = calculateProgress()
 
   if (isCompleted && results) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-        <AssessmentResults
-          results={results}
-          assessmentData={assessmentData}
-          onRestart={() => {
-            setCurrentSection(0)
-            setAssessmentData({
-              motivation: "",
-              timeCommitment: "",
-              riskTolerance: "",
-              professionalBackground: "",
-              transferableSkills: [],
-              businessApplication: "",
-              businessExperience: "",
-              targetIncome: "",
-              capitalAvailable: "",
-              industryPreference: "",
-              geography: "",
-              businessModel: "",
-              creditScore: "",
-            })
-            setResults(null)
-            setIsCompleted(false)
-          }}
-        />
+      <div className="min-h-screen bg-gray-50">
+        <Navigation />
+        <AssessmentResults results={results} onRestart={handleRestart} />
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Are You Ready to Buy a Business?</h1>
-            <p className="text-xl text-gray-600 mb-6 max-w-2xl mx-auto">
-              Take our 3-minute Personal Assessment to discover your readiness level, skill advantages, and personalized
-              deal parameters.
-            </p>
-            <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
-              <div className="flex items-center gap-1">
-                <CheckCircle className="w-4 h-4 text-green-500" />
-                <span>3 minutes</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <CheckCircle className="w-4 h-4 text-green-500" />
-                <span>Personalized results</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <CheckCircle className="w-4 h-4 text-green-500" />
-                <span>Free report</span>
-              </div>
-            </div>
+    <div className="min-h-screen bg-gray-50">
+      <Navigation />
+
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">KnowledgeBuyer Assessment</h1>
+          <p className="text-gray-600">
+            Discover your readiness to acquire a business and get your personalized deal profile
+          </p>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="mb-8">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-sm font-medium text-gray-700">
+              Section {currentSection + 1} of 3:{" "}
+              {currentSection === 0
+                ? "Readiness Assessment"
+                : currentSection === 1
+                  ? "Professional Background"
+                  : "Deal Parameters"}
+            </span>
+            <span className="text-sm text-gray-500">{progress}% Complete</span>
           </div>
+          <Progress value={progress} className="h-2" />
+        </div>
 
-          {/* Progress Bar */}
-          <div className="mb-8">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-gray-700">
-                Section {currentSection + 1} of {sections.length}: {sections[currentSection].title}
-              </span>
-              <span className="text-sm text-gray-500">{Math.round(progress)}% Complete</span>
-            </div>
-            <Progress value={progress} className="h-2" />
-          </div>
+        {/* Assessment Sections */}
+        <Card className="mb-8">
+          <CardContent className="p-6">
+            {currentSection === 0 && <Section1 data={assessmentData} onUpdate={updateAssessmentData} />}
+            {currentSection === 1 && <Section2 data={assessmentData} onUpdate={updateAssessmentData} />}
+            {currentSection === 2 && <Section3 data={assessmentData} onUpdate={updateAssessmentData} />}
+          </CardContent>
+        </Card>
 
-          {/* Assessment Sections */}
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                {currentSection === 0 && <Target className="w-5 h-5 text-blue-600" />}
-                {currentSection === 1 && <TrendingUp className="w-5 h-5 text-blue-600" />}
-                {currentSection === 2 && <DollarSign className="w-5 h-5 text-blue-600" />}
-                {sections[currentSection].title}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              {currentSection === 0 && <AssessmentSection1 data={assessmentData} onUpdate={updateAssessmentData} />}
-              {currentSection === 1 && <AssessmentSection2 data={assessmentData} onUpdate={updateAssessmentData} />}
-              {currentSection === 2 && <AssessmentSection3 data={assessmentData} onUpdate={updateAssessmentData} />}
-            </CardContent>
-          </Card>
+        {/* Navigation */}
+        <div className="flex justify-between">
+          <Button variant="outline" onClick={handleBack} disabled={currentSection === 0}>
+            Back
+          </Button>
 
-          {/* Navigation */}
-          <div className="flex justify-between items-center">
-            <Button variant="outline" onClick={handleBack} disabled={currentSection === 0}>
-              Back
-            </Button>
-
-            <div className="flex gap-2">
-              {sections.map((_, index) => (
-                <div
-                  key={index}
-                  className={`w-3 h-3 rounded-full ${
-                    index === currentSection ? "bg-blue-600" : index < currentSection ? "bg-green-500" : "bg-gray-200"
-                  }`}
-                />
-              ))}
-            </div>
-
-            <Button
-              onClick={handleNext}
-              className="bg-blue-600 hover:bg-blue-700"
-              disabled={!isValidSection(currentSection)}
-            >
-              {currentSection === sections.length - 1 ? "Get My Results" : "Next"}
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-          </div>
-
-          {/* Motivational Copy */}
-          <div className="text-center mt-8">
-            <p className="text-sm text-gray-500 italic">
-              {currentSection === 0 && "You're closer than you think to owning your own business"}
-              {currentSection === 1 && "Your professional skills are your secret weapon"}
-              {currentSection === 2 && "Let's build your perfect deal box"}
-            </p>
-          </div>
+          <Button
+            onClick={handleNext}
+            disabled={!isValidSection(currentSection)}
+            className="bg-blue-600 hover:bg-blue-700"
+          >
+            {currentSection === 2 ? (
+              <>
+                <CheckCircle className="w-4 h-4 mr-2" />
+                Get My Results
+              </>
+            ) : (
+              "Next"
+            )}
+          </Button>
         </div>
       </div>
     </div>
