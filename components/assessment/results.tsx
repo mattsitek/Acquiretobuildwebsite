@@ -69,7 +69,7 @@ interface ResultsProps {
   onRestart: () => void
 }
 
-export function AssessmentResults({ results, assessmentData, onRestart }: ResultsProps) {
+export default function AssessmentResults({ results, assessmentData, onRestart }: ResultsProps) {
   const [email, setEmail] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -384,8 +384,8 @@ export function AssessmentResults({ results, assessmentData, onRestart }: Result
           <Link href="/deal-kit">
             <Button className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2">
               <ArrowRight className="w-4 h-4" />
-                Get The Deal Kit
-              </Button>
+              Get The Deal Kit
+            </Button>
           </Link>
         </div>
 

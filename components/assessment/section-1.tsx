@@ -11,7 +11,7 @@ interface Section1Props {
   onUpdate: (updates: Partial<AssessmentData>) => void
 }
 
-export function AssessmentSection1({ data, onUpdate }: Section1Props) {
+export default function AssessmentSection1({ data, onUpdate }: Section1Props) {
   return (
     <div className="space-y-8">
       {/* Question 1: Motivation */}

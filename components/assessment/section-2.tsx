@@ -13,7 +13,7 @@ interface Section2Props {
   onUpdate: (updates: Partial<AssessmentData>) => void
 }
 
-export function AssessmentSection2({ data, onUpdate }: Section2Props) {
+export default function AssessmentSection2({ data, onUpdate }: Section2Props) {
   const handleSkillsChange = (skill: string, checked: boolean) => {
     const currentSkills = data.transferableSkills || []
     if (checked) {

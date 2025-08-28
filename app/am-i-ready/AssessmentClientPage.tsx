@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { ArrowLeft } from "lucide-react"
 import { useState } from "react"
-import Section1 from "@/components/assessment/section-1"
-import Section2 from "@/components/assessment/section-2"
-import Section3 from "@/components/assessment/section-3"
-import Results from "@/components/assessment/results"
+import AssessmentSection1 from "@/components/assessment/section-1"
+import AssessmentSection2 from "@/components/assessment/section-2"
+import AssessmentSection3 from "@/components/assessment/section-3"
+import AssessmentResults from "@/components/assessment/results"
 
 export default function AssessmentClientPage() {
   const [currentSection, setCurrentSection] = useState(1)
@@ -41,7 +41,7 @@ export default function AssessmentClientPage() {
   }
 
   if (showResults) {
-    return <Results responses={responses} onRestart={handleRestart} />
+    return <AssessmentResults responses={responses} onRestart={handleRestart} />
   }
 
   return (
@@ -70,9 +70,9 @@ export default function AssessmentClientPage() {
       )}
 
       {/* Current Section */}
-      {currentSection === 1 && <Section1 onComplete={handleSectionComplete} />}
-      {currentSection === 2 && <Section2 onComplete={handleSectionComplete} />}
-      {currentSection === 3 && <Section3 onComplete={handleSectionComplete} />}
+      {currentSection === 1 && <AssessmentSection1 onComplete={handleSectionComplete} />}
+      {currentSection === 2 && <AssessmentSection2 onComplete={handleSectionComplete} />}
+      {currentSection === 3 && <AssessmentSection3 onComplete={handleSectionComplete} />}
     </div>
   )
 }

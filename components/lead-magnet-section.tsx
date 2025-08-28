@@ -9,7 +9,7 @@ import Image from "next/image"
 import { subscribeToLeadMagnet } from "@/app/actions/lead-magnet"
 
 interface LeadMagnetSectionProps {
-  leadMagnet: {
+  leadMagnet?: {
     id: string
     title: string
     description: string
@@ -30,7 +30,7 @@ interface LeadMagnetSectionProps {
   } | null
 }
 
-export function LeadMagnetSection({ leadMagnet }: LeadMagnetSectionProps) {
+export default function LeadMagnetSection({ leadMagnet }: LeadMagnetSectionProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
   const formRef = useRef<HTMLFormElement>(null)
