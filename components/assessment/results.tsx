@@ -189,9 +189,9 @@ export function AssessmentResults({ results, assessmentData, onRestart }: Result
                     <span className="text-gray-600">Geography:</span>
                     <span className="font-medium capitalize">{results.dealBox.targetBusinessProfile.geography}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Model:</span>
-                    <span className="font-medium capitalize">
+                  <div className="flex justify-between items-start">
+                    <span className="text-gray-600 flex-shrink-0">Model:</span>
+                    <span className="font-medium capitalize text-right ml-2">
                       {results.dealBox.targetBusinessProfile.businessModel}
                     </span>
                   </div>
