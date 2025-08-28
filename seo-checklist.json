@@ -1,0 +1,68 @@
+{
+  "seo_checklist": {
+    "technical_seo": {
+      "meta_tags": {
+        "title_tags": "✓ Implemented on all pages",
+        "meta_descriptions": "✓ Unique descriptions for each page",
+        "canonical_urls": "✓ Set for all pages",
+        "robots_meta": "✓ Configured appropriately"
+      },
+      "structured_data": {
+        "organization_schema": "✓ Added to layout",
+        "website_schema": "✓ Added to homepage",
+        "blog_schema": "✓ Added to blog pages",
+        "article_schema": "✓ Added to individual posts",
+        "breadcrumb_schema": "✓ Added to navigation"
+      },
+      "performance": {
+        "core_web_vitals": "⚠️ Needs testing",
+        "image_optimization": "✓ Next.js Image component used",
+        "font_optimization": "✓ Font preloading implemented",
+        "lazy_loading": "✓ Implemented for images"
+      }
+    },
+    "content_seo": {
+      "keyword_optimization": {
+        "primary_keywords": [
+          "business acquisition",
+          "buy a business",
+          "business acquisition newsletter",
+          "SBA loans",
+          "business financing"
+        ],
+        "long_tail_keywords": [
+          "how to buy a business with no money",
+          "business acquisition case studies",
+          "SBA loan application process",
+          "business valuation methods"
+        ]
+      },
+      "content_structure": {
+        "heading_hierarchy": "✓ Proper H1-H6 structure",
+        "internal_linking": "✓ Strategic internal links",
+        "content_length": "✓ Comprehensive content",
+        "readability": "✓ Clear and accessible writing"
+      }
+    },
+    "local_seo": {
+      "google_my_business": "N/A - Online business",
+      "local_citations": "N/A - Online business",
+      "location_pages": "N/A - Online business"
+    },
+    "mobile_seo": {
+      "mobile_friendly": "✓ Responsive design",
+      "page_speed_mobile": "⚠️ Needs testing",
+      "mobile_usability": "✓ Touch-friendly interface"
+    },
+    "recommendations": [
+      "Test Core Web Vitals scores",
+      "Set up Google Search Console",
+      "Create XML sitemap",
+      "Implement schema markup testing",
+      "Monitor search rankings",
+      "Set up Google Analytics 4",
+      "Create backlink strategy",
+      "Optimize for featured snippets"
+    ]
+  }
+}

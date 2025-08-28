@@ -1,0 +1,78 @@
+{
+  "models": [
+    {
+      "name": "Deal Kit Subscriber",
+      "api_key": "deal_kit_subscriber",
+      "singleton": false,
+      "sortable": false,
+      "modular_block": false,
+      "draft_mode_active": false,
+      "all_locales_required": true,
+      "collection_appearance": "table",
+      "has_singleton_item": false,
+      "fields": [
+        {
+          "label": "Email",
+          "field_type": "string",
+          "api_key": "email",
+          "localized": false,
+          "validators": {
+            "required": {},
+            "unique": {},
+            "format": {
+              "predefined_pattern": "email"
+            }
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "Subscriber email address"
+        },
+        {
+          "label": "Buyer Type",
+          "field_type": "string",
+          "api_key": "buyer_type",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "Type of business they're targeting (services, manufacturing, etc.)"
+        },
+        {
+          "label": "Submitted At",
+          "field_type": "date_time",
+          "api_key": "submitted_at",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "date_time_picker",
+            "parameters": {}
+          },
+          "hint": "When they signed up for the Deal Kit"
+        },
+        {
+          "label": "Status",
+          "field_type": "string",
+          "api_key": "status",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "active",
+          "hint": "Subscription status (active, unsubscribed, etc.)"
+        }
+      ]
+    }
+  ]
+}

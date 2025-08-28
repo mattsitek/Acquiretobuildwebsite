@@ -1,0 +1,120 @@
+{
+  "models": [
+    {
+      "name": "Subscriber",
+      "api_key": "subscriber",
+      "singleton": false,
+      "sortable": false,
+      "modular_block": false,
+      "draft_mode_active": false,
+      "all_locales_required": true,
+      "collection_appearance": "table",
+      "has_singleton_item": false,
+      "fields": [
+        {
+          "label": "Email",
+          "field_type": "string",
+          "api_key": "email",
+          "localized": false,
+          "validators": {
+            "required": {},
+            "unique": {},
+            "format": {
+              "predefined_pattern": "email"
+            }
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "Subscriber email address"
+        },
+        {
+          "label": "First Name",
+          "field_type": "string",
+          "api_key": "first_name",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "Subscriber's first name (optional)"
+        },
+        {
+          "label": "Source",
+          "field_type": "string",
+          "api_key": "source",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "website",
+          "hint": "Where the subscriber came from (website, lead_magnet, social, etc.)"
+        },
+        {
+          "label": "Subscribed At",
+          "field_type": "date_time",
+          "api_key": "subscribed_at",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "date_time_picker",
+            "parameters": {}
+          },
+          "hint": "When they subscribed"
+        },
+        {
+          "label": "Subscriber Status",
+          "field_type": "string",
+          "api_key": "subscriber_status",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "active",
+          "hint": "Subscription status (active, unsubscribed, etc.)"
+        },
+        {
+          "label": "Actively Searching",
+          "field_type": "boolean",
+          "api_key": "actively_searching",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "boolean",
+            "parameters": {}
+          },
+          "default_value": false,
+          "hint": "Whether they're actively searching for a business to buy"
+        },
+        {
+          "label": "Lead Magnet ID",
+          "field_type": "string",
+          "api_key": "lead_magnet_id",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "hint": "ID of the lead magnet they downloaded (if applicable)"
+        }
+      ]
+    }
+  ]
+}

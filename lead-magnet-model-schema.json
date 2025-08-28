@@ -1,0 +1,178 @@
+{
+  "models": [
+    {
+      "name": "Lead Magnet",
+      "api_key": "lead_magnet",
+      "singleton": false,
+      "sortable": false,
+      "modular_block": false,
+      "draft_mode_active": false,
+      "all_locales_required": true,
+      "collection_appearance": "table",
+      "has_singleton_item": false,
+      "fields": [
+        {
+          "label": "Title",
+          "field_type": "string",
+          "api_key": "title",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "10 Scripts to Start the Conversation with a Business Owner",
+          "hint": "Main headline for the lead magnet (e.g., '10 Scripts to Start the Conversation')"
+        },
+        {
+          "label": "Description",
+          "field_type": "text",
+          "api_key": "description",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "textarea",
+            "parameters": {
+              "rows": 4
+            }
+          },
+          "default_value": "Join 1,000+ mid-career professionals using these cold email and seller outreach scripts. Delivered instantly + get weekly insights every Friday.",
+          "hint": "Subheadline or body text describing the lead magnet value"
+        },
+        {
+          "label": "PDF File",
+          "field_type": "file",
+          "api_key": "pdf_file",
+          "localized": false,
+          "validators": {
+            "required": {}
+          },
+          "appearance": {
+            "editor": "file",
+            "parameters": {}
+          },
+          "hint": "The actual PDF file that will be downloaded"
+        },
+        {
+          "label": "PDF Description",
+          "field_type": "text",
+          "api_key": "pdf_description",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "textarea",
+            "parameters": {
+              "rows": 2
+            }
+          },
+          "default_value": "Proven scripts that get responses from business owners",
+          "hint": "Short description of the PDF content (used for SEO and display)"
+        },
+        {
+          "label": "Keywords",
+          "field_type": "string",
+          "api_key": "keywords",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "business acquisition, cold email scripts, seller outreach, business buyer",
+          "hint": "Comma-separated keywords for SEO"
+        },
+        {
+          "label": "Preview Image",
+          "field_type": "file",
+          "api_key": "preview_image",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "file",
+            "parameters": {
+              "gallery_view": true
+            }
+          },
+          "hint": "Visual mockup of the PDF (recommended: 300x400px)"
+        },
+        {
+          "label": "Preview Image Alt Text",
+          "field_type": "string",
+          "api_key": "preview_image_alt_text",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "Business Scripts PDF Preview",
+          "hint": "Alt text for the preview image (accessibility)"
+        },
+        {
+          "label": "File Size",
+          "field_type": "string",
+          "api_key": "file_size",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "single_line",
+            "parameters": {
+              "heading": false
+            }
+          },
+          "default_value": "2.1 MB",
+          "hint": "Display file size (e.g., '2.1 MB')"
+        },
+        {
+          "label": "Page Count",
+          "field_type": "integer",
+          "api_key": "page_count",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "integer",
+            "parameters": {}
+          },
+          "default_value": 15,
+          "hint": "Number of pages in the PDF"
+        },
+        {
+          "label": "Is Active",
+          "field_type": "boolean",
+          "api_key": "is_active",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "boolean",
+            "parameters": {}
+          },
+          "default_value": true,
+          "hint": "Whether this lead magnet is currently active"
+        },
+        {
+          "label": "Download Count",
+          "field_type": "integer",
+          "api_key": "download_count",
+          "localized": false,
+          "validators": {},
+          "appearance": {
+            "editor": "integer",
+            "parameters": {}
+          },
+          "default_value": 0,
+          "hint": "Track total downloads (for analytics)"
+        }
+      ]
+    }
+  ]
+}
