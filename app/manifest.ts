@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next"
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Acquire & Build - Business Acquisition Newsletter",
-    short_name: "A&B",
+    short_name: "Acquire & Build",
     description:
       "The newsletter and community for business acquisition. Real stories, tactical insights, and actionable advice for buying and building businesses.",
     start_url: "/",

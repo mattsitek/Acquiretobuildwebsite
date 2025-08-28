@@ -12,7 +12,7 @@ interface Section3Props {
   onUpdate: (updates: Partial<AssessmentData>) => void
 }
 
-export default function AssessmentSection3({ data, onUpdate }: Section3Props) {
+export function AssessmentSection3({ data, onUpdate }: Section3Props) {
   return (
     <div className="space-y-8">
       {/* Question 1: Target Income */}
