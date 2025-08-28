@@ -216,8 +216,9 @@ export default function DealScorecard({ showNavigation = true }: DealScorecardPr
   return (
     <div className="min-h-screen bg-background">
       {showNavigation && <Navigation />}
+    
     <div className="py-8 px-4 sm:px-6 lg:px-8">
-    <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto">
       
         {/* Header */}
         <div className="text-center mb-12">
