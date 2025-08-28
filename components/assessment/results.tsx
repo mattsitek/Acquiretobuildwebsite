@@ -9,6 +9,8 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import Link from "next/link"
+
 import {
   Download,
   Mail,
@@ -322,7 +324,7 @@ export function AssessmentResults({ results, assessmentData, onRestart }: Result
           <CardHeader className="text-center">
             <CardTitle className="text-2xl">Get Your Detailed Business Buyer Roadmap</CardTitle>
             <p className="text-gray-600">
-              Download a personalized report with detailed analysis, deal examples, and action steps
+              Get a personalized report with detailed analysis, deal examples, and action steps
             </p>
           </CardHeader>
           <CardContent>
@@ -379,10 +381,12 @@ export function AssessmentResults({ results, assessmentData, onRestart }: Result
             Retake Assessment
           </Button>
 
-          <Button className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2">
-            <ArrowRight className="w-4 h-4" />
-            Explore Deal Opportunities
-          </Button>
+          <Link href="/deal-kit">
+            <Button className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2">
+              <ArrowRight className="w-4 h-4" />
+                Get The Deal Kit
+              </Button>
+          </Link>
         </div>
 
         {/* Footer */}
