@@ -111,7 +111,7 @@ export function AssessmentResults({ results, assessmentData, onRestart }: Result
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Your KnowledgeBuyer Assessment Results</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Your Personal Buyer Assessment Results</h1>
           <p className="text-xl text-gray-600 mb-6">
             Based on your responses, here's your personalized business acquisition roadmap
           </p>
@@ -322,7 +322,7 @@ export function AssessmentResults({ results, assessmentData, onRestart }: Result
           <CardHeader className="text-center">
             <CardTitle className="text-2xl">Get Your Detailed Business Buyer Roadmap</CardTitle>
             <p className="text-gray-600">
-              Download a personalized PDF report with detailed analysis, deal examples, and action steps
+              Download a personalized report with detailed analysis, deal examples, and action steps
             </p>
           </CardHeader>
           <CardContent>
