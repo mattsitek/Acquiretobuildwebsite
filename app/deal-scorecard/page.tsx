@@ -113,7 +113,16 @@ export default function DealScorecard({ showNavigation = true }: DealScorecardPr
       const timeoutId = setTimeout(updateFinancingData, 1000)
       return () => clearTimeout(timeoutId)
     }
-  }, [formData])
+  }, [
+    formData.downPayment,
+    formData.conventionalLoan,
+    formData.sba7a,
+    formData.sba504,
+    formData.sellerNote,
+    datocmsId,
+    emailCaptured,
+    scores,
+  ])
 
   const updateFormData = (updates: Partial<FormData>) => {
     setFormData((prev) => ({ ...prev, ...updates }))
@@ -206,14 +215,13 @@ export default function DealScorecard({ showNavigation = true }: DealScorecardPr
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Conditionally show navigation */}
       {showNavigation && <Navigation />}
 
       <div className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl sm:text-5xl font-black text-black mb-4">Deal Scorecard</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold text-black mb-4">Deal Scorecard</h1>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
               Get an instant business valuation and risk assessment to make smarter acquisition decisions
             </p>
