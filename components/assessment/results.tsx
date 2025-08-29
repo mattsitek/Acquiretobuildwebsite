@@ -1,6 +1,8 @@
 "use client"
 
-import type React from "react"
+import React from "react"
+
+import type { ReactElement } from "react"
 
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -69,16 +71,54 @@ interface ResultsProps {
   onRestart: () => void
 }
 
-export function AssessmentResults({ results, assessmentData, onRestart }: ResultsProps) {
+export function AssessmentResults({ results, assessmentData, onRestart }: ResultsProps): ReactElement {
   const [email, setEmail] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [hasBeenSaved, setHasBeenSaved] = useState(false)
+
+  // Save assessment data to DatoCMS (without email initially)
+  React.useEffect(() => {
+    if (!hasBeenSaved) {
+      saveAssessmentData()
+      setHasBeenSaved(true)
+    }
+  }, [hasBeenSaved])
+
+  const saveAssessmentData = async (emailAddress?: string) => {
+    try {
+      const response = await fetch("/api/assessment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          assessmentData,
+          results,
+          email: emailAddress || null,
+        }),
+      })
+
+      const result = await response.json()
+
+      if (!result.success) {
+        console.error("Failed to save assessment:", result)
+      } else {
+        console.log("Assessment saved successfully:", result.datocms_id)
+      }
+    } catch (error) {
+      console.error("Error saving assessment:", error)
+    }
+  }
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate API call
+    // Save assessment data with email
+    await saveAssessmentData(email)
+
+    // Simulate report generation
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
     setIsSubmitted(true)
@@ -384,8 +424,8 @@ export function AssessmentResults({ results, assessmentData, onRestart }: Result
           <Link href="/deal-kit">
             <Button className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2">
               <ArrowRight className="w-4 h-4" />
-                Get The Deal Kit
-              </Button>
+              Get The Deal Kit
+            </Button>
           </Link>
         </div>
 
