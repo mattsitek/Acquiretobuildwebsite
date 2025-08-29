@@ -152,9 +152,6 @@ export function NewsletterForm({
           </div>
         )}
       </form>
-
-      <p id="email-description" className={disclaimerClasses}>
-        Join 1,000+ professionals getting weekly insights. No spam, unsubscribe anytime.
       </p>
     </div>
   )
