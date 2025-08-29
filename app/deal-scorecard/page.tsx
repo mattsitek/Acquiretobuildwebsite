@@ -214,11 +214,9 @@ export default function DealScorecard({ showNavigation = true }: DealScorecardPr
   const progressPercentage = ((currentStep - 1) / 2) * 100
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8">
       {showNavigation && <Navigation />}
-    
-    <div className="py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto">
       
         {/* Header */}
         <div className="text-center mb-12">
