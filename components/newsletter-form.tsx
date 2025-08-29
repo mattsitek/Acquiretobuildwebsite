@@ -151,8 +151,6 @@ export function NewsletterForm({
             <div>{message.text}</div>
           </div>
         )}
-      </form>
-      </p>
     </div>
   )
 }
