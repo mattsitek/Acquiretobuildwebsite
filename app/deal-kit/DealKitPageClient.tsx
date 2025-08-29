@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import Navigation from "@/components/navigation"
 import {
   Download,
   Mail,
@@ -262,30 +263,8 @@ export default function DealKitPageClient({
         }}
       />
 
-      {/* Navigation */}
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-40">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="text-2xl font-black text-black">
-              Acquire & Build
-            </Link>
-            <div className="flex space-x-8">
-              <Link href="/blog" className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors">
-                Blog
-              </Link>
-              <Link href="/deal-kit" className="text-[#1A73E8] font-medium">
-                Deal Kit
-              </Link>
-              <Link href="/newsletter" className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors">
-                Newsletter
-              </Link>
-              <Link href="/contact" className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors">
-                Contact
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+     {/* Navigation - NEW: Replace the old inline nav */}
+      <Navigation />
 
       {/* Hero Section */}
       <section className="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white">

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import Link from "next/link"
+import Navigation from "@/components/navigation"
 
 export default function NewsletterPage() {
   const iframeRef = useRef<HTMLIFrameElement>(null)
@@ -77,35 +78,9 @@ export default function NewsletterPage() {
         }}
       />
 
-      {/* Navigation */}
-      <nav
-        className="bg-white border-b border-gray-200 sticky top-0 z-50"
-        role="navigation"
-        aria-label="Main navigation"
-      >
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="text-2xl font-black text-black" aria-label="Acquire & Build Home">
-              Acquire & Build
-            </Link>
-            <div className="flex space-x-8">
-              <Link href="/blog" className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors">
-                Blog
-              </Link>
-              <Link href="/deal-kit" className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors">
-                Deal Kit
-              </Link>
-              <Link href="/newsletter" className="text-[#1A73E8] font-medium" aria-current="page">
-                Newsletter
-              </Link>
-              <Link href="/contact" className="text-gray-700 hover:text-[#1A73E8] font-medium transition-colors">
-                Contact
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
-
+      {/* Navigation - NEW: Replace the old inline nav */}
+      <Navigation />
+      
       {/* Newsletter Embed */}
       <div className="w-full" style={{ height: "calc(100vh - 64px)" }}>
         <iframe

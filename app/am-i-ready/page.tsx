@@ -10,6 +10,7 @@ import { AssessmentSection2 } from "@/components/assessment/section-2"
 import { AssessmentSection3 } from "@/components/assessment/section-3"
 import { AssessmentResults } from "@/components/assessment/results"
 import { calculateReadinessScore, calculateDealBox, type AssessmentData } from "@/lib/assessment-logic"
+import Navigation from "@/components/navigation"
 
 export default function AmIReadyPage() {
   const [currentSection, setCurrentSection] = useState(0)
@@ -202,6 +203,10 @@ export default function AmIReadyPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+
+      {/* Navigation - NEW: Replace the old inline nav */}
+      <Navigation />
+      
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
