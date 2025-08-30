@@ -85,8 +85,6 @@ export async function POST(request: NextRequest) {
 
     console.log("✅ Successfully updated DatoCMS record:", datocmsId)
 
-    }
-
     return NextResponse.json({
       success: true,
       datocms_id: datocmsId,
