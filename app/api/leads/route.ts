@@ -10,24 +10,6 @@ export async function POST(request: NextRequest) {
     if (!apiToken) {
       console.error("❌ DATOCMS_API_TOKEN environment variable is not set")
 
-      // Still send to Zapier if configured, but log the DatoCMS issue
-      if (process.env.NEXT_PUBLIC_ZAPIER_WEBHOOK_URL) {
-        try {
-          await fetch(process.env.NEXT_PUBLIC_ZAPIER_WEBHOOK_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              ...leadData,
-              timestamp: new Date().toISOString(),
-              note: "DatoCMS token not configured - data sent to Zapier only",
-            }),
-          })
-          console.log("✅ Sent to Zapier (DatoCMS unavailable)")
-        } catch (zapierError) {
-          console.error("⚠️ Both DatoCMS and Zapier failed:", zapierError)
-        }
-      }
-
       return NextResponse.json({
         success: true,
         warning: "DatoCMS not configured - please set DATOCMS_API_TOKEN environment variable",
@@ -166,24 +148,6 @@ export async function POST(request: NextRequest) {
       // 🔍 Log the original lead data for comparison
       console.error("   Original Lead Data:", JSON.stringify(leadData, null, 2))
 
-      // Still try Zapier as fallback
-      if (process.env.NEXT_PUBLIC_ZAPIER_WEBHOOK_URL) {
-        try {
-          await fetch(process.env.NEXT_PUBLIC_ZAPIER_WEBHOOK_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              ...leadData,
-              timestamp: new Date().toISOString(),
-              note: "DatoCMS failed - sent to Zapier as backup",
-              datocms_error: result,
-            }),
-          })
-          console.log("✅ Sent to Zapier as fallback")
-        } catch (zapierError) {
-          console.error("⚠️ Both DatoCMS and Zapier failed:", zapierError)
-        }
-      }
 
       return NextResponse.json(
         {
@@ -196,25 +160,6 @@ export async function POST(request: NextRequest) {
     }
 
     console.log("✅ Successfully saved to DatoCMS:", result.data?.id)
-
-    // Send to Zapier webhook if configured
-    if (process.env.NEXT_PUBLIC_ZAPIER_WEBHOOK_URL) {
-      try {
-        await fetch(process.env.NEXT_PUBLIC_ZAPIER_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ...leadData,
-            datocms_id: result.data?.id,
-            timestamp: new Date().toISOString(),
-          }),
-        })
-        console.log("✅ Successfully sent to Zapier")
-      } catch (zapierError) {
-        console.error("⚠️ Zapier webhook failed:", zapierError)
-        // Don't fail the entire request if Zapier fails
-      }
-    }
 
     return NextResponse.json({
       success: true,
