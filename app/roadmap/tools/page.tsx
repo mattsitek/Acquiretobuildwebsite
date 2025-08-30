@@ -6,13 +6,13 @@ import { Download, ExternalLink } from "lucide-react"
 
 type Tool = {
   id: string
-  step: string // e.g., "Step 5"
+  step: string
   title: string
   kind: "Tool" | "Template" | "Checklist" | "Guide" | "Story"
   blurb: string
-  href: string // primary action (download or open)
+  href: string
   actionLabel?: string
-  secondaryHref?: string // e.g., explainer page
+  secondaryHref?: string
   secondaryLabel?: string
 }
 
@@ -32,7 +32,7 @@ const tools: Tool[] = [
     title: "Deal Box Builder",
     kind: "Tool",
     blurb: "Define your target industry, size, geography, and cash-flow needs—the filter for every future deal.",
-    href: "/am-i-ready",
+    href: "/deal-scorecard",
     actionLabel: "Build your deal box",
   },
   {
@@ -168,7 +168,7 @@ export default function RoadmapToolsPage() {
                   <Badge variant="secondary">{t.step}</Badge>
                   <Badge className="bg-[#1A73E8] text-white">{t.kind}</Badge>
                 </div>
-                <CardTitle className="text-xl leading-tight">{t.title}</CardTitle>
+                <CardTitle className="text-xl leading-tight text-black">{t.title}</CardTitle>
               </CardHeader>
               <CardContent className="flex flex-1 flex-col justify-between gap-4">
                 <p className="text-sm text-gray-700">{t.blurb}</p>
@@ -191,13 +191,6 @@ export default function RoadmapToolsPage() {
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        {/* Back to Roadmap */}
-        <div className="mt-14 text-center">
-          <Button asChild variant="outline" size="lg">
-            <a href="/roadmap">← Back to Roadmap</a>
-          </Button>
         </div>
       </section>
     </div>
