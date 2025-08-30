@@ -196,13 +196,6 @@ export default function DealScorecard({ showNavigation = true }: DealScorecardPr
         setDatocmsId(result.datocms_id)
       }
 
-      // Zapier webhook (EXISTING - NO CHANGES)
-      await fetch(process.env.NEXT_PUBLIC_ZAPIER_WEBHOOK_URL || "", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(leadData),
-      })
-
       setEmailCaptured(true)
       setShowEmailGate(false)
       setCurrentStep(3)
