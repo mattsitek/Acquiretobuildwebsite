@@ -72,10 +72,6 @@ export function NewsletterForm({
       ? "bg-green-50 text-green-800 border border-green-200"
       : "bg-red-50 text-red-800 border border-red-200"
 
-  const disclaimerClasses = isFooter
-    ? "text-xs text-gray-400 mt-3 text-center"
-    : "text-xs text-gray-500 mt-3 text-center"
-
   return (
     <div className="w-full max-w-md mx-auto">
       {/* Newsletter Subscription Structured Data */}
@@ -151,11 +147,8 @@ export function NewsletterForm({
             <div>{message.text}</div>
           </div>
         )}
-      </form>
+     </form>
 
-      <p id="email-description" className={disclaimerClasses}>
-        Join 1,000+ professionals getting weekly insights. No spam, unsubscribe anytime.
-      </p>
-    </div>
+      </div>
   )
 }
