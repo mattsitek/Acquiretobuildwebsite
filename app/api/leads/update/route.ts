@@ -85,23 +85,6 @@ export async function POST(request: NextRequest) {
 
     console.log("✅ Successfully updated DatoCMS record:", datocmsId)
 
-    // Send updated data to Zapier if configured
-    if (process.env.NEXT_PUBLIC_ZAPIER_WEBHOOK_URL) {
-      try {
-        await fetch(process.env.NEXT_PUBLIC_ZAPIER_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ...leadData,
-            datocms_id: datocmsId,
-            timestamp: new Date().toISOString(),
-            update_type: "financing_complete",
-          }),
-        })
-        console.log("✅ Successfully sent update to Zapier")
-      } catch (zapierError) {
-        console.error("⚠️ Zapier update webhook failed:", zapierError)
-      }
     }
 
     return NextResponse.json({
