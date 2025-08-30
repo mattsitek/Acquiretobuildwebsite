@@ -262,15 +262,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* DEAL SCORECARD SECTION - Now Embedded Component */}
-  <section className="py-16 lg:py-24 bg-white" aria-labelledby="scorecard-heading">
-    <div className="container mx-auto px-4">
-      <div className="max-w-6xl mx-auto">
-        <DealScorecard showNavigation={false} />
-      </div>
-    </div>
-  </section>
-
       {/* Value Proposition Section */}
       <section className="py-16 lg:py-24 bg-[#F9F9F9]" aria-labelledby="value-prop-heading">
         <div className="container mx-auto px-4">
