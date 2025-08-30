@@ -238,7 +238,7 @@ export default async function HomePage() {
               <NewsletterForm variant="hero" buttonText={homepageData?.heroButtonText || "GET FREE WEEKLY INSIGHTS"} />
 
               <p className="text-sm text-gray-600">
-                Join 1,000+ professionals, receive scripts, tools, lessons & real-world tactics — straight to your inbox.
+                Join 1,000+ professionals getting weekly scripts, tools, lessons & real-world tactics — straight to your inbox.
               </p>
             </div>
 
