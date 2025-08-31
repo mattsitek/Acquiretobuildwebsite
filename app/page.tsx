@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { NewsletterForm } from "@/components/newsletter-form"
-import { Search, AlertTriangle, Users, Clock, Brain, MessageCircle, CheckCircle, Briefcase } from "lucide-react"
+import { Search, AlertTriangle, Users, Clock, Brain, MessageCircle, CheckCircle, Briefcase, Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { getHomepageContent } from "@/lib/datocms"
@@ -68,6 +68,31 @@ export default async function HomePage() {
   if (process.env.NODE_ENV === "development") {
     console.log("Homepage data from DatoCMS:", homepageData)
   }
+
+  // Testimonials data for social proof section
+  const testimonials = [
+    {
+      id: "1",
+      testimonialText: "The Deal Kit saved me months of research. Everything I needed in one place.",
+      authorName: "Sarah J.",
+      authorTitle: "Business Buyer",
+      starRating: 5,
+    },
+    {
+      id: "2",
+      testimonialText: "Professional templates that actually work. Closed my first deal using these tools.",
+      authorName: "Mike C.",
+      authorTitle: "ETA MBA",
+      starRating: 5,
+    },
+    {
+      id: "3",
+      testimonialText: "Incredible value. These templates would cost thousands from a lawyer.",
+      authorName: "Jessica R.",
+      authorTitle: "Solo Searcher",
+      starRating: 5,
+    },
+  ]
 
   return (
     <main role="main">
@@ -336,8 +361,48 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Social Proof Section */}
+      <section className="py-16 lg:py-24 bg-[#F9F9F9]" aria-labelledby="social-proof-heading">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 id="social-proof-heading" className="text-3xl lg:text-4xl font-black text-black mb-6">
+              Trusted by 2,500+ Business Buyers
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {testimonials.map((testimonial) => (
+              <Card
+                key={testimonial.id}
+                className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200"
+              >
+                <CardContent className="p-6 space-y-4">
+                  {/* Star Rating */}
+                  <div className="flex justify-center space-x-1" aria-label={`${testimonial.starRating} star rating`}>
+                    {[...Array(testimonial.starRating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />
+                    ))}
+                  </div>
+
+                  {/* Testimonial Text */}
+                  <blockquote className="text-gray-700 text-center italic leading-relaxed">
+                    "{testimonial.testimonialText}"
+                  </blockquote>
+
+                  {/* Author Info */}
+                  <div className="text-center">
+                    <cite className="text-black font-semibold not-italic">{testimonial.authorName}</cite>
+                    <p className="text-gray-600 text-sm">{testimonial.authorTitle}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Who It's For Section - Updated to use DatoCMS */}
-      <section className="py-16 lg:py-24 bg-[#F9F9F9]" aria-labelledby="right-place-heading">
+      <section className="py-16 lg:py-24 bg-white" aria-labelledby="right-place-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 id="right-place-heading" className="text-3xl lg:text-5xl font-black text-black text-center mb-16">
