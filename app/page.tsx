@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { getHomepageContent } from "@/lib/datocms"
 import type { Metadata } from "next"
+import AmIReady from './am-i-ready/page'
 
 export const metadata: Metadata = {
   title: "Acquire & Build - Buy a Business, Build Your Freedom",
@@ -465,7 +466,14 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
+     {/* Am I Ready SECTION - Now Embedded Component */}
+      <section className="py-16 lg:py-24 bg-white" aria-labelledby="am-i-ready-heading">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <AmIReady showNavigation={false} />
+          </div>
+        </div>
+      </section>
       {/* Main CTA Section - Matches Original Black Background Design */}
       <section className="py-16 lg:py-24 bg-black" aria-labelledby="cta-heading">
         <div className="container mx-auto px-4 text-center">
