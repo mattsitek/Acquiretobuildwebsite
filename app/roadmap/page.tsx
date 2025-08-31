@@ -189,36 +189,11 @@ export default function RoadmapPage() {
         {/* Traditional View */}
         {viewMode === "traditional" && (
           <>
-            {/* Curvy background path */}
             <div className="pointer-events-none absolute inset-0 -z-10">
-              <svg
-                className="mx-auto h-full w-full opacity-20"
-                viewBox="0 0 1200 2400"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                <defs>
-                  <linearGradient id="road" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="currentColor" />
-                    <stop offset="100%" stopColor="currentColor" />
-                  </linearGradient>
-                </defs>
-                <motion.path
-                  d="M200 50 C 600 200, 600 400, 300 550 S 0 900, 400 1050  800 1250, 500 1400  100 1650, 600 1800  1000 2000, 700 2300"
-                  fill="none"
-                  stroke="url(#road)"
-                  strokeWidth="6"
-                  strokeLinecap="round"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 2.4, ease: "easeInOut" }}
-                />
-              </svg>
+              <div className="mx-auto h-full w-2 bg-gradient-to-b from-primary/20 via-primary/10 to-primary/5 rounded-full" />
             </div>
 
-            {/* Stops */}
-            <ol className="mt-12 space-y-10">
+            <ol className="mt-12 space-y-8 relative">
               {stops.map((s, i) => (
                 <li key={s.id} className="relative">
                   <motion.div
@@ -226,36 +201,45 @@ export default function RoadmapPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.25 }}
                     transition={{ duration: 0.35, delay: i * 0.05 }}
-                    className={[
-                      "grid items-center gap-6 rounded-2xl border bg-card p-5 shadow-sm md:grid-cols-12",
-                      i % 2 === 0 ? "md:[&>*:first-child]:order-2" : "",
-                    ].join(" ")}
+                    className="max-w-4xl mx-auto"
                   >
-                    {/* Icon & Step */}
-                    <div className="md:col-span-2">
-                      <div className="flex items-center gap-2 text-sm font-semibold text-primary">
-                        <span>{s.step}</span>
+                    <div className="relative flex items-start gap-6 rounded-2xl border bg-card/50 backdrop-blur-sm p-6 shadow-sm hover:shadow-md transition-all duration-300">
+                      {/* Step number indicator */}
+                      <div className="flex-shrink-0">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold text-sm">
+                          {i}
+                        </div>
                       </div>
-                      <div className="mt-2 inline-flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
-                        {s.icon}
+
+                      {/* Content section */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary">
+                            {s.icon}
+                          </div>
+                          <span className="text-sm font-semibold text-primary">{s.step}</span>
+                        </div>
+
+                        <h3 className="text-xl font-bold leading-tight text-foreground mb-2">{s.title}</h3>
+                        <p className="text-muted-foreground leading-relaxed">{s.blurb}</p>
                       </div>
-                    </div>
 
-                    {/* Content */}
-                    <div className="md:col-span-8">
-                      <h3 className="text-xl font-bold leading-tight text-foreground">{s.title}</h3>
-                      <p className="mt-2 text-muted-foreground">{s.blurb}</p>
-                    </div>
+                      {/* Action button */}
+                      <div className="flex-shrink-0">
+                        {s.link && (
+                          <Button
+                            asChild
+                            variant="outline"
+                            size="sm"
+                            className="hover:bg-primary hover:text-primary-foreground transition-colors bg-transparent"
+                          >
+                            <a href={s.link.href}>{s.link.label || "Learn more"}</a>
+                          </Button>
+                        )}
+                      </div>
 
-                    {/* CTA */}
-                    <div className="md:col-span-2 md:justify-self-end">
-                      {s.link && (
-                        <Button
-                          asChild
-                          className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground"
-                        >
-                          <a href={s.link.href}>{s.link.label || "Learn more"}</a>
-                        </Button>
+                      {i < stops.length - 1 && (
+                        <div className="absolute left-6 top-16 w-0.5 h-8 bg-gradient-to-b from-primary/30 to-transparent" />
                       )}
                     </div>
                   </motion.div>
