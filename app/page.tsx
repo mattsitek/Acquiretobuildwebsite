@@ -6,9 +6,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { getHomepageContent } from "@/lib/datocms"
 import type { Metadata } from "next"
-import DealScorecard from './deal-scorecard/page'
-import Navigation from "@/components/navigation"
-
 
 export const metadata: Metadata = {
   title: "Acquire & Build - Buy a Business, Build Your Freedom",
@@ -165,46 +162,6 @@ export default async function HomePage() {
         }}
       />
 
-      {/* Navigation - NEW: Replace the old inline nav */}
-        <Navigation />
-
-      {/* Debug Info in Development */}
-      {process.env.NODE_ENV === "development" && (
-        <div className="bg-blue-50 p-4">
-          <div className="container mx-auto px-4">
-            <div className="text-sm text-blue-800">
-              <p>DatoCMS Homepage Status: {homepageData ? "✅ Connected" : "❌ Using Fallback Content"}</p>
-              <p>API Token Status: {process.env.DATOCMS_API_TOKEN ? "✅ Configured" : "❌ Missing"}</p>
-              {homepageData && <p>Hero Image: {homepageData.heroImage?.url ? "✅ Available" : "❌ Missing"}</p>}
-              {homepageData && (
-                <p>Right Place Fields: {homepageData.rightPlaceTitle ? "✅ Available" : "❌ Not Added Yet"}</p>
-              )}
-              <Link href="/debug-homepage" className="underline text-blue-600">
-                → View Homepage Debug Page
-              </Link>
-              <Link href="/datocms-setup" className="underline text-blue-600 ml-4">
-                → DatoCMS Setup Guide
-              </Link>
-              <Link href="/debug-newsletter" className="underline text-blue-600 ml-4">
-                → Newsletter Debug Page
-              </Link>
-              {!process.env.DATOCMS_API_TOKEN && (
-                <div className="mt-2 p-2 bg-red-100 rounded text-red-800">
-                  <p className="font-semibold">⚠️ DatoCMS API Token Missing</p>
-                  <p className="text-xs">Add DATOCMS_API_TOKEN to your environment variables</p>
-                </div>
-              )}
-              {!homepageData?.rightPlaceTitle && process.env.DATOCMS_API_TOKEN && (
-                <div className="mt-2 p-2 bg-yellow-100 rounded text-yellow-800">
-                  <p className="font-semibold">Next Step: Add Right Place fields to DatoCMS</p>
-                  <p className="text-xs">The section will use fallback content until you add the fields</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Hero Section - Matches Original Design */}
       <section className="relative overflow-hidden bg-white" aria-labelledby="hero-heading">
         <div className="container mx-auto px-4 py-16 lg:py-24">
@@ -238,7 +195,8 @@ export default async function HomePage() {
               <NewsletterForm variant="hero" buttonText={homepageData?.heroButtonText || "GET FREE WEEKLY INSIGHTS"} />
 
               <p className="text-sm text-gray-600">
-                Join 1,000+ professionals getting weekly scripts, tools, lessons & real-world tactics — straight to your inbox.
+                Join 1,000+ professionals getting weekly scripts, tools, lessons & real-world tactics — straight to your
+                inbox.
               </p>
             </div>
 
@@ -339,10 +297,7 @@ export default async function HomePage() {
                   >
                     <Brain className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-black">Tactical Insights</h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    Deal breakdowns, financing hacks, and playbooks from real acquisitions
-                  </p>
+                  <h3 className="text-2xl font-bold text-black">Proven business acquisition frameworks</h3>
                 </CardContent>
               </Card>
             </Link>
@@ -357,10 +312,7 @@ export default async function HomePage() {
                   >
                     <Briefcase className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-black">Deal Kit</h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    Professional templates, scripts, and tools to find, evaluate, and close your first acquisition
-                  </p>
+                  <h3 className="text-2xl font-bold text-black">Live deal breakdowns</h3>
                 </CardContent>
               </Card>
             </Link>
@@ -374,10 +326,7 @@ export default async function HomePage() {
                 >
                   <MessageCircle className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-black">Community Support</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  Feedback, live Q&As, and behind-the-scenes stories from other buyers
-                </p>
+                <h3 className="text-2xl font-bold text-black">Tools to evaluate opportunities faster</h3>
               </CardContent>
             </Card>
           </div>
@@ -448,7 +397,7 @@ export default async function HomePage() {
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 id="cta-heading" className="text-3xl lg:text-5xl font-black text-white">
-              READY TO BUY YOUR FREEDOM?
+              Stop Climbing Start Owning Today
             </h2>
 
             <p className="text-xl lg:text-2xl text-gray-300">
