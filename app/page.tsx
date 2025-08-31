@@ -256,8 +256,8 @@ export default async function HomePage() {
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8 mb-12">
-            {/* Tactical Insights - Links to Newsletter */}
-            <Link href="/newsletter" className="group" aria-label="A Proven Roadmap">
+            {/* A Proven Roadmap */}
+            <Link href="/roadmap" className="group" aria-label="A Proven Roadmap">
               <Card className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200 h-full cursor-pointer">
                 <CardContent className="p-8 text-center space-y-4">
                   <div
