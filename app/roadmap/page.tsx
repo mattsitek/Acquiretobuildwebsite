@@ -1,9 +1,11 @@
 "use client"
 
 import type React from "react"
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Navigation from "@/components/navigation"
+import { SmartJourneyNavigator, type JourneyStep } from "@/components/smart-journey-navigator"
 import {
   Target,
   Search,
@@ -105,97 +107,170 @@ const stops: RoadmapStop[] = [
   },
 ]
 
+const convertToJourneySteps = (stops: RoadmapStop[]): JourneyStep[] => {
+  return stops.map((stop, index) => ({
+    id: stop.id,
+    step: stop.step,
+    title: stop.title,
+    description: stop.blurb,
+    icon: stop.icon,
+    href: stop.link?.href,
+    estimatedTime: index === 0 ? "10 min" : index < 3 ? "2-3 hours" : "1-2 weeks",
+    // Smart status logic - first step is current, rest are locked initially
+    status: index === 0 ? "current" : ("locked" as const),
+  }))
+}
+
 export default function RoadmapPage() {
+  const [journeySteps, setJourneySteps] = useState<JourneyStep[]>(convertToJourneySteps(stops))
+  const [currentStepId, setCurrentStepId] = useState("s0")
+  const [viewMode, setViewMode] = useState<"navigator" | "traditional">("navigator")
+
+  const handleStepChange = (stepId: string) => {
+    setCurrentStepId(stepId)
+    // Update step statuses based on user interaction
+    setJourneySteps((prev) =>
+      prev.map((step) => {
+        const stepIndex = prev.findIndex((s) => s.id === stepId)
+        const currentIndex = prev.findIndex((s) => s.id === step.id)
+
+        if (currentIndex < stepIndex) {
+          return { ...step, status: "complete" as const }
+        } else if (currentIndex === stepIndex) {
+          return { ...step, status: "current" as const }
+        } else {
+          return { ...step, status: "locked" as const }
+        }
+      }),
+    )
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
 
       <section className="relative mx-auto max-w-6xl px-4 py-16">
         {/* Header */}
-        <div className="mx-auto max-w-2xl text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-black mb-4">Your Roadmap to Buying a Business</h1>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+        <div className="mx-auto max-w-2xl text-center mb-12">
+          <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">Your Roadmap to Buying a Business</h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Simple steps. Real tools. The path to freedom.
           </p>
+
+          <div className="flex justify-center gap-2 mt-6">
+            <Button
+              variant={viewMode === "navigator" ? "default" : "outline"}
+              onClick={() => setViewMode("navigator")}
+              size="sm"
+            >
+              Interactive Navigator
+            </Button>
+            <Button
+              variant={viewMode === "traditional" ? "default" : "outline"}
+              onClick={() => setViewMode("traditional")}
+              size="sm"
+            >
+              Traditional View
+            </Button>
+          </div>
         </div>
 
-        {/* Curvy background path */}
-        <div className="pointer-events-none absolute inset-0 -z-10">
-          <svg
-            className="mx-auto h-full w-full opacity-20"
-            viewBox="0 0 1200 2400"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <defs>
-              <linearGradient id="road" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="currentColor" />
-                <stop offset="100%" stopColor="currentColor" />
-              </linearGradient>
-            </defs>
-            <motion.path
-              d="M200 50 C 600 200, 600 400, 300 550 S 0 900, 400 1050  800 1250, 500 1400  100 1650, 600 1800  1000 2000, 700 2300"
-              fill="none"
-              stroke="url(#road)"
-              strokeWidth="6"
-              strokeLinecap="round"
-              initial={{ pathLength: 0 }}
-              whileInView={{ pathLength: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 2.4, ease: "easeInOut" }}
+        {viewMode === "navigator" && (
+          <div className="mb-16">
+            <SmartJourneyNavigator
+              steps={journeySteps}
+              currentStepId={currentStepId}
+              onStepChange={handleStepChange}
+              className="max-w-4xl mx-auto"
             />
-          </svg>
-        </div>
+          </div>
+        )}
 
-        {/* Stops */}
-        <ol className="mt-12 space-y-10">
-          {stops.map((s, i) => (
-            <li key={s.id} className="relative">
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.35, delay: i * 0.05 }}
-                className={[
-                  "grid items-center gap-6 rounded-2xl border bg-card p-5 shadow-sm md:grid-cols-12",
-                  i % 2 === 0 ? "md:[&>*:first-child]:order-2" : "",
-                ].join(" ")}
+        {/* Traditional View */}
+        {viewMode === "traditional" && (
+          <>
+            {/* Curvy background path */}
+            <div className="pointer-events-none absolute inset-0 -z-10">
+              <svg
+                className="mx-auto h-full w-full opacity-20"
+                viewBox="0 0 1200 2400"
+                preserveAspectRatio="none"
+                aria-hidden="true"
               >
-                {/* Icon & Step */}
-                <div className="md:col-span-2">
-                  <div className="flex items-center gap-2 text-sm font-semibold text-[#1A73E8]">
-                    <span>{s.step}</span>
-                  </div>
-                  <div className="mt-2 inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#1A73E8]/10 text-[#1A73E8]">
-                    {s.icon}
-                  </div>
-                </div>
+                <defs>
+                  <linearGradient id="road" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="currentColor" />
+                    <stop offset="100%" stopColor="currentColor" />
+                  </linearGradient>
+                </defs>
+                <motion.path
+                  d="M200 50 C 600 200, 600 400, 300 550 S 0 900, 400 1050  800 1250, 500 1400  100 1650, 600 1800  1000 2000, 700 2300"
+                  fill="none"
+                  stroke="url(#road)"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 2.4, ease: "easeInOut" }}
+                />
+              </svg>
+            </div>
 
-                {/* Content */}
-                <div className="md:col-span-8">
-                  <h3 className="text-xl font-bold leading-tight text-black">{s.title}</h3>
-                  <p className="mt-2 text-gray-700">{s.blurb}</p>
-                </div>
+            {/* Stops */}
+            <ol className="mt-12 space-y-10">
+              {stops.map((s, i) => (
+                <li key={s.id} className="relative">
+                  <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.25 }}
+                    transition={{ duration: 0.35, delay: i * 0.05 }}
+                    className={[
+                      "grid items-center gap-6 rounded-2xl border bg-card p-5 shadow-sm md:grid-cols-12",
+                      i % 2 === 0 ? "md:[&>*:first-child]:order-2" : "",
+                    ].join(" ")}
+                  >
+                    {/* Icon & Step */}
+                    <div className="md:col-span-2">
+                      <div className="flex items-center gap-2 text-sm font-semibold text-primary">
+                        <span>{s.step}</span>
+                      </div>
+                      <div className="mt-2 inline-flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        {s.icon}
+                      </div>
+                    </div>
 
-                {/* CTA */}
-                <div className="md:col-span-2 md:justify-self-end">
-                  {s.link && (
-                    <Button asChild className="w-full md:w-auto bg-[#1A73E8] hover:bg-[#1557B0] text-white">
-                      <a href={s.link.href}>{s.link.label || "Learn more"}</a>
-                    </Button>
-                  )}
-                </div>
-              </motion.div>
-            </li>
-          ))}
-        </ol>
+                    {/* Content */}
+                    <div className="md:col-span-8">
+                      <h3 className="text-xl font-bold leading-tight text-foreground">{s.title}</h3>
+                      <p className="mt-2 text-muted-foreground">{s.blurb}</p>
+                    </div>
+
+                    {/* CTA */}
+                    <div className="md:col-span-2 md:justify-self-end">
+                      {s.link && (
+                        <Button
+                          asChild
+                          className="w-full md:w-auto bg-primary hover:bg-primary/90 text-primary-foreground"
+                        >
+                          <a href={s.link.href}>{s.link.label || "Learn more"}</a>
+                        </Button>
+                      )}
+                    </div>
+                  </motion.div>
+                </li>
+              ))}
+            </ol>
+          </>
+        )}
 
         {/* Footer CTA */}
         <div className="mt-14 text-center">
-          <Button asChild size="lg" className="bg-[#1A73E8] hover:bg-[#1557B0] text-white">
+          <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
             <a href="/roadmap/tools">Explore the Roadmap Tools</a>
           </Button>
-          <p className="mt-3 text-sm text-gray-600">
+          <p className="mt-3 text-sm text-muted-foreground">
             Every step links to a tool, template, or story—no fluff, just what you need.
           </p>
         </div>

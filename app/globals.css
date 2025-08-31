@@ -4,26 +4,40 @@
 
 @layer base {
   :root {
+    /* Updated design tokens to match the Smart Journey Navigator design brief */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --foreground: 215 25% 27%;
+    --card: 210 17% 98%;
+    --card-foreground: 215 25% 27%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
+    --popover-foreground: 215 25% 27%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 88%;
+    --secondary-foreground: 215 25% 27%;
+    --muted: 210 17% 98%;
+    --muted-foreground: 215 25% 27%;
+    --accent: 0 0% 88%;
+    --accent-foreground: 215 25% 27%;
+    --destructive: 348 83% 47%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 88%;
+    --input: 0 0% 100%;
+    --ring: 217 91% 60% / 0.5;
+    --radius: 2rem;
+    --chart-1: 217 91% 60%;
+    --chart-2: 215 25% 27%;
+    --chart-3: 0 0% 88%;
+    --chart-4: 210 17% 98%;
+    --chart-5: 0 0% 100%;
+    --sidebar: 0 0% 100%;
+    --sidebar-foreground: 215 25% 27%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 88%;
+    --sidebar-accent-foreground: 215 25% 27%;
+    --sidebar-border: 0 0% 88%;
+    --sidebar-ring: 217 91% 60% / 0.5;
   }
 
   .dark {
