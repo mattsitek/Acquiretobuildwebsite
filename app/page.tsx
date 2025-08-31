@@ -1,13 +1,11 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { NewsletterForm } from "@/components/newsletter-form"
-import { Search, AlertTriangle, Users, Clock, Brain, MessageCircle, CheckCircle, Briefcase } from "lucide-react"
+import { Search, AlertTriangle, Users, Clock, CheckCircle, Briefcase, Star, Map, UsersRound } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { getHomepageContent } from "@/lib/datocms"
 import type { Metadata } from "next"
-import DealScorecard from './deal-scorecard/page'
-import Navigation from "@/components/navigation"
 
 
 export const metadata: Metadata = {
@@ -71,6 +69,31 @@ export default async function HomePage() {
   if (process.env.NODE_ENV === "development") {
     console.log("Homepage data from DatoCMS:", homepageData)
   }
+
+  // Testimonials data for social proof section
+  const testimonials = [
+    {
+      id: "1",
+      testimonialText: "The Deal Kit saved me months of research. Everything I needed in one place.",
+      authorName: "Sarah J.",
+      authorTitle: "Business Buyer",
+      starRating: 5,
+    },
+    {
+      id: "2",
+      testimonialText: "Professional templates that actually work. Closed my first deal using these tools.",
+      authorName: "Mike C.",
+      authorTitle: "ETA MBA",
+      starRating: 5,
+    },
+    {
+      id: "3",
+      testimonialText: "Incredible value. These templates would cost thousands from a lawyer.",
+      authorName: "Jessica R.",
+      authorTitle: "Solo Searcher",
+      starRating: 5,
+    },
+  ]
 
   return (
     <main role="main">
@@ -165,46 +188,6 @@ export default async function HomePage() {
         }}
       />
 
-      {/* Navigation - NEW: Replace the old inline nav */}
-        <Navigation />
-
-      {/* Debug Info in Development */}
-      {process.env.NODE_ENV === "development" && (
-        <div className="bg-blue-50 p-4">
-          <div className="container mx-auto px-4">
-            <div className="text-sm text-blue-800">
-              <p>DatoCMS Homepage Status: {homepageData ? "✅ Connected" : "❌ Using Fallback Content"}</p>
-              <p>API Token Status: {process.env.DATOCMS_API_TOKEN ? "✅ Configured" : "❌ Missing"}</p>
-              {homepageData && <p>Hero Image: {homepageData.heroImage?.url ? "✅ Available" : "❌ Missing"}</p>}
-              {homepageData && (
-                <p>Right Place Fields: {homepageData.rightPlaceTitle ? "✅ Available" : "❌ Not Added Yet"}</p>
-              )}
-              <Link href="/debug-homepage" className="underline text-blue-600">
-                → View Homepage Debug Page
-              </Link>
-              <Link href="/datocms-setup" className="underline text-blue-600 ml-4">
-                → DatoCMS Setup Guide
-              </Link>
-              <Link href="/debug-newsletter" className="underline text-blue-600 ml-4">
-                → Newsletter Debug Page
-              </Link>
-              {!process.env.DATOCMS_API_TOKEN && (
-                <div className="mt-2 p-2 bg-red-100 rounded text-red-800">
-                  <p className="font-semibold">⚠️ DatoCMS API Token Missing</p>
-                  <p className="text-xs">Add DATOCMS_API_TOKEN to your environment variables</p>
-                </div>
-              )}
-              {!homepageData?.rightPlaceTitle && process.env.DATOCMS_API_TOKEN && (
-                <div className="mt-2 p-2 bg-yellow-100 rounded text-yellow-800">
-                  <p className="font-semibold">Next Step: Add Right Place fields to DatoCMS</p>
-                  <p className="text-xs">The section will use fallback content until you add the fields</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Hero Section - Matches Original Design */}
       <section className="relative overflow-hidden bg-white" aria-labelledby="hero-heading">
         <div className="container mx-auto px-4 py-16 lg:py-24">
@@ -238,7 +221,8 @@ export default async function HomePage() {
               <NewsletterForm variant="hero" buttonText={homepageData?.heroButtonText || "GET FREE WEEKLY INSIGHTS"} />
 
               <p className="text-sm text-gray-600">
-                Join 1,000+ professionals getting weekly scripts, tools, lessons & real-world tactics — straight to your inbox.
+                Join 1,000+ professionals getting weekly scripts, tools, lessons & real-world tactics — straight to your
+                inbox.
               </p>
             </div>
 
@@ -262,14 +246,121 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* DEAL SCORECARD SECTION - Now Embedded Component */}
-  <section className="py-16 lg:py-24 bg-white" aria-labelledby="scorecard-heading">
-    <div className="container mx-auto px-4">
-      <div className="max-w-6xl mx-auto">
-        <DealScorecard showNavigation={false} />
-      </div>
-    </div>
-  </section>
+      {/* What You'll Get Section */}
+      <section className="py-16 lg:py-24 bg-white" aria-labelledby="what-youll-get-heading">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 id="what-youll-get-heading" className="text-3xl lg:text-5xl font-black text-black mb-6">
+              WHAT YOU'LL GET
+            </h2>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-8 mb-12">
+            {/* Tactical Insights - Links to Newsletter */}
+            <Link href="/newsletter" className="group" aria-label="A Proven Roadmap">
+              <Card className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200 h-full cursor-pointer">
+                <CardContent className="p-8 text-center space-y-4">
+                  <div
+                    className="w-16 h-16 bg-[#1A73E8] rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-200"
+                    aria-hidden="true"
+                  >
+                    <Map className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-black">A Proven Roadmap</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    The 8-step roadmap that guides you from W2 worker to business owner — no MBA or private equity
+                    needed
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+
+            {/* Deal Kit - Links to Deal Kit page */}
+            <Link href="/deal-kit" className="group" aria-label="Tools to Evaluate Deals with Confidence">
+              <Card className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200 h-full cursor-pointer">
+                <CardContent className="p-8 text-center space-y-4">
+                  <div
+                    className="w-16 h-16 bg-[#1A73E8] rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-200"
+                    aria-hidden="true"
+                  >
+                    <Briefcase className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-black">Tools to Evaluate Deals with Confidence</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    Valuation calculators, due diligence checklists, and deal breakdowns to help you avoid overpaying
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+
+            {/* Community of Support - Links to Newsletter */}
+            <Link href="/newsletter" className="group" aria-label="A Tribe of Values-Driven Buyers">
+              <Card className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200 h-full cursor-pointer">
+                <CardContent className="p-8 text-center space-y-4">
+                  <div
+                    className="w-16 h-16 bg-[#1A73E8] rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-200"
+                    aria-hidden="true"
+                  >
+                    <UsersRound className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-black">A Tribe of Values-Driven Buyers</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    Join 1,000+ mid-career professionals buying boring, profitable businesses — and building freedom on
+                    their terms.
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
+
+          <div className="text-center">
+            <Badge variant="secondary" className="bg-[#1A73E8] text-white text-lg px-6 py-2 rounded-full">
+              🔥 COMING SOON: Off-Market Deal Flow
+            </Badge>
+            <p className="text-gray-700 mt-4">Leads and seller intros shared by vetted members</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof Section */}
+      <section className="py-16 lg:py-24 bg-[#F9F9F9]" aria-labelledby="social-proof-heading">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 id="social-proof-heading" className="text-3xl lg:text-4xl font-black text-black mb-6">
+              Trusted by 2,500+ Business Buyers
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {testimonials.map((testimonial) => (
+              <Card
+                key={testimonial.id}
+                className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200"
+              >
+                <CardContent className="p-6 space-y-4">
+                  {/* Star Rating */}
+                  <div className="flex justify-center space-x-1" aria-label={`${testimonial.starRating} star rating`}>
+                    {[...Array(testimonial.starRating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />
+                    ))}
+                  </div>
+
+                  {/* Testimonial Text */}
+                  <blockquote className="text-gray-700 text-center italic leading-relaxed">
+                    "{testimonial.testimonialText}"
+                  </blockquote>
+
+                  {/* Author Info */}
+                  <div className="text-center">
+                    <cite className="text-black font-semibold not-italic">{testimonial.authorName}</cite>
+                    <p className="text-gray-600 text-sm">{testimonial.authorTitle}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Value Proposition Section */}
       <section className="py-16 lg:py-24 bg-[#F9F9F9]" aria-labelledby="value-prop-heading">
@@ -289,7 +380,6 @@ export default async function HomePage() {
                 <Search className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-black">Find Real Businesses</h3>
-              <p className="text-gray-700">Find real small businesses to buy (even off-market)</p>
             </div>
 
             <div className="text-center space-y-4">
@@ -300,7 +390,6 @@ export default async function HomePage() {
                 <AlertTriangle className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-black">Avoid Rookie Mistakes</h3>
-              <p className="text-gray-700">Avoid rookie mistakes that cost time and money</p>
             </div>
 
             <div className="text-center space-y-4">
@@ -311,7 +400,6 @@ export default async function HomePage() {
                 <Users className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-black">Learn from Experts</h3>
-              <p className="text-gray-700">Learn from dealmakers, operators & solo searchers doing the work</p>
             </div>
 
             <div className="text-center space-y-4">
@@ -322,86 +410,13 @@ export default async function HomePage() {
                 <Clock className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-black">Buy Back Your Time</h3>
-              <p className="text-gray-700">Build a business that buys back your time — not one that owns you</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* What You'll Get Section */}
-      <section className="py-16 lg:py-24 bg-white" aria-labelledby="what-youll-get-heading">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 id="what-youll-get-heading" className="text-3xl lg:text-5xl font-black text-black mb-6">
-              WHAT YOU'LL GET
-            </h2>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-8 mb-12">
-            {/* Tactical Insights - Links to Newsletter */}
-            <Link href="/newsletter" className="group" aria-label="Learn about tactical insights">
-              <Card className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200 h-full cursor-pointer">
-                <CardContent className="p-8 text-center space-y-4">
-                  <div
-                    className="w-16 h-16 bg-[#1A73E8] rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-200"
-                    aria-hidden="true"
-                  >
-                    <Brain className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-black">Tactical Insights</h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    Deal breakdowns, financing hacks, and playbooks from real acquisitions
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-
-            {/* Deal Kit - Links to Deal Kit page */}
-            <Link href="/deal-kit" className="group" aria-label="Access the Deal Kit">
-              <Card className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200 h-full cursor-pointer">
-                <CardContent className="p-8 text-center space-y-4">
-                  <div
-                    className="w-16 h-16 bg-[#1A73E8] rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-200"
-                    aria-hidden="true"
-                  >
-                    <Briefcase className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-black">Deal Kit</h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    Professional templates, scripts, and tools to find, evaluate, and close your first acquisition
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-
-            {/* Community Support */}
-            <Card className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200">
-              <CardContent className="p-8 text-center space-y-4">
-                <div
-                  className="w-16 h-16 bg-[#1A73E8] rounded-full flex items-center justify-center mx-auto"
-                  aria-hidden="true"
-                >
-                  <MessageCircle className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-black">Community Support</h3>
-                <p className="text-gray-700 leading-relaxed">
-                  Feedback, live Q&As, and behind-the-scenes stories from other buyers
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="text-center">
-            <Badge variant="secondary" className="bg-[#1A73E8] text-white text-lg px-6 py-2 rounded-full">
-              🔥 COMING SOON: Off-Market Deal Flow
-            </Badge>
-            <p className="text-gray-700 mt-4">Leads and seller intros shared by vetted members</p>
-          </div>
-        </div>
-      </section>
-
       {/* Who It's For Section - Updated to use DatoCMS */}
-      <section className="py-16 lg:py-24 bg-[#F9F9F9]" aria-labelledby="right-place-heading">
+      <section className="py-16 lg:py-24 bg-white" aria-labelledby="right-place-heading">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 id="right-place-heading" className="text-3xl lg:text-5xl font-black text-black text-center mb-16">
@@ -451,13 +466,41 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
+      {/* Start Here Section - NEW SECTION */}
+      <section className="py-16 lg:py-20 bg-white" aria-labelledby="start-here-heading">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center space-y-8">
+            <h2 id="start-here-heading" className="text-3xl lg:text-5xl font-black text-black">
+              HERE'S WHERE TO START
+            </h2>
+            
+            <p className="text-xl lg:text-2xl text-gray-700 leading-relaxed">
+              Not sure if you're ready to buy a business? Take our 2-minute assessment to get a personalized roadmap based on your current situation.
+            </p>
+            
+            <div className="pt-4">
+              <Link 
+                href="/am-i-ready" 
+                className="inline-flex items-center justify-center gap-3 bg-[#1A73E8] hover:bg-[#1557B7] text-white font-bold text-lg px-8 py-4 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 transition-transform"
+                aria-label="Take the Personal Am I Ready Assessment"
+              >
+                <CheckCircle className="h-6 w-6" aria-hidden="true" />
+                TAKE THE ASSESSMENT
+              </Link>
+            </div>
+            
+            <p className="text-gray-600 text-sm">
+              Get your personalized readiness score + next steps in under 2 minutes
+            </p>
+          </div>
+        </div>
+      </section>
       {/* Main CTA Section - Matches Original Black Background Design */}
       <section className="py-16 lg:py-24 bg-black" aria-labelledby="cta-heading">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto space-y-8">
             <h2 id="cta-heading" className="text-3xl lg:text-5xl font-black text-white">
-              READY TO BUY YOUR FREEDOM?
+              Stop Climbing Start Owning Today
             </h2>
 
             <p className="text-xl lg:text-2xl text-gray-300">
@@ -476,78 +519,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Educational Content Section */}
-      <section className="py-16 bg-white border-t border-gray-200" aria-labelledby="learn-heading">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 id="learn-heading" className="text-2xl font-bold text-black mb-8 text-center">
-              Learn how to buy a business without breaking the bank
-            </h2>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <article>
-                <h3 className="text-lg font-semibold text-black mb-3">
-                  Business acquisition financing: SBA, seller notes, creative capital
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  Discover funding strategies that don't require massive upfront capital.
-                </p>
-              </article>
-
-              <article>
-                <h3 className="text-lg font-semibold text-black mb-3">How to value a business the smart way</h3>
-                <p className="text-gray-600 text-sm">Learn valuation methods that protect you from overpaying.</p>
-              </article>
-
-              <article>
-                <h3 className="text-lg font-semibold text-black mb-3">
-                  Due diligence checklists for first-time buyers
-                </h3>
-                <p className="text-gray-600 text-sm">Essential steps to verify what you're really buying.</p>
-              </article>
-
-              <article>
-                <h3 className="text-lg font-semibold text-black mb-3">
-                  Real case studies from HVAC, services, and manufacturing
-                </h3>
-                <p className="text-gray-600 text-sm">See how others successfully acquired and grew their businesses.</p>
-              </article>
-
-              <article>
-                <h3 className="text-lg font-semibold text-black mb-3">
-                  Buy a business with as little as 10% down — here's how
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  Creative financing structures that minimize your cash investment.
-                </p>
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-black text-white py-12" role="contentinfo">
-        <div className="container mx-auto px-4">
-          <div className="text-center space-y-4">
-            <h3 className="text-2xl font-bold">Acquire & Build</h3>
-            <p className="text-gray-400">The newsletter and community for business acquisition.</p>
-            <nav className="flex justify-center space-x-6 text-sm" aria-label="Footer navigation">
-              <Link href="/privacy" className="hover:text-[#1A73E8] transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="hover:text-[#1A73E8] transition-colors">
-                Terms of Service
-              </Link>
-              <Link href="/contact" className="hover:text-[#1A73E8] transition-colors">
-                Contact
-              </Link>
-            </nav>
-            <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Acquire & Build. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </main>
   )
 }
