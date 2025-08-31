@@ -7,9 +7,6 @@ import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import {
-  Check,
-  Lock,
-  AlertCircle,
   ChevronLeft,
   ChevronRight,
   Target,
@@ -21,7 +18,6 @@ import {
   FileText,
   AlarmCheckIcon as FlagCheckered,
   Rocket,
-  Clock,
   ArrowRight,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -36,7 +32,6 @@ export interface JourneyStep {
   icon: React.ReactNode
   status: StepStatus
   href?: string
-  estimatedTime?: string
 }
 
 interface SmartJourneyNavigatorProps {
@@ -79,40 +74,15 @@ export function SmartJourneyNavigator({
     return () => window.removeEventListener("resize", checkMobile)
   }, [])
 
-  const getStepStatusIcon = (status: StepStatus) => {
-    switch (status) {
-      case "complete":
-        return <Check className="h-4 w-4" />
-      case "current":
-        return <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-      case "incomplete":
-        return <AlertCircle className="h-4 w-4" />
-      case "locked":
-        return <Lock className="h-3 w-3" />
+  const getStepStatusColor = (status: StepStatus, index: number) => {
+    if (index === currentStepIndex) {
+      return "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20"
     }
+    return "bg-muted/50 text-muted-foreground border-border hover:bg-muted hover:text-foreground"
   }
 
-  const getStepStatusColor = (status: StepStatus) => {
-    switch (status) {
-      case "complete":
-        return "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20"
-      case "current":
-        return "bg-gradient-to-br from-primary/10 to-primary/5 text-primary border-primary ring-2 ring-primary/30 shadow-lg shadow-primary/10"
-      case "incomplete":
-        return "bg-gradient-to-br from-orange-50 to-orange-25 text-orange-600 border-orange-200 shadow-md shadow-orange-100"
-      case "locked":
-        return "bg-muted/50 text-muted-foreground border-border"
-    }
-  }
-
-  const canNavigateToStep = (status: StepStatus) => {
-    return status === "complete" || status === "current" || status === "incomplete"
-  }
-
-  const handleStepClick = (step: JourneyStep) => {
-    if (canNavigateToStep(step.status)) {
-      onStepChange(step.id)
-    }
+  const handleStepClick = (step: JourneyStep, index: number) => {
+    onStepChange(step.id)
   }
 
   const handlePrevious = () => {
@@ -138,7 +108,7 @@ export function SmartJourneyNavigator({
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-2xl font-bold text-foreground mb-1">Your Journey Progress</h2>
-            <p className="text-muted-foreground">Track your path to business ownership</p>
+            <p className="text-muted-foreground">Navigate through the complete roadmap</p>
           </div>
           <motion.div
             initial={{ scale: 0 }}
@@ -146,38 +116,25 @@ export function SmartJourneyNavigator({
             transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
           >
             <Badge variant="secondary" className="text-base px-4 py-2 font-semibold">
-              {completedSteps} of {steps.length} complete
+              Step {currentStepIndex + 1} of {steps.length}
             </Badge>
           </motion.div>
         </div>
 
         <div className="relative">
-          <Progress value={progressPercentage} className="h-3 bg-muted/30" />
+          <Progress value={((currentStepIndex + 1) / steps.length) * 100} className="h-3 bg-muted/30" />
           <motion.div
             className="absolute top-0 left-0 h-3 bg-gradient-to-r from-primary to-primary/80 rounded-full"
             initial={{ width: 0 }}
-            animate={{ width: `${progressPercentage}%` }}
+            animate={{ width: `${((currentStepIndex + 1) / steps.length) * 100}%` }}
             transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
           />
         </div>
 
         <div className="flex items-center justify-between mt-3">
           <p className="text-sm text-muted-foreground">
-            {progressPercentage === 100
-              ? "🎉 Journey complete! You're ready to acquire a business."
-              : `${Math.round(progressPercentage)}% complete - Keep going!`}
+            Navigate freely through all {steps.length} steps of the business acquisition process
           </p>
-          {progressPercentage > 0 && progressPercentage < 100 && (
-            <motion.div
-              className="flex items-center gap-1 text-xs text-muted-foreground"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-            >
-              <Clock className="h-3 w-3" />
-              <span>Est. {Math.ceil((steps.length - completedSteps) * 2)} weeks remaining</span>
-            </motion.div>
-          )}
         </div>
       </motion.div>
 
@@ -189,7 +146,7 @@ export function SmartJourneyNavigator({
             <motion.div
               className="absolute top-8 left-12 h-1 bg-gradient-to-r from-primary via-primary to-primary/80 rounded-full -z-10 shadow-sm"
               initial={{ width: 0 }}
-              animate={{ width: `${(completedSteps / Math.max(steps.length - 1, 1)) * 100}%` }}
+              animate={{ width: `${(currentStepIndex / Math.max(steps.length - 1, 1)) * 100}%` }}
               transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
             />
 
@@ -204,26 +161,21 @@ export function SmartJourneyNavigator({
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <motion.button
-                    onClick={() => handleStepClick(step)}
-                    disabled={!canNavigateToStep(step.status)}
+                    onClick={() => handleStepClick(step, index)}
                     onHoverStart={() => setHoveredStep(step.id)}
                     onHoverEnd={() => setHoveredStep(null)}
-                    className={cn(
-                      "relative flex flex-col items-center group transition-all duration-300",
-                      canNavigateToStep(step.status) ? "cursor-pointer" : "cursor-not-allowed",
-                    )}
-                    whileHover={canNavigateToStep(step.status) ? { scale: 1.08, y: -4 } : {}}
-                    whileTap={canNavigateToStep(step.status) ? { scale: 0.95 } : {}}
+                    className="relative flex flex-col items-center group transition-all duration-300 cursor-pointer"
+                    whileHover={{ scale: 1.08, y: -4 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    {/* Enhanced Step Circle with Glow Effect */}
                     <motion.div
                       className={cn(
-                        "w-16 h-16 rounded-full border-2 flex items-center justify-center transition-all duration-300 mb-4 relative overflow-hidden",
-                        getStepStatusColor(step.status),
-                        hoveredStep === step.id && canNavigateToStep(step.status) && "transform-gpu",
+                        "w-16 h-16 rounded-full border-2 flex items-center justify-center transition-all duration-300 mb-4 relative overflow-hidden font-bold text-lg",
+                        getStepStatusColor(step.status, index),
+                        hoveredStep === step.id && "transform-gpu",
                       )}
                       animate={
-                        step.status === "current"
+                        index === currentStepIndex
                           ? {
                               boxShadow: [
                                 "0 0 0 0 rgba(59, 130, 246, 0.4)",
@@ -233,10 +185,10 @@ export function SmartJourneyNavigator({
                             }
                           : {}
                       }
-                      transition={{ duration: 2, repeat: step.status === "current" ? Number.POSITIVE_INFINITY : 0 }}
+                      transition={{ duration: 2, repeat: index === currentStepIndex ? Number.POSITIVE_INFINITY : 0 }}
                     >
                       {/* Background Shimmer Effect for Current Step */}
-                      {step.status === "current" && (
+                      {index === currentStepIndex && (
                         <motion.div
                           className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                           animate={{ x: [-100, 100] }}
@@ -244,12 +196,7 @@ export function SmartJourneyNavigator({
                         />
                       )}
 
-                      <motion.div
-                        animate={step.status === "current" ? { rotate: [0, 5, -5, 0] } : {}}
-                        transition={{ duration: 2, repeat: step.status === "current" ? Number.POSITIVE_INFINITY : 0 }}
-                      >
-                        {getStepStatusIcon(step.status)}
-                      </motion.div>
+                      <span>{index}</span>
                     </motion.div>
 
                     {/* Enhanced Step Label */}
@@ -261,17 +208,6 @@ export function SmartJourneyNavigator({
                         {step.step}
                       </motion.p>
                       <p className="text-sm text-muted-foreground leading-tight font-medium">{step.title}</p>
-                      {step.estimatedTime && (
-                        <motion.div
-                          className="flex items-center justify-center gap-1 mt-2"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ delay: 0.5 + index * 0.1 }}
-                        >
-                          <Clock className="h-3 w-3 text-muted-foreground" />
-                          <p className="text-xs text-muted-foreground font-medium">{step.estimatedTime}</p>
-                        </motion.div>
-                      )}
                     </div>
 
                     {/* Enhanced Tooltip */}
@@ -342,29 +278,23 @@ export function SmartJourneyNavigator({
             </Button>
           </motion.div>
 
-          {/* Enhanced Mobile Step Dots */}
           <div className="flex justify-center space-x-3 mb-4">
             {steps.map((step, index) => (
               <motion.button
                 key={step.id}
-                onClick={() => handleStepClick(step)}
-                disabled={!canNavigateToStep(step.status)}
+                onClick={() => handleStepClick(step, index)}
                 className={cn(
                   "w-4 h-4 rounded-full transition-all duration-300 relative",
-                  step.status === "complete"
+                  index === currentStepIndex
                     ? "bg-primary shadow-lg shadow-primary/30"
-                    : step.status === "current"
-                      ? "bg-primary ring-2 ring-primary/30 shadow-lg shadow-primary/20"
-                      : step.status === "incomplete"
-                        ? "bg-orange-400 shadow-md shadow-orange-200"
-                        : "bg-muted",
+                    : "bg-muted hover:bg-muted-foreground/20",
                 )}
                 whileTap={{ scale: 0.9 }}
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: index * 0.05, type: "spring", stiffness: 200 }}
               >
-                {step.status === "current" && (
+                {index === currentStepIndex && (
                   <motion.div
                     className="absolute inset-0 rounded-full bg-primary"
                     animate={{ scale: [1, 1.3, 1] }}
@@ -392,10 +322,7 @@ export function SmartJourneyNavigator({
 
           <div className="relative flex items-start gap-6">
             <motion.div
-              className={cn(
-                "w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 relative overflow-hidden",
-                getStepStatusColor(steps[currentStepIndex]?.status || "locked"),
-              )}
+              className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 relative overflow-hidden bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20"
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
@@ -425,21 +352,6 @@ export function SmartJourneyNavigator({
                 >
                   {steps[currentStepIndex]?.title}
                 </motion.h3>
-                {steps[currentStepIndex]?.estimatedTime && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.4, type: "spring" }}
-                  >
-                    <Badge
-                      variant="secondary"
-                      className="text-sm px-3 py-1 font-medium bg-primary/10 text-primary border-primary/20"
-                    >
-                      <Clock className="h-3 w-3 mr-1" />
-                      {steps[currentStepIndex].estimatedTime}
-                    </Badge>
-                  </motion.div>
-                )}
               </div>
 
               <motion.p
