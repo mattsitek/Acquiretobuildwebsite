@@ -238,7 +238,6 @@ export default async function HomePage() {
                 <Search className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-black">Find Real Businesses</h3>
-              <p className="text-gray-700">Find real small businesses to buy (even off-market)</p>
             </div>
 
             <div className="text-center space-y-4">
@@ -249,7 +248,6 @@ export default async function HomePage() {
                 <AlertTriangle className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-black">Avoid Rookie Mistakes</h3>
-              <p className="text-gray-700">Avoid rookie mistakes that cost time and money</p>
             </div>
 
             <div className="text-center space-y-4">
@@ -260,7 +258,6 @@ export default async function HomePage() {
                 <Users className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-black">Learn from Experts</h3>
-              <p className="text-gray-700">Learn from dealmakers, operators & solo searchers doing the work</p>
             </div>
 
             <div className="text-center space-y-4">
@@ -271,7 +268,6 @@ export default async function HomePage() {
                 <Clock className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-black">Buy Back Your Time</h3>
-              <p className="text-gray-700">Build a business that buys back your time — not one that owns you</p>
             </div>
           </div>
         </div>
@@ -416,78 +412,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Educational Content Section */}
-      <section className="py-16 bg-white border-t border-gray-200" aria-labelledby="learn-heading">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 id="learn-heading" className="text-2xl font-bold text-black mb-8 text-center">
-              Learn how to buy a business without breaking the bank
-            </h2>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <article>
-                <h3 className="text-lg font-semibold text-black mb-3">
-                  Business acquisition financing: SBA, seller notes, creative capital
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  Discover funding strategies that don't require massive upfront capital.
-                </p>
-              </article>
-
-              <article>
-                <h3 className="text-lg font-semibold text-black mb-3">How to value a business the smart way</h3>
-                <p className="text-gray-600 text-sm">Learn valuation methods that protect you from overpaying.</p>
-              </article>
-
-              <article>
-                <h3 className="text-lg font-semibold text-black mb-3">
-                  Due diligence checklists for first-time buyers
-                </h3>
-                <p className="text-gray-600 text-sm">Essential steps to verify what you're really buying.</p>
-              </article>
-
-              <article>
-                <h3 className="text-lg font-semibold text-black mb-3">
-                  Real case studies from HVAC, services, and manufacturing
-                </h3>
-                <p className="text-gray-600 text-sm">See how others successfully acquired and grew their businesses.</p>
-              </article>
-
-              <article>
-                <h3 className="text-lg font-semibold text-black mb-3">
-                  Buy a business with as little as 10% down — here's how
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  Creative financing structures that minimize your cash investment.
-                </p>
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-black text-white py-12" role="contentinfo">
-        <div className="container mx-auto px-4">
-          <div className="text-center space-y-4">
-            <h3 className="text-2xl font-bold">Acquire & Build</h3>
-            <p className="text-gray-400">The newsletter and community for business acquisition.</p>
-            <nav className="flex justify-center space-x-6 text-sm" aria-label="Footer navigation">
-              <Link href="/privacy" className="hover:text-[#1A73E8] transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="hover:text-[#1A73E8] transition-colors">
-                Terms of Service
-              </Link>
-              <Link href="/contact" className="hover:text-[#1A73E8] transition-colors">
-                Contact
-              </Link>
-            </nav>
-            <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Acquire & Build. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </main>
   )
 }
