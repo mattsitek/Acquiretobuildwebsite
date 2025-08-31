@@ -47,7 +47,7 @@ const stops: RoadmapStop[] = [
     title: "Spot the Deals",
     blurb: "Go beyond marketplaces. Build proprietary deal flow through outreach and local networks.",
     icon: <Search className="h-6 w-6" />,
-    link: { href: "/roadmap/tools", label: "Use the scripts" },
+    link: { href: "https://drive.google.com/file/d/1g2R6kGPZPz8qNxuCPb5N1xdyyWsEV5Hn/view?usp=sharing", label: "Use the scripts" },
   },
   {
     id: "s2",
@@ -63,7 +63,7 @@ const stops: RoadmapStop[] = [
     title: "Build Trust with the Owner",
     blurb: "Owners sell to people they trust. Lead with respect for their legacy.",
     icon: <Handshake className="h-6 w-6" />,
-    link: { href: "/roadmap/tools", label: "Read the playbook" },
+    link: { href: "https://drive.google.com/file/d/1g2R6kGPZPz8qNxuCPb5N1xdyyWsEV5Hn/view?usp=sharing", label: "Read the playbook" },
   },
   {
     id: "s4",
@@ -71,7 +71,7 @@ const stops: RoadmapStop[] = [
     title: "Make the Offer (LOI)",
     blurb: "Creatively structure an LOI that works for you and feels fair to the seller.",
     icon: <FilePenLine className="h-6 w-6" />,
-    link: { href: "/roadmap/tools", label: "LOI template" },
+    link: { href: "https://docs.google.com/document/d/1bC1uQ9UaDIu9eZm3zSo3krOjfj0xCaHq/edit?usp=sharing&ouid=102897195036318380202&rtpof=true&sd=true", label: "LOI template" },
   },
   {
     id: "s5",
@@ -79,7 +79,7 @@ const stops: RoadmapStop[] = [
     title: "Do the Homework (Diligence)",
     blurb: "Verify the numbers, customers, ops, and legal so there are no surprises.",
     icon: <ClipboardList className="h-6 w-6" />,
-    link: { href: "/roadmap/tools", label: "Diligence checklist" },
+    link: { href: "https://drive.google.com/file/d/1CEaa4kjtu_cwgfe7yHCuodOitbE6H0Hc/view?usp=sharing", label: "Diligence checklist" },
   },
   {
     id: "s6",
