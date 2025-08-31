@@ -63,7 +63,7 @@ const stops: RoadmapStop[] = [
     title: "Build Trust with the Owner",
     blurb: "Owners sell to people they trust. Lead with respect for their legacy.",
     icon: <Handshake className="h-6 w-6" />,
-    link: { href: "https://drive.google.com/file/d/1g2R6kGPZPz8qNxuCPb5N1xdyyWsEV5Hn/view?usp=sharing", label: "Read the playbook" },
+    link: { href: "https://drive.google.com/file/d/1xcmuICygWMQL6azmGvq0bshQ0qfJfE8O/view?usp=sharing", label: "Read the playbook" },
   },
   {
     id: "s4",
