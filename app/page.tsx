@@ -245,7 +245,111 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Value Proposition Section */}
+   
+      {/* What You'll Get Section */}
+      <section className="py-16 lg:py-24 bg-white" aria-labelledby="what-youll-get-heading">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 id="what-youll-get-heading" className="text-3xl lg:text-5xl font-black text-black mb-6">
+              WHAT YOU'LL GET
+            </h2>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-8 mb-12">
+            {/* Tactical Insights - Links to Newsletter */}
+            <Link href="/newsletter" className="group" aria-label="A Proven Roadmap">
+              <Card className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200 h-full cursor-pointer">
+                <CardContent className="p-8 text-center space-y-4">
+                  <div
+                    className="w-16 h-16 bg-[#1A73E8] rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-200"
+                    aria-hidden="true"
+                  >
+                    <Brain className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-black">The 8-step roadmap that guides you from W2 worker to business owner — no MBA or private equity needed</h3>
+                </CardContent>
+              </Card>
+            </Link>
+
+            {/* Deal Kit - Links to Deal Kit page */}
+            <Link href="/deal-kit" className="group" aria-label="Tools to Evaluate Deals with Confidence">
+              <Card className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200 h-full cursor-pointer">
+                <CardContent className="p-8 text-center space-y-4">
+                  <div
+                    className="w-16 h-16 bg-[#1A73E8] rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-200"
+                    aria-hidden="true"
+                  >
+                    <Briefcase className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-black">Valuation calculators, due diligence checklists, and deal breakdowns to help you avoid overpaying and under-earning.</h3>
+                </CardContent>
+              </Card>
+            </Link>
+            
+            {/* Community of Support - Links to Newsletter */}
+            <Link href="/newsletter" className="group" aria-label="A Tribe of Values-Driven Buyers">
+              <Card className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200 h-full cursor-pointer">
+                <CardContent className="p-8 text-center space-y-4">
+                  <div
+                    className="w-16 h-16 bg-[#1A73E8] rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-200"
+                    aria-hidden="true"
+                  >
+                    <Brain className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-black">Join 1,000+ mid-career professionals buying boring, profitable businesses — and building freedom on their terms.</h3>
+                </CardContent>
+              </Card>
+          </div>
+
+          <div className="text-center">
+            <Badge variant="secondary" className="bg-[#1A73E8] text-white text-lg px-6 py-2 rounded-full">
+              🔥 COMING SOON: Off-Market Deal Flow
+            </Badge>
+            <p className="text-gray-700 mt-4">Leads and seller intros shared by vetted members</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof Section */}
+      <section className="py-16 lg:py-24 bg-[#F9F9F9]" aria-labelledby="social-proof-heading">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 id="social-proof-heading" className="text-3xl lg:text-4xl font-black text-black mb-6">
+              Trusted by 2,500+ Business Buyers
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {testimonials.map((testimonial) => (
+              <Card
+                key={testimonial.id}
+                className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200"
+              >
+                <CardContent className="p-6 space-y-4">
+                  {/* Star Rating */}
+                  <div className="flex justify-center space-x-1" aria-label={`${testimonial.starRating} star rating`}>
+                    {[...Array(testimonial.starRating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />
+                    ))}
+                  </div>
+
+                  {/* Testimonial Text */}
+                  <blockquote className="text-gray-700 text-center italic leading-relaxed">
+                    "{testimonial.testimonialText}"
+                  </blockquote>
+
+                  {/* Author Info */}
+                  <div className="text-center">
+                    <cite className="text-black font-semibold not-italic">{testimonial.authorName}</cite>
+                    <p className="text-gray-600 text-sm">{testimonial.authorTitle}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+   {/* Value Proposition Section */}
       <section className="py-16 lg:py-24 bg-[#F9F9F9]" aria-labelledby="value-prop-heading">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -294,109 +398,6 @@ export default async function HomePage() {
               </div>
               <h3 className="text-xl font-bold text-black">Buy Back Your Time</h3>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* What You'll Get Section */}
-      <section className="py-16 lg:py-24 bg-white" aria-labelledby="what-youll-get-heading">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 id="what-youll-get-heading" className="text-3xl lg:text-5xl font-black text-black mb-6">
-              WHAT YOU'LL GET
-            </h2>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-8 mb-12">
-            {/* Tactical Insights - Links to Newsletter */}
-            <Link href="/newsletter" className="group" aria-label="Learn about tactical insights">
-              <Card className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200 h-full cursor-pointer">
-                <CardContent className="p-8 text-center space-y-4">
-                  <div
-                    className="w-16 h-16 bg-[#1A73E8] rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-200"
-                    aria-hidden="true"
-                  >
-                    <Brain className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-black">Proven business acquisition frameworks</h3>
-                </CardContent>
-              </Card>
-            </Link>
-
-            {/* Deal Kit - Links to Deal Kit page */}
-            <Link href="/deal-kit" className="group" aria-label="Access the Deal Kit">
-              <Card className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200 h-full cursor-pointer">
-                <CardContent className="p-8 text-center space-y-4">
-                  <div
-                    className="w-16 h-16 bg-[#1A73E8] rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-200"
-                    aria-hidden="true"
-                  >
-                    <Briefcase className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-black">Live deal breakdowns</h3>
-                </CardContent>
-              </Card>
-            </Link>
-
-            {/* Community Support */}
-            <Card className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200">
-              <CardContent className="p-8 text-center space-y-4">
-                <div
-                  className="w-16 h-16 bg-[#1A73E8] rounded-full flex items-center justify-center mx-auto"
-                  aria-hidden="true"
-                >
-                  <MessageCircle className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-black">Tools to evaluate opportunities faster</h3>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="text-center">
-            <Badge variant="secondary" className="bg-[#1A73E8] text-white text-lg px-6 py-2 rounded-full">
-              🔥 COMING SOON: Off-Market Deal Flow
-            </Badge>
-            <p className="text-gray-700 mt-4">Leads and seller intros shared by vetted members</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Social Proof Section */}
-      <section className="py-16 lg:py-24 bg-[#F9F9F9]" aria-labelledby="social-proof-heading">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 id="social-proof-heading" className="text-3xl lg:text-4xl font-black text-black mb-6">
-              Trusted by 2,500+ Business Buyers
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {testimonials.map((testimonial) => (
-              <Card
-                key={testimonial.id}
-                className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200"
-              >
-                <CardContent className="p-6 space-y-4">
-                  {/* Star Rating */}
-                  <div className="flex justify-center space-x-1" aria-label={`${testimonial.starRating} star rating`}>
-                    {[...Array(testimonial.starRating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />
-                    ))}
-                  </div>
-
-                  {/* Testimonial Text */}
-                  <blockquote className="text-gray-700 text-center italic leading-relaxed">
-                    "{testimonial.testimonialText}"
-                  </blockquote>
-
-                  {/* Author Info */}
-                  <div className="text-center">
-                    <cite className="text-black font-semibold not-italic">{testimonial.authorName}</cite>
-                    <p className="text-gray-600 text-sm">{testimonial.authorTitle}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
           </div>
         </div>
       </section>
