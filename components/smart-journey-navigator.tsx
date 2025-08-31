@@ -21,6 +21,8 @@ import {
   FileText,
   AlarmCheckIcon as FlagCheckered,
   Rocket,
+  Clock,
+  ArrowRight,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -65,6 +67,7 @@ export function SmartJourneyNavigator({
   showMobileSwipe = true,
 }: SmartJourneyNavigatorProps) {
   const [isMobile, setIsMobile] = useState(false)
+  const [hoveredStep, setHoveredStep] = useState<string | null>(null)
   const currentStepIndex = steps.findIndex((step) => step.id === currentStepId)
   const completedSteps = steps.filter((step) => step.status === "complete").length
   const progressPercentage = (completedSteps / steps.length) * 100
@@ -92,13 +95,13 @@ export function SmartJourneyNavigator({
   const getStepStatusColor = (status: StepStatus) => {
     switch (status) {
       case "complete":
-        return "bg-primary text-primary-foreground border-primary"
+        return "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20"
       case "current":
-        return "bg-primary/10 text-primary border-primary ring-2 ring-primary/20"
+        return "bg-gradient-to-br from-primary/10 to-primary/5 text-primary border-primary ring-2 ring-primary/30 shadow-lg shadow-primary/10"
       case "incomplete":
-        return "bg-orange-50 text-orange-600 border-orange-200"
+        return "bg-gradient-to-br from-orange-50 to-orange-25 text-orange-600 border-orange-200 shadow-md shadow-orange-100"
       case "locked":
-        return "bg-muted text-muted-foreground border-border"
+        return "bg-muted/50 text-muted-foreground border-border"
     }
   }
 
@@ -126,98 +129,205 @@ export function SmartJourneyNavigator({
 
   return (
     <div className={cn("w-full", className)}>
-      {/* Progress Overview */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold text-foreground">Your Journey Progress</h2>
-          <Badge variant="secondary" className="text-sm">
-            {completedSteps} of {steps.length} complete
-          </Badge>
+      <motion.div
+        className="mb-12"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h2 className="text-2xl font-bold text-foreground mb-1">Your Journey Progress</h2>
+            <p className="text-muted-foreground">Track your path to business ownership</p>
+          </div>
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
+          >
+            <Badge variant="secondary" className="text-base px-4 py-2 font-semibold">
+              {completedSteps} of {steps.length} complete
+            </Badge>
+          </motion.div>
         </div>
-        <Progress value={progressPercentage} className="h-2" />
-        <p className="text-sm text-muted-foreground mt-2">
-          {progressPercentage === 100
-            ? "🎉 Journey complete! You're ready to acquire a business."
-            : `${Math.round(progressPercentage)}% complete - Keep going!`}
-        </p>
-      </div>
 
-      {/* Desktop Step Navigation */}
+        <div className="relative">
+          <Progress value={progressPercentage} className="h-3 bg-muted/30" />
+          <motion.div
+            className="absolute top-0 left-0 h-3 bg-gradient-to-r from-primary to-primary/80 rounded-full"
+            initial={{ width: 0 }}
+            animate={{ width: `${progressPercentage}%` }}
+            transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+          />
+        </div>
+
+        <div className="flex items-center justify-between mt-3">
+          <p className="text-sm text-muted-foreground">
+            {progressPercentage === 100
+              ? "🎉 Journey complete! You're ready to acquire a business."
+              : `${Math.round(progressPercentage)}% complete - Keep going!`}
+          </p>
+          {progressPercentage > 0 && progressPercentage < 100 && (
+            <motion.div
+              className="flex items-center gap-1 text-xs text-muted-foreground"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+            >
+              <Clock className="h-3 w-3" />
+              <span>Est. {Math.ceil((steps.length - completedSteps) * 2)} weeks remaining</span>
+            </motion.div>
+          )}
+        </div>
+      </motion.div>
+
       {!isMobile && (
-        <div className="hidden md:block mb-8">
-          <div className="relative">
-            {/* Connection Line */}
-            <div className="absolute top-6 left-6 right-6 h-0.5 bg-border -z-10" />
-            <div
-              className="absolute top-6 left-6 h-0.5 bg-primary transition-all duration-500 -z-10"
-              style={{ width: `${(completedSteps / (steps.length - 1)) * 100}%` }}
+        <div className="hidden md:block mb-12">
+          <div className="relative px-6">
+            {/* Enhanced Connection Line with Gradient */}
+            <div className="absolute top-8 left-12 right-12 h-1 bg-gradient-to-r from-muted via-border to-muted rounded-full -z-10" />
+            <motion.div
+              className="absolute top-8 left-12 h-1 bg-gradient-to-r from-primary via-primary to-primary/80 rounded-full -z-10 shadow-sm"
+              initial={{ width: 0 }}
+              animate={{ width: `${(completedSteps / Math.max(steps.length - 1, 1)) * 100}%` }}
+              transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
             />
 
-            {/* Step Dots */}
+            {/* Enhanced Step Dots */}
             <div className="flex justify-between">
               {steps.map((step, index) => (
-                <motion.button
+                <motion.div
                   key={step.id}
-                  onClick={() => handleStepClick(step)}
-                  disabled={!canNavigateToStep(step.status)}
-                  className={cn(
-                    "relative flex flex-col items-center group transition-all duration-200",
-                    canNavigateToStep(step.status) ? "cursor-pointer hover:scale-105" : "cursor-not-allowed",
-                  )}
-                  whileHover={canNavigateToStep(step.status) ? { scale: 1.05 } : {}}
-                  whileTap={canNavigateToStep(step.status) ? { scale: 0.95 } : {}}
+                  className="relative flex flex-col items-center"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  {/* Step Circle */}
-                  <div
+                  <motion.button
+                    onClick={() => handleStepClick(step)}
+                    disabled={!canNavigateToStep(step.status)}
+                    onHoverStart={() => setHoveredStep(step.id)}
+                    onHoverEnd={() => setHoveredStep(null)}
                     className={cn(
-                      "w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-200 mb-3",
-                      getStepStatusColor(step.status),
+                      "relative flex flex-col items-center group transition-all duration-300",
+                      canNavigateToStep(step.status) ? "cursor-pointer" : "cursor-not-allowed",
                     )}
+                    whileHover={canNavigateToStep(step.status) ? { scale: 1.08, y: -4 } : {}}
+                    whileTap={canNavigateToStep(step.status) ? { scale: 0.95 } : {}}
                   >
-                    {getStepStatusIcon(step.status)}
-                  </div>
+                    {/* Enhanced Step Circle with Glow Effect */}
+                    <motion.div
+                      className={cn(
+                        "w-16 h-16 rounded-full border-2 flex items-center justify-center transition-all duration-300 mb-4 relative overflow-hidden",
+                        getStepStatusColor(step.status),
+                        hoveredStep === step.id && canNavigateToStep(step.status) && "transform-gpu",
+                      )}
+                      animate={
+                        step.status === "current"
+                          ? {
+                              boxShadow: [
+                                "0 0 0 0 rgba(59, 130, 246, 0.4)",
+                                "0 0 0 10px rgba(59, 130, 246, 0)",
+                                "0 0 0 0 rgba(59, 130, 246, 0)",
+                              ],
+                            }
+                          : {}
+                      }
+                      transition={{ duration: 2, repeat: step.status === "current" ? Number.POSITIVE_INFINITY : 0 }}
+                    >
+                      {/* Background Shimmer Effect for Current Step */}
+                      {step.status === "current" && (
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                          animate={{ x: [-100, 100] }}
+                          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                        />
+                      )}
 
-                  {/* Step Label */}
-                  <div className="text-center max-w-24">
-                    <p className="text-xs font-medium text-foreground mb-1">{step.step}</p>
-                    <p className="text-xs text-muted-foreground leading-tight">{step.title}</p>
-                    {step.estimatedTime && (
-                      <p className="text-xs text-muted-foreground mt-1 opacity-75">{step.estimatedTime}</p>
-                    )}
-                  </div>
+                      <motion.div
+                        animate={step.status === "current" ? { rotate: [0, 5, -5, 0] } : {}}
+                        transition={{ duration: 2, repeat: step.status === "current" ? Number.POSITIVE_INFINITY : 0 }}
+                      >
+                        {getStepStatusIcon(step.status)}
+                      </motion.div>
+                    </motion.div>
 
-                  {/* Tooltip on Hover */}
-                  <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-popover text-popover-foreground px-3 py-2 rounded-lg shadow-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
-                    {step.description}
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-popover" />
-                  </div>
-                </motion.button>
+                    {/* Enhanced Step Label */}
+                    <div className="text-center max-w-28">
+                      <motion.p
+                        className="text-sm font-bold text-foreground mb-1"
+                        animate={hoveredStep === step.id ? { scale: 1.05 } : { scale: 1 }}
+                      >
+                        {step.step}
+                      </motion.p>
+                      <p className="text-sm text-muted-foreground leading-tight font-medium">{step.title}</p>
+                      {step.estimatedTime && (
+                        <motion.div
+                          className="flex items-center justify-center gap-1 mt-2"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.5 + index * 0.1 }}
+                        >
+                          <Clock className="h-3 w-3 text-muted-foreground" />
+                          <p className="text-xs text-muted-foreground font-medium">{step.estimatedTime}</p>
+                        </motion.div>
+                      )}
+                    </div>
+
+                    {/* Enhanced Tooltip */}
+                    <AnimatePresence>
+                      {hoveredStep === step.id && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute -top-20 left-1/2 transform -translate-x-1/2 bg-popover/95 backdrop-blur-sm text-popover-foreground px-4 py-3 rounded-xl shadow-xl text-sm z-20 border border-border/50 max-w-64"
+                        >
+                          <p className="font-medium mb-1">{step.title}</p>
+                          <p className="text-xs opacity-90">{step.description}</p>
+                          <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-popover/95" />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.button>
+                </motion.div>
               ))}
             </div>
           </div>
         </div>
       )}
 
-      {/* Mobile Step Navigation */}
       {isMobile && (
         <div className="md:hidden mb-8">
-          <div className="flex items-center justify-between mb-4">
+          <motion.div
+            className="flex items-center justify-between mb-6 bg-card/50 backdrop-blur-sm rounded-2xl p-4 border border-border/50"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <Button
               variant="outline"
               size="sm"
               onClick={handlePrevious}
               disabled={currentStepIndex === 0}
-              className="flex items-center gap-2 bg-transparent"
+              className="flex items-center gap-2 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background/90 disabled:opacity-50"
             >
               <ChevronLeft className="h-4 w-4" />
               Previous
             </Button>
 
             <div className="text-center">
-              <p className="text-sm font-medium text-foreground">
+              <motion.p
+                className="text-base font-bold text-foreground"
+                key={currentStepIndex}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+              >
                 Step {currentStepIndex + 1} of {steps.length}
-              </p>
-              <p className="text-xs text-muted-foreground">{steps[currentStepIndex]?.title}</p>
+              </motion.p>
+              <p className="text-sm text-muted-foreground font-medium">{steps[currentStepIndex]?.title}</p>
             </div>
 
             <Button
@@ -225,71 +335,134 @@ export function SmartJourneyNavigator({
               size="sm"
               onClick={handleNext}
               disabled={currentStepIndex === steps.length - 1}
-              className="flex items-center gap-2 bg-transparent"
+              className="flex items-center gap-2 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background/90 disabled:opacity-50"
             >
               Next
               <ChevronRight className="h-4 w-4" />
             </Button>
-          </div>
+          </motion.div>
 
-          {/* Mobile Step Dots */}
-          <div className="flex justify-center space-x-2">
+          {/* Enhanced Mobile Step Dots */}
+          <div className="flex justify-center space-x-3 mb-4">
             {steps.map((step, index) => (
-              <button
+              <motion.button
                 key={step.id}
                 onClick={() => handleStepClick(step)}
                 disabled={!canNavigateToStep(step.status)}
                 className={cn(
-                  "w-3 h-3 rounded-full transition-all duration-200",
+                  "w-4 h-4 rounded-full transition-all duration-300 relative",
                   step.status === "complete"
-                    ? "bg-primary"
+                    ? "bg-primary shadow-lg shadow-primary/30"
                     : step.status === "current"
-                      ? "bg-primary ring-2 ring-primary/20"
+                      ? "bg-primary ring-2 ring-primary/30 shadow-lg shadow-primary/20"
                       : step.status === "incomplete"
-                        ? "bg-orange-400"
+                        ? "bg-orange-400 shadow-md shadow-orange-200"
                         : "bg-muted",
                 )}
-              />
+                whileTap={{ scale: 0.9 }}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: index * 0.05, type: "spring", stiffness: 200 }}
+              >
+                {step.status === "current" && (
+                  <motion.div
+                    className="absolute inset-0 rounded-full bg-primary"
+                    animate={{ scale: [1, 1.3, 1] }}
+                    transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+                  />
+                )}
+              </motion.button>
             ))}
           </div>
         </div>
       )}
 
-      {/* Current Step Highlight */}
       <AnimatePresence mode="wait">
         <motion.div
           key={currentStepId}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
-          className="bg-card border border-border rounded-2xl p-6 shadow-sm"
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -30, scale: 0.95 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="bg-gradient-to-br from-card to-card/80 backdrop-blur-sm border border-border/50 rounded-3xl p-8 shadow-xl shadow-black/5 relative overflow-hidden"
         >
-          <div className="flex items-start gap-4">
-            <div
+          {/* Background Pattern */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 opacity-50" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl" />
+
+          <div className="relative flex items-start gap-6">
+            <motion.div
               className={cn(
-                "w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0",
+                "w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 relative overflow-hidden",
                 getStepStatusColor(steps[currentStepIndex]?.status || "locked"),
               )}
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
             >
-              {stepIcons[currentStepId as keyof typeof stepIcons] || steps[currentStepIndex]?.icon}
-            </div>
+              {/* Icon Shimmer Effect */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                animate={{ x: [-100, 100] }}
+                transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+              />
+
+              <motion.div
+                animate={{ rotate: [0, 5, -5, 0] }}
+                transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
+              >
+                {stepIcons[currentStepId as keyof typeof stepIcons] || steps[currentStepIndex]?.icon}
+              </motion.div>
+            </motion.div>
 
             <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
-                <h3 className="text-xl font-bold text-foreground">{steps[currentStepIndex]?.title}</h3>
+              <div className="flex items-center gap-4 mb-3">
+                <motion.h3
+                  className="text-2xl font-bold text-foreground"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  {steps[currentStepIndex]?.title}
+                </motion.h3>
                 {steps[currentStepIndex]?.estimatedTime && (
-                  <Badge variant="secondary" className="text-xs">
-                    {steps[currentStepIndex].estimatedTime}
-                  </Badge>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.4, type: "spring" }}
+                  >
+                    <Badge
+                      variant="secondary"
+                      className="text-sm px-3 py-1 font-medium bg-primary/10 text-primary border-primary/20"
+                    >
+                      <Clock className="h-3 w-3 mr-1" />
+                      {steps[currentStepIndex].estimatedTime}
+                    </Badge>
+                  </motion.div>
                 )}
               </div>
-              <p className="text-muted-foreground mb-4">{steps[currentStepIndex]?.description}</p>
+
+              <motion.p
+                className="text-muted-foreground mb-6 text-lg leading-relaxed"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                {steps[currentStepIndex]?.description}
+              </motion.p>
 
               {steps[currentStepIndex]?.href && (
-                <Button asChild className="bg-primary hover:bg-primary/90">
-                  <a href={steps[currentStepIndex].href}>Get Started</a>
-                </Button>
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
+                  <Button
+                    asChild
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 text-base font-semibold rounded-xl shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                  >
+                    <a href={steps[currentStepIndex].href} className="flex items-center gap-2">
+                      Get Started
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </Button>
+                </motion.div>
               )}
             </div>
           </div>
