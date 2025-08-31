@@ -115,9 +115,7 @@ const convertToJourneySteps = (stops: RoadmapStop[]): JourneyStep[] => {
     description: stop.blurb,
     icon: stop.icon,
     href: stop.link?.href,
-    estimatedTime: index === 0 ? "10 min" : index < 3 ? "2-3 hours" : "1-2 weeks",
-    // Smart status logic - first step is current, rest are locked initially
-    status: index === 0 ? "current" : ("locked" as const),
+    status: index === 0 ? "current" : ("incomplete" as const),
   }))
 }
 
@@ -128,7 +126,6 @@ export default function RoadmapPage() {
 
   const handleStepChange = (stepId: string) => {
     setCurrentStepId(stepId)
-    // Update step statuses based on user interaction
     setJourneySteps((prev) =>
       prev.map((step) => {
         const stepIndex = prev.findIndex((s) => s.id === stepId)
@@ -139,7 +136,7 @@ export default function RoadmapPage() {
         } else if (currentIndex === stepIndex) {
           return { ...step, status: "current" as const }
         } else {
-          return { ...step, status: "locked" as const }
+          return { ...step, status: "incomplete" as const }
         }
       }),
     )
