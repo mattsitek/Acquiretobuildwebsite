@@ -23,7 +23,6 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { submitDealKitForm } from "@/app/actions/deal-kit"
-import DealScorecard from './deal-scorecard/page'
 
 // Icon mapping for dynamic icons
 const iconMap: { [key: string]: any } = {
@@ -432,11 +431,60 @@ export default function DealKitPageClient({
           </div>
         </div>
       </section>
-      {/* DEAL SCORECARD SECTION - Now Embedded Component */}
-      <section className="py-16 lg:py-24 bg-white" aria-labelledby="scorecard-heading">
+      {/* Score Your Deal Section */}
+      <section className="py-16 lg:py-20 bg-gradient-to-br from-blue-50 to-indigo-50 border-t border-gray-200">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <DealScorecard showNavigation={false} />
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-12 border border-gray-100">
+              <div className="text-center space-y-6">
+                {/* Icon */}
+                <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                  <Calculator className="h-8 w-8 text-blue-600" />
+                </div>
+                
+                {/* Headline */}
+                <h2 className="text-3xl lg:text-4xl font-black text-gray-900">
+                  SCORE YOUR DEAL
+                </h2>
+                
+                {/* Value Proposition */}
+                <p className="text-xl lg:text-2xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
+                  Get a comprehensive deal score in under 5 minutes. Our proven framework analyzes 12 key factors to tell you if your deal will make money or lose money.
+                </p>
+                
+                {/* Benefits List */}
+                <div className="grid md:grid-cols-3 gap-6 pt-4">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
+                    <span className="text-gray-700 font-medium">5-Minute Assessment</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
+                    <span className="text-gray-700 font-medium">Instant Deal Score</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
+                    <span className="text-gray-700 font-medium">Actionable Insights</span>
+                  </div>
+                </div>
+                
+                {/* CTA Button */}
+                <div className="pt-6">
+                  <Link 
+                    href="/deal-scorecard" 
+                    className="inline-flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg px-10 py-4 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                  >
+                    <TrendingUp className="h-6 w-6" />
+                    SCORE MY DEAL NOW
+                  </Link>
+                </div>
+                
+                {/* Social Proof */}
+                <p className="text-gray-600 text-sm pt-2">
+                  Join 1,000+ investors who've used our scorecard to avoid bad deals
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
