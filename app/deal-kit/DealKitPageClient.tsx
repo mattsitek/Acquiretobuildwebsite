@@ -23,6 +23,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { submitDealKitForm } from "@/app/actions/deal-kit"
+import DealScorecard from './deal-scorecard/page'
 
 // Icon mapping for dynamic icons
 const iconMap: { [key: string]: any } = {
