@@ -6,21 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Navigation from "@/components/navigation"
-import {
-  Download,
-  Mail,
-  Loader2,
-  CheckCircle,
-  AlertCircle,
-  FileText,
-  Shield,
-  Phone,
-  ClipboardList,
-  Star,
-  X,
-  ArrowRight,
-  Briefcase,
-} from "lucide-react"
+import { Download, Mail, Loader2, CheckCircle, AlertCircle, FileText, Shield, Phone, ClipboardList, Star, X, ArrowRight, Briefcase, Calculator, TrendingUp } from "lucide-react"
 import Link from "next/link"
 import { submitDealKitForm } from "@/app/actions/deal-kit"
 
