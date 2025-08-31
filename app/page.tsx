@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { NewsletterForm } from "@/components/newsletter-form"
-import { Search, AlertTriangle, Users, Clock, Brain, MessageCircle, CheckCircle, Briefcase, Star } from "lucide-react"
+import { Search, AlertTriangle, Users, Clock, Brain, MessageCircle, CheckCircle, Briefcase, Star, Map, UsersRound } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { getHomepageContent } from "@/lib/datocms"
@@ -257,6 +257,7 @@ export default async function HomePage() {
 
           <div className="grid lg:grid-cols-3 gap-8 mb-12">
             {/* Tactical Insights - Links to Newsletter */}
+            
             <Link href="/newsletter" className="group" aria-label="A Proven Roadmap">
               <Card className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200 h-full cursor-pointer">
                 <CardContent className="p-8 text-center space-y-4">
@@ -264,9 +265,12 @@ export default async function HomePage() {
                     className="w-16 h-16 bg-[#1A73E8] rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-200"
                     aria-hidden="true"
                   >
-                    <Brain className="h-8 w-8 text-white" />
+                    <Map className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-black">The 8-step roadmap that guides you from W2 worker to business owner — no MBA or private equity needed</h3>
+                  <h3 className="text-2xl font-bold text-black">A Proven Roadmap</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    The 8-step roadmap that guides you from W2 worker to business owner — no MBA or private equity needed
+                  </p>
                 </CardContent>
               </Card>
             </Link>
@@ -281,12 +285,15 @@ export default async function HomePage() {
                   >
                     <Briefcase className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-black">Valuation calculators, due diligence checklists, and deal breakdowns to help you avoid overpaying and under-earning.</h3>
+                  <h3 className="text-2xl font-bold text-black">Tools to Evaluate Deals with Confidence</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    Valuation calculators, due diligence checklists, and deal breakdowns to help you avoid overpaying
+                  </p>
                 </CardContent>
               </Card>
             </Link>
             
-            {/* Community of Support - Links to Newsletter */}
+           {/* Community of Support - Links to Newsletter */}
             <Link href="/newsletter" className="group" aria-label="A Tribe of Values-Driven Buyers">
               <Card className="border-2 border-gray-100 hover:border-[#1A73E8] transition-colors duration-200 h-full cursor-pointer">
                 <CardContent className="p-8 text-center space-y-4">
@@ -294,12 +301,15 @@ export default async function HomePage() {
                     className="w-16 h-16 bg-[#1A73E8] rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-200"
                     aria-hidden="true"
                   >
-                    <Brain className="h-8 w-8 text-white" />
+                    <UsersRound className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-black">Join 1,000+ mid-career professionals buying boring, profitable businesses — and building freedom on their terms.</h3>
+                  <h3 className="text-2xl font-bold text-black">A Tribe of Values-Driven Buyers</h3>
+                  <p className="text-gray-700 leading-relaxed">
+                    Join 1,000+ mid-career professionals buying boring, profitable businesses — and building freedom on their terms.
+                  </p>
                 </CardContent>
               </Card>
-          </div>
+            </Link>
 
           <div className="text-center">
             <Badge variant="secondary" className="bg-[#1A73E8] text-white text-lg px-6 py-2 rounded-full">
