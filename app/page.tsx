@@ -466,6 +466,35 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+      {/* Start Here Section - NEW SECTION */}
+      <section className="py-16 lg:py-20 bg-white" aria-labelledby="start-here-heading">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center space-y-8">
+            <h2 id="start-here-heading" className="text-3xl lg:text-5xl font-black text-black">
+              HERE'S WHERE TO START
+            </h2>
+            
+            <p className="text-xl lg:text-2xl text-gray-700 leading-relaxed">
+              Not sure if you're ready to buy a business? Take our 2-minute assessment to get a personalized roadmap based on your current situation.
+            </p>
+            
+            <div className="pt-4">
+              <Link 
+                href="/am-i-ready" 
+                className="inline-flex items-center justify-center gap-3 bg-[#1A73E8] hover:bg-[#1557B7] text-white font-bold text-lg px-8 py-4 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 transition-transform"
+                aria-label="Take the Personal Am I Ready Assessment"
+              >
+                <CheckCircle className="h-6 w-6" aria-hidden="true" />
+                TAKE THE ASSESSMENT
+              </Link>
+            </div>
+            
+            <p className="text-gray-600 text-sm">
+              Get your personalized readiness score + next steps in under 2 minutes
+            </p>
+          </div>
+        </div>
+      </section>
       {/* Main CTA Section - Matches Original Black Background Design */}
       <section className="py-16 lg:py-24 bg-black" aria-labelledby="cta-heading">
         <div className="container mx-auto px-4 text-center">
