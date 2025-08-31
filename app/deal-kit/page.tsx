@@ -59,8 +59,7 @@ export default async function DealKitPage() {
     formDisclaimer: "Join 1,000+ professionals getting weekly insights. No spam, unsubscribe anytime.",
     whatsInsideTitle: "What's Inside The Deal Kit",
     whatsInsideSubtitle: "Everything you need to start acquiring businesses today",
-    socialProofTitle: "Trusted by 1,000+ Business Buyers",
-    dealScorcardTitle: "Score Your Deal",
+    socialProofTitle: "Trusted by 2,500+ Business Buyers",
     comingSoonTitle: "More Tools Coming Soon",
     comingSoonSubtitle: "We're constantly adding new resources to help you succeed",
     successMessage: "🎉 Success! Check your email for The Deal Kit. It should arrive within 2 minutes.",
@@ -143,7 +142,7 @@ export default async function DealKitPage() {
       displayOrder: 3,
     },
   ]
-  
+
   const comingSoonTools = [
     {
       id: "1",
