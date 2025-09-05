@@ -10,7 +10,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://acquireandbuild.com"),
+  metadataBase: new URL("https://acquiretobuild.com"),
   title: {
     default: "Acquire & Build - Buy a Business, Build Your Freedom",
     template: "%s | Acquire & Build",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://acquireandbuild.com",
+    url: "https://acquiretobuild.com",
     siteName: "Acquire & Build",
     title: "Acquire & Build - Buy a Business, Build Your Freedom",
     description:
@@ -73,8 +73,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@acquireandbuild",
-    creator: "@acquireandbuild",
+    site: "@acquiretobuild",
+    creator: "@acquiretobuild",
     title: "Acquire & Build - Buy a Business, Build Your Freedom",
     description:
       "Join the free newsletter + community for business acquisition. Learn how to buy a business and build your freedom.",
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     google: "your-google-verification-code",
   },
   alternates: {
-    canonical: "https://acquireandbuild.com",
+    canonical: "https://acquiretobuild.com",
   },
   generator: "v0.dev",
 }
@@ -110,22 +110,22 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              "@id": "https://acquireandbuild.com/#organization",
+              "@id": "https://acquiretobuild.com/#organization",
               name: "Acquire & Build",
               alternateName: "Acquire and Build",
               description: "Newsletter and community for business acquisition education and resources",
-              url: "https://acquireandbuild.com",
+              url: "https://acquiretobuild.com",
               logo: {
                 "@type": "ImageObject",
-                "@id": "https://acquireandbuild.com/#logo",
-                url: "https://acquireandbuild.com/logo.png",
+                "@id": "https://acquiretobuild.com/#logo",
+                url: "https://acquiretobuild.com/logo.png",
                 width: 400,
                 height: 400,
                 caption: "Acquire & Build Logo",
               },
               image: {
                 "@type": "ImageObject",
-                url: "https://acquireandbuild.com/og-image.png",
+                url: "https://acquiretobuild.com/og-image.png",
                 width: 1200,
                 height: 630,
               },
@@ -133,7 +133,7 @@ export default function RootLayout({
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "customer service",
-                url: "https://acquireandbuild.com/contact",
+                url: "https://acquiretobuild.com/contact",
                 availableLanguage: "English",
               },
               foundingDate: "2024",
@@ -168,19 +168,19 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              "@id": "https://acquireandbuild.com/#website",
-              url: "https://acquireandbuild.com",
+              "@id": "https://acquiretobuild.com/#website",
+              url: "https://acquiretobuild.com",
               name: "Acquire & Build",
               description:
                 "Learn how to buy a business and build your freedom. Newsletter and community for business acquisition.",
               publisher: {
-                "@id": "https://acquireandbuild.com/#organization",
+                "@id": "https://acquiretobuild.com/#organization",
               },
               potentialAction: {
                 "@type": "SearchAction",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://acquireandbuild.com/blog?search={search_term_string}",
+                  urlTemplate: "https://acquiretobuild.com/blog?search={search_term_string}",
                 },
                 "query-input": "required name=search_term_string",
               },
@@ -201,8 +201,8 @@ export default function RootLayout({
         />
         <meta name="classification" content="Business Education, Entrepreneurship, Business Acquisition" />
         <meta name="owner" content="Acquire & Build" />
-        <meta name="url" content="https://acquireandbuild.com" />
-        <meta name="identifier-URL" content="https://acquireandbuild.com" />
+        <meta name="url" content="https://acquiretobuild.com" />
+        <meta name="identifier-URL" content="https://acquiretobuild.com" />
         <meta name="coverage" content="Worldwide" />
         <meta name="distribution" content="Global" />
         <meta name="rating" content="General" />
@@ -219,7 +219,7 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#1A73E8" />
 
         {/* Canonical URL - will be overridden by page-specific canonical */}
-        <link rel="canonical" href="https://acquireandbuild.com" />
+        <link rel="canonical" href="https://acquiretobuild.com" />
       </head>
       <body className={inter.className}>{children}</body>
     </html>
