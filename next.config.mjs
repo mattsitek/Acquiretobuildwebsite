@@ -25,7 +25,7 @@ const nextConfig = {
             value: 'http',
           },
         ],
-        destination: 'https://acquireandbuild.com/:path*',
+        destination: 'https://acquiretobuild.com/:path*',
         permanent: true,
       },
       // Non-www to www redirect (if needed - currently canonicalizing to non-www)
@@ -34,10 +34,10 @@ const nextConfig = {
         has: [
           {
             type: 'host',
-            value: 'www.acquireandbuild.com',
+            value: 'www.acquiretobuild.com',
           },
         ],
-        destination: 'https://acquireandbuild.com/:path*',
+        destination: 'https://acquiretobuild.com/:path*',
         permanent: true,
       },
     ]
