@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next"
 import { getBlogPosts } from "@/lib/datocms"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://acquireandbuild.com"
+  const baseUrl = "https://acquiretobuild.com"
   const currentDate = new Date()
 
   // Get all blog posts for dynamic URLs
