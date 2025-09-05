@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next"
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://acquireandbuild.com"
+  const baseUrl = "https://acquiretobuild.com"
 
   // Paths we never want crawled/indexed (internal tools, PII, debug, raw APIs)
   const DISALLOW = [
