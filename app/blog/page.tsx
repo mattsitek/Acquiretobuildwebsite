@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     title: "Blog | Acquire & Build",
     description: "Latest insights on business acquisition and entrepreneurship",
     type: "website",
-    url: "https://acquireandbuild.com/blog",
+    url: "https://www.acquiretobuild.com/blog",
     images: [
       {
         url: "/og-image.png",
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://acquireandbuild.com/blog",
+    canonical: "https://www.acquireatobuild.com/blog",
   },
 }
 
@@ -96,9 +96,9 @@ export default async function BlogPage() {
             "@id": "https://acquireandbuild.com/blog#blog",
             name: "Acquire & Build Blog",
             description: "Insights and strategies for business acquisition and entrepreneurship",
-            url: "https://acquireandbuild.com/blog",
+            url: "https://www.acquiretobuild.com/blog",
             publisher: {
-              "@id": "https://acquireandbuild.com/#organization",
+              "@id": "https://www.acquiretobuild.com/#organization",
             },
             mainEntity: {
               "@type": "ItemList",
@@ -107,18 +107,18 @@ export default async function BlogPage() {
                 position: index + 1,
                 item: {
                   "@type": "BlogPosting",
-                  "@id": `https://acquireandbuild.com/blog/${post.slug}#blogpost`,
+                  "@id": `https://www.acquiretobuild.com/blog/${post.slug}#blogpost`,
                   headline: post.title,
                   description: post.excerpt || `Read "${post.title}" on business acquisition`,
-                  url: `https://acquireandbuild.com/blog/${post.slug}`,
+                  url: `https://www.acquiretobuild.com/blog/${post.slug}`,
                   datePublished: post.publishedAt,
                   author: {
-                    "@id": "https://acquireandbuild.com/#organization",
+                    "@id": "https://www.acquiretobuild.com/#organization",
                   },
                   publisher: {
-                    "@id": "https://acquireandbuild.com/#organization",
+                    "@id": "https://www.acquiretobuild.com/#organization",
                   },
-                  image: post.featureImage?.url || "https://acquireandbuild.com/og-image.png",
+                  image: post.featureImage?.url || "https://www.acquiretobuild.com/og-image.png",
                 },
               })),
             },
