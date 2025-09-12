@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title: "Contact Acquire & Build",
     description: "Get in touch about business acquisition, partnerships, or questions about buying a business.",
     type: "website",
-    url: "https://acquireandbuild.com/contact",
+    url: "https://www.acquiretobuild.com/contact",
     images: [
       {
         url: "/og-image.png",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://acquireandbuild.com/contact",
+    canonical: "https://www.acquiretobuild.com/contact",
   },
   robots: {
     index: true,
@@ -51,16 +51,16 @@ export default function ContactPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ContactPage",
-            "@id": "https://acquireandbuild.com/contact#contactpage",
+            "@id": "https://www.acquiretobuild.com/contact#contactpage",
             name: "Contact Acquire & Build",
             description: "Get in touch about business acquisition, partnerships, or questions about buying a business.",
-            url: "https://acquireandbuild.com/contact",
+            url: "https://www.acquiretobuild.com/contact",
             isPartOf: {
-              "@id": "https://acquireandbuild.com/#website",
+              "@id": "https://www.acquiretobuild.com/#website",
             },
             mainEntity: {
               "@type": "Organization",
-              "@id": "https://acquireandbuild.com/#organization",
+              "@id": "https://www.acquiretobuild.com/#organization",
             },
             breadcrumb: {
               "@type": "BreadcrumbList",
@@ -69,13 +69,13 @@ export default function ContactPage() {
                   "@type": "ListItem",
                   position: 1,
                   name: "Home",
-                  item: "https://acquireandbuild.com",
+                  item: "https://www.acquiretobuild.com",
                 },
                 {
                   "@type": "ListItem",
                   position: 2,
                   name: "Contact",
-                  item: "https://acquireandbuild.com/contact",
+                  item: "https://www.acquiretobuild.com/contact",
                 },
               ],
             },
