@@ -12,6 +12,13 @@ import { EmailGate } from "@/components/email-gate"
 import { calculateScores, type FormData, type ScoreResults } from "@/app/lib/calculations"
 import { trackUTMParams } from "@/app/lib/analytics"
 import Navigation from "@/components/navigation"
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://www.acquiretobuild.com/deal-scorecard",
+  },
+}
 
 interface DealScorecardProps {
   showNavigation?: boolean
