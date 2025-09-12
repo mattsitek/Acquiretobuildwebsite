@@ -11,6 +11,13 @@ import { AssessmentSection3 } from "@/components/assessment/section-3"
 import { AssessmentResults } from "@/components/assessment/results"
 import { calculateReadinessScore, calculateDealBox, type AssessmentData } from "@/lib/assessment-logic"
 import Navigation from "@/components/navigation"
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://www.acquiretobuild.com/am-i-ready",
+  },
+}
 
 export default function AmIReadyPage() {
   const [currentSection, setCurrentSection] = useState(0)
