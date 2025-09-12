@@ -18,6 +18,14 @@ import {
   Rocket,
 } from "lucide-react"
 
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://www.acquiretobuild.com/roadmap",
+  },
+}
+
 export type RoadmapLink = {
   href: string
   label?: string
