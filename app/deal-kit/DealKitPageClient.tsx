@@ -234,7 +234,7 @@ export default function DealKitPageClient({
             "@type": "WebPage",
             name: "The Deal Kit - Business Acquisition Tools",
             description: "Free professional business acquisition tools including LOI templates, NDAs, and scripts",
-            url: "https://acquireandbuild.com/deal-kit",
+            url: "https://www.acquiretobuild.com/deal-kit",
             mainEntity: {
               "@type": "Product",
               name: "The Deal Kit",

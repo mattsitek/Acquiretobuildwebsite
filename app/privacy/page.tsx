@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://acquireandbuild.com/privacy",
+    canonical: "https://www.acquiretobuild.com/privacy",
   },
 }
 
@@ -100,7 +100,7 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
               <p className="mb-4">If you have any questions about this privacy policy, please contact us at:</p>
               <p className="mb-2">
-                <strong>Email:</strong> privacy@acquireandbuild.com
+                <strong>Email:</strong> privacy@www.acquiretobuild.com
               </p>
               <p className="mb-2">
                 <strong>Website:</strong>{" "}
