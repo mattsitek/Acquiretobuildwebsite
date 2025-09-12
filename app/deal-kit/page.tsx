@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: "The Deal Kit - Free Business Acquisition Tools",
     description: "Professional templates, scripts, and tools to find, evaluate, and close your first acquisition",
     type: "website",
-    url: "https://acquireandbuild.com/deal-kit",
+    url: "https://www.acquiretobuild.com/deal-kit",
     images: [
       {
         url: "/og-image.png",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://acquireandbuild.com/deal-kit",
+    canonical: "https://www.acquiretobuild.com/deal-kit",
   },
   robots: {
     index: true,
@@ -173,7 +173,7 @@ export default async function DealKitPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Product",
-            "@id": "https://acquireandbuild.com/deal-kit#product",
+            "@id": "https://www.acquiretobuild.com/deal-kit#product",
             name: "The Deal Kit - Business Acquisition Tools",
             description:
               "Professional templates, scripts, and tools to find, evaluate, and close your first acquisition",
@@ -186,7 +186,7 @@ export default async function DealKitPage() {
               price: "0",
               priceCurrency: "USD",
               availability: "https://schema.org/InStock",
-              url: "https://acquireandbuild.com/deal-kit",
+              url: "https://www.acquiretobuild.com/deal-kit",
             },
             aggregateRating: {
               "@type": "AggregateRating",
@@ -211,12 +211,12 @@ export default async function DealKitPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Service",
-            "@id": "https://acquireandbuild.com/deal-kit#service",
+            "@id": "https://www.acquiretobuild.com/deal-kit#service",
             name: "Business Acquisition Toolkit",
             description:
               "Free professional business acquisition tools including LOI templates, NDAs, cold outreach scripts, and due diligence checklists",
             provider: {
-              "@id": "https://acquireandbuild.com/#organization",
+              "@id": "https://www.acquiretobuild.com/#organization",
             },
             serviceType: "Business Education",
             areaServed: {
