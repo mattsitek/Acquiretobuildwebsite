@@ -121,7 +121,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       description: post.excerpt || `Read "${post.title}" on Acquire & Build`,
       type: "article",
       publishedTime: publishedDate,
-      url: `https://acquireandbuild.com/blog/${post.slug}`,
+      url: `https://www.acquiretobuild.com/blog/${post.slug}`,
       images: post.featureImage?.url
         ? [
             {
@@ -147,7 +147,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       images: post.featureImage?.url ? [post.featureImage.url] : ["/og-image.png"],
     },
     alternates: {
-      canonical: `https://acquireandbuild.com/blog/${post.slug}`,
+      canonical: `https://www.acquiretobuild.com/blog/${post.slug}`,
     },
     robots: {
       index: true,
@@ -185,12 +185,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "BlogPosting",
-            "@id": `https://acquireandbuild.com/blog/${post.slug}#blogpost`,
+            "@id": `https://www.acquiretobuild.com/blog/${post.slug}#blogpost`,
             headline: post.title,
             description: post.excerpt || `Insights on business acquisition: ${post.title}`,
             image: {
               "@type": "ImageObject",
-              url: post.featureImage?.url || "https://acquireandbuild.com/og-image.png",
+              url: post.featureImage?.url || "https://www.acquiretobuild.com/og-image.png",
               width: 1200,
               height: 630,
               caption: post.featureImage?.alt || post.title,
@@ -199,23 +199,23 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             dateModified: post.publishedAt || new Date().toISOString(),
             author: {
               "@type": "Organization",
-              "@id": "https://acquireandbuild.com/#organization",
+              "@id": "https://www.acquiretobuild.com/#organization",
               name: "Acquire & Build",
             },
             publisher: {
               "@type": "Organization",
-              "@id": "https://acquireandbuild.com/#organization",
+              "@id": "https://www.acquiretobuild.com/#organization",
               name: "Acquire & Build",
               logo: {
                 "@type": "ImageObject",
-                url: "https://acquireandbuild.com/logo.png",
+                url: "https://www.acquiretobuild.com/logo.png",
                 width: 400,
                 height: 400,
               },
             },
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://acquireandbuild.com/blog/${post.slug}`,
+              "@id": `https://www.acquiretobuild.com/blog/${post.slug}`,
             },
             keywords: [
               "business acquisition",
@@ -231,7 +231,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             inLanguage: "en-US",
             isPartOf: {
               "@type": "Blog",
-              "@id": "https://acquireandbuild.com/blog#blog",
+              "@id": "https://www.acquiretobuild.com/blog#blog",
               name: "Acquire & Build Blog",
             },
             breadcrumb: {
@@ -241,19 +241,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   "@type": "ListItem",
                   position: 1,
                   name: "Home",
-                  item: "https://acquireandbuild.com",
+                  item: "https://www.acquiretobuild.com",
                 },
                 {
                   "@type": "ListItem",
                   position: 2,
                   name: "Blog",
-                  item: "https://acquireandbuild.com/blog",
+                  item: "https://www.acquiretobuild.com/blog",
                 },
                 {
                   "@type": "ListItem",
                   position: 3,
                   name: post.title,
-                  item: `https://acquireandbuild.com/blog/${post.slug}`,
+                  item: `https://www.acquiretobuild.com/blog/${post.slug}`,
                 },
               ],
             },
