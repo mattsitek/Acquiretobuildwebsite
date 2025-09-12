@@ -45,21 +45,21 @@ export default function NewsletterPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "@id": "https://acquireandbuild.com/newsletter#webpage",
+            "@id": "https://www.acquiretobuild.com/newsletter#webpage",
             name: "Newsletter - Acquire & Build",
             description:
               "Subscribe to the Acquire & Build newsletter for weekly insights on business acquisition, financing strategies, and deal breakdowns.",
             isPartOf: {
-              "@id": "https://acquireandbuild.com/#website",
+              "@id": "https://www.acquiretobuild.com/#website",
             },
             mainEntity: {
               "@type": "Newsletter",
-              "@id": "https://acquireandbuild.com/newsletter#newsletter",
+              "@id": "https://www.acquiretobuild.com/newsletter#newsletter",
               name: "Acquire & Build Newsletter",
               description:
                 "Weekly newsletter covering business acquisition strategies, deal breakdowns, and financing tactics",
               publisher: {
-                "@id": "https://acquireandbuild.com/#organization",
+                "@id": "https://www.acquiretobuild.com/#organization",
               },
               audience: {
                 "@type": "Audience",
