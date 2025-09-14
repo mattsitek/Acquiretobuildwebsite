@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://www.acquireatobuild.com/blog",
+    canonical: "https://www.acquiretobuild.com/blog",
   },
 }
 
