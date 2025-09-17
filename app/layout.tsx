@@ -98,6 +98,18 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Preload critical resources */}
+       {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-QM8D20M9CE"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-QM8D20M9CE');
+            `,
+          }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://graphql.datocms.com" />
